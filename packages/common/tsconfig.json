@@ -1,0 +1,10 @@
+{
+  "$schema": "http://json.schemastore.org/tsconfig",
+  "extends": "../../etc/tsconfig_base.json",
+  "compilerOptions": {
+    "outDir": "build/lib"
+  },
+  "include": [
+    "src/**/*"
+  ]
+}

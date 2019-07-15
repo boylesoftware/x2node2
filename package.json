@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json.schemastore.org/package",
+  "name": "root",
+  "private": true,
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "clean": "lerna clean && lerna run clean",
+    "build": "lerna run build",
+    "lint": "lerna run lint",
+    "docs": "api-documenter markdown -i ./etc/api -o ./docs"
+  },
+  "engines": {
+    "node": ">=10.15.1"
+  },
+  "devDependencies": {
+    "@microsoft/api-documenter": "^7.3.8",
+    "@microsoft/api-extractor": "^7.3.2",
+    "@types/node": "^12.6.3",
+    "@typescript-eslint/eslint-plugin": "^1.12.0",
+    "@typescript-eslint/parser": "^1.12.0",
+    "eslint": "^6.0.1",
+    "lerna": "^3.15.0",
+    "rimraf": "^2.6.3",
+    "rollup": "^1.17.0",
+    "typescript": "^3.5.2"
+  }
+}

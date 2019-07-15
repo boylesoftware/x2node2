@@ -1,0 +1,2508 @@
+{
+  "metadata": {
+    "toolPackage": "@microsoft/api-extractor",
+    "toolVersion": "7.3.2",
+    "schemaVersion": 1001,
+    "oldestForwardsCompatibleVersion": 1001
+  },
+  "kind": "Package",
+  "canonicalReference": "@x2node/common",
+  "docComment": "/**\n * Common mobule the provides foundation for the rest of the X2 Framrwork and applications that use it.\n *\n * @remarks\n *\n * This mobule deals with the notion of the X2 application, its lifecycle, services, which are singletons that provide service layer functionality to the rest of the application, as well as common basic functionality such as logging and application configuration.\n *\n * @packageDocumentation\n */\n",
+  "name": "@x2node/common",
+  "members": [
+    {
+      "kind": "EntryPoint",
+      "canonicalReference": "",
+      "name": "",
+      "members": [
+        {
+          "kind": "Class",
+          "canonicalReference": "(Application:class)",
+          "docComment": "/**\n * An _x2node_ application.\n *\n * @remarks\n *\n * A single `Application` instance serves as the top object that repsents the Node application and ties all of its components together. An instance is usually created in the very beginning of the application lifecycle. Once created, the instance is uninitialized and is not ready to be used.\n *\n * Next step is to configure the instance. Normally, that includes adding _services_ to the application via one of the `services()` methods. Services are singletons stored on the application object in readonly properties with names called _service keys_. This makes the services available to all other application components as well as to each other.\n *\n * Once all services have been configured for the application, it then can be initialized using its {@link Application.init | init()} method. The initialization process creates service instances and sets them on the `Application` object under the corresponding service keys. From this point on, the application is ready.\n *\n * The application can be then gracefully shut down using its {@link Application.shutdown | shutdown()} method. Services may optionally implement {@link Service} interface to provide special shutdown logic, which is invoked during the application shutdown process.\n *\n * The `Application` class can be also extended to provide additional functionality.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class "
+            },
+            {
+              "kind": "Reference",
+              "text": "Application"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "Application",
+          "members": [
+            {
+              "kind": "Constructor",
+              "canonicalReference": "(:constructor,0)",
+              "docComment": "/**\n * Create new uninitialized application instance.\n *\n * @remarks\n *\n * The new instance must be configured (e.g. services added) and initialized before it can be used.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "constructor();"
+                }
+              ],
+              "releaseTag": "Public",
+              "overloadIndex": 0,
+              "parameters": []
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "(config:instance)",
+              "docComment": "/**\n * Application configuration service.\n *\n * @remarks\n *\n * The configuration service is different in that it is always available on the application, even before it is initialized. If not explicitely configured, {@link DefaultConfiguration} is used. If explicitely configured, the default configuration is used before the configured service is initialized and after it is shut down.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "config"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Configuration"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "config",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "isStatic": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "(init:instance,0)",
+              "docComment": "/**\n * Initialize the application and make it ready to use.\n *\n * @remarks\n *\n * This method must be called before the newly created and configured application can be used. Calling this method creates, configures and initializes all application services. After successful initialization, the application's {@link Application.ready | ready} flag becomes `true` and the `init()` method can no longer be called (will throw an error if attempted).\n *\n * If `init()` is called (asynchronously) before active initialization is complete, the same initialization promise is returned. This, however, should not be normal application behavior. A corresponding warning message will be logged in the console.\n *\n * An error will be thrown if `init()` is called while the application is being shutdown via the {@link Application.shutdown | shutdown()} method. On the other hand, it is possible to call the {@link Application.shutdown | shutdown()} method before the initialization is complete. In that case, the initialization will be aborted, all services already initialized will be shut down. The promise returned by the `init()` method will reject with an error after the shutdown is complete.\n *\n * @returns Promise, which resolves with the initialized application or rejects with an application initialization error.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "init"
+                },
+                {
+                  "kind": "Content",
+                  "text": "(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<this>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 0,
+              "parameters": [],
+              "name": "init"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "(logger:instance)",
+              "docComment": "/**\n * Logger service.\n *\n * @remarks\n *\n * The logger service is different in that it is always available on the application, even before it is initialized. If not explicitely configured, {@link DefaultLogger} is used. If explicitely configured, the default logger is used before the configured logger service is initialized and after it is shut down.\n *\n * The default logger format string is taken from `X2_LOG_FORMAT` environment variable. If not provided, \"{ts} {?ctx} {cat}: {msg}\\n{?err}\" is used by default.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "logger"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Logger"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "logger",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "isStatic": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "(ready:instance)",
+              "docComment": "/**\n * Tells if the application has been successfully initialized and is ready to be used.\n *\n * @remarks\n *\n * When a new application instance is created, this flag is initially `false`. It becomes `true` after the application is successfully initialized (see {@link Application.init | init()} method). When the application is shutting down or has shut down (see {@link Application.shutdown | shutdown()}), this flag turns back to `false`.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ready"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "ready",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "isStatic": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "(services:instance,1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "services"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "K0"
+                },
+                {
+                  "kind": "Content",
+                  "text": " extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ServiceKey"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "S0"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "S0"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "A0"
+                },
+                {
+                  "kind": "Content",
+                  "text": " extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ApplicationPlusService"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<this, "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "K0"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "S0"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">("
+                },
+                {
+                  "kind": "Reference",
+                  "text": "binder0"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "K0"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ServiceFactory"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<this, "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "S0"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">]"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "A0"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 30,
+                "endIndex": 31
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "binder0",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 22,
+                    "endIndex": 29
+                  }
+                }
+              ],
+              "typeParameters": [
+                {
+                  "typeParameterName": "K0",
+                  "constraintTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 8
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  }
+                },
+                {
+                  "typeParameterName": "S0",
+                  "constraintTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  }
+                },
+                {
+                  "typeParameterName": "A0",
+                  "constraintTokenRange": {
+                    "startIndex": 13,
+                    "endIndex": 19
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  }
+                }
+              ],
+              "name": "services"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "(services:instance,2)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "services"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "K0"
+                },
+                {
+                  "kind": "Content",
+                  "text": " extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ServiceKey"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "S0"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "S0"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "A0"
+                },
+                {
+                  "kind": "Content",
+                  "text": " extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ApplicationPlusService"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<this, "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "K0"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "S0"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "K1"
+                },
+                {
+                  "kind": "Content",
+                  "text": " extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ServiceKey"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "S1"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "S1"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "A1"
+                },
+                {
+                  "kind": "Content",
+                  "text": " extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ApplicationPlusService"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "A0"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "K1"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "S1"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">("
+                },
+                {
+                  "kind": "Reference",
+                  "text": "binder0"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "K0"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ServiceFactory"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<this, "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "S0"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "binder1"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "K1"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ServiceFactory"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "A0"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "S1"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">]"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "A1"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 62,
+                "endIndex": 63
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 2,
+              "parameters": [
+                {
+                  "parameterName": "binder0",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 42,
+                    "endIndex": 49
+                  }
+                },
+                {
+                  "parameterName": "binder1",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 52,
+                    "endIndex": 61
+                  }
+                }
+              ],
+              "typeParameters": [
+                {
+                  "typeParameterName": "K0",
+                  "constraintTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 8
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  }
+                },
+                {
+                  "typeParameterName": "S0",
+                  "constraintTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  }
+                },
+                {
+                  "typeParameterName": "A0",
+                  "constraintTokenRange": {
+                    "startIndex": 13,
+                    "endIndex": 19
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  }
+                },
+                {
+                  "typeParameterName": "K1",
+                  "constraintTokenRange": {
+                    "startIndex": 22,
+                    "endIndex": 26
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  }
+                },
+                {
+                  "typeParameterName": "S1",
+                  "constraintTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  }
+                },
+                {
+                  "typeParameterName": "A1",
+                  "constraintTokenRange": {
+                    "startIndex": 31,
+                    "endIndex": 39
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  }
+                }
+              ],
+              "name": "services"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "(showMessage:instance,0)",
+              "docComment": "/**\n * Show message in the application console.\n *\n * @param message - The message.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "protected "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "showMessage"
+                },
+                {
+                  "kind": "Content",
+                  "text": "("
+                },
+                {
+                  "kind": "Reference",
+                  "text": "message"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 7,
+                "endIndex": 8
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 0,
+              "parameters": [
+                {
+                  "parameterName": "message",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 5,
+                    "endIndex": 6
+                  }
+                }
+              ],
+              "name": "showMessage"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "(shutdown:instance,0)",
+              "docComment": "/**\n * Gracefully shutdown the application.\n *\n * @remarks\n *\n * Once called, the application starts shutting down all of its services in the reverse initialization order. Any errors encountered during services shutdown are logged, but otherwise ignored.\n *\n * If `shutdown()` is called when the application is already shutting down, the same shutdown promise will be returned. This, however, should not be normal application behavior. A corresponding warning message will be logged in the console.\n *\n * It is safe to call `shutdown()` on an uninitialized application or application that has been shut down. The returned promise will resolve immediately.\n *\n * It is also possible to call `shutdown()` while the application is being initialized via the {@link Application.init | init()} method. In that case, the initialization process will be aborted, all services already initialized will be shut down.\n *\n * @returns Promise the resolves when the shutdown is complete (that is when all application services complete shutdown). The promise never rejects since all shutdown errors are logged, but otherwise ignored.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "shutdown"
+                },
+                {
+                  "kind": "Content",
+                  "text": "(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<void>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 0,
+              "parameters": [],
+              "name": "shutdown"
+            }
+          ],
+          "implementsTokenRanges": []
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "(Configuration:interface)",
+          "docComment": "/**\n * Application configuration service interface.\n *\n * @remarks\n *\n * A configuration service is always available on the application, even if not explicitly configured. The {@link DefaultConfiguration} implementation is used by default.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface "
+            },
+            {
+              "kind": "Reference",
+              "text": "Configuration"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "Configuration",
+          "members": [
+            {
+              "kind": "MethodSignature",
+              "canonicalReference": "(get:0)",
+              "docComment": "/**\n * Get configuration option value.\n *\n * @param key - Configuration option key.\n *\n * @returns Configuration option value, if available.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "get"
+                },
+                {
+                  "kind": "Content",
+                  "text": "("
+                },
+                {
+                  "kind": "Reference",
+                  "text": "key"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "returnTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 7
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 0,
+              "parameters": [
+                {
+                  "parameterName": "key",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 5
+                  }
+                }
+              ],
+              "name": "get"
+            },
+            {
+              "kind": "MethodSignature",
+              "canonicalReference": "(getRequired:0)",
+              "docComment": "/**\n * Get required configuration option value. Throws an error if option is not available.\n *\n * @param key - Configuration option key.\n *\n * @returns Configuration option value.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "getRequired"
+                },
+                {
+                  "kind": "Content",
+                  "text": "("
+                },
+                {
+                  "kind": "Reference",
+                  "text": "key"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "returnTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 7
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 0,
+              "parameters": [
+                {
+                  "parameterName": "key",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 5
+                  }
+                }
+              ],
+              "name": "getRequired"
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "Class",
+          "canonicalReference": "(DefaultConfiguration:class)",
+          "docComment": "/**\n * Default implementation of the {@link Configuration} service that takes configuration options from the process environment variables (see `process.env`).\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class "
+            },
+            {
+              "kind": "Reference",
+              "text": "DefaultConfiguration"
+            },
+            {
+              "kind": "Content",
+              "text": " implements "
+            },
+            {
+              "kind": "Reference",
+              "text": "Configuration"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "DefaultConfiguration",
+          "members": [
+            {
+              "kind": "Method",
+              "canonicalReference": "(get:instance,0)",
+              "docComment": "/**\n * Get configuration option value.\n *\n * @param key - Configuration option key.\n *\n * @returns Configuration option value, if available.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "get"
+                },
+                {
+                  "kind": "Content",
+                  "text": "("
+                },
+                {
+                  "kind": "Reference",
+                  "text": "key"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 7
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 0,
+              "parameters": [
+                {
+                  "parameterName": "key",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 5
+                  }
+                }
+              ],
+              "name": "get"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "(getRequired:instance,0)",
+              "docComment": "/**\n * Get required configuration option value. Throws an error if option is not available.\n *\n * @param key - Configuration option key.\n *\n * @returns Configuration option value.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "getRequired"
+                },
+                {
+                  "kind": "Content",
+                  "text": "("
+                },
+                {
+                  "kind": "Reference",
+                  "text": "key"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 7
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 0,
+              "parameters": [
+                {
+                  "parameterName": "key",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 5
+                  }
+                }
+              ],
+              "name": "getRequired"
+            }
+          ],
+          "implementsTokenRanges": [
+            {
+              "startIndex": 3,
+              "endIndex": 5
+            }
+          ]
+        },
+        {
+          "kind": "Class",
+          "canonicalReference": "(DefaultLogger:class)",
+          "docComment": "/**\n * Default logger service implementation.\n *\n * @remarks\n *\n * This implementation uses `console.error()` and `console.log()` to output error and debug messages respectively. It is used by default by applications when no other logger service is configured explicitly.\n *\n * This implementation uses `NODE_DEBUG` environment variable to configure what debug message categories get logged. To enable a given debug log category, the environmant variable, which is a comma-separated list, must include either the exact category name, or category name prefix followed by a star. For the puprpose of the prefix matching, the category names are split at underscores. For example, to enable debug messages for category \"X2_DB_SQL\", the `NODE_DEBUG` must include any of the following: \"X2*\", \"X2_DB*\", \"X2_DB_SQL\" or \"X2_DB_SQL*\". Note also, that `NODE_DEBUG` is case-insensitive.\n *\n * Another feature of this implementation is configurable log message format, which can be provided to the class constructor. The format string includes variables in curly braces that get replaced by certain values. The following variables are supported by default:\n *\n * * _ts_ - Message timestamp in ISO format (see `Date.toISOString()`). * _pid_ - The Node process PID (see `process.pid`). * _cat_ - The message category. \"ERROR\" for error messages. * _msg_ - The message text. * _env:VAR_ - Value of the environment variable, where _VAR_ if the variable name (see `process.env`). * _ctx_ - Comma-space-separated list of context values (see {@link Logger.addContext | addContext()} on `Logger` interface). The whole list is surrounded by square brackets. * _err_ - Error information for error messages. Includes error stack trace if the error object is an instance of `Error`.\n *\n * The variable name in a variable placeholder in the format string can be prefixed with a question marks. In that case, if the variable able is empty, the part of the format string preceeding the placeholder up to the previous variable placeholder or the beginning of the format string is omitted. For example, the default format string is \"{ts} {?ctx} {cat}: {msg}\\n{?err}\".\n *\n * The constructor also can take definitions for additional message variables not included in the default set (or overriding the defaults).\n *\n * Also, this implementation can be used as a base class for another logger service implementation. The extended class can override {@link DefaultLogger.writeMessage | writeMessage()} method to provide its own logic for writing log messages.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class "
+            },
+            {
+              "kind": "Reference",
+              "text": "DefaultLogger"
+            },
+            {
+              "kind": "Content",
+              "text": " implements "
+            },
+            {
+              "kind": "Reference",
+              "text": "Logger"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "DefaultLogger",
+          "members": [
+            {
+              "kind": "Constructor",
+              "canonicalReference": "(:constructor,0)",
+              "docComment": "/**\n * Create new logger service instance.\n *\n * @param format - The log message format string.\n *\n * @param extraVars - Implementation for additional log message variables that can be used in the `format` string.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "constructor("
+                },
+                {
+                  "kind": "Reference",
+                  "text": "format"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "extraVars"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        ["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "key"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": string]: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "MessageVariable"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ");"
+                }
+              ],
+              "releaseTag": "Public",
+              "overloadIndex": 0,
+              "parameters": [
+                {
+                  "parameterName": "format",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  }
+                },
+                {
+                  "parameterName": "extraVars",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 7,
+                    "endIndex": 12
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "(addContext:instance,0)",
+              "docComment": "/**\n * Create new logger based on this one and add context to it.\n *\n * @remarks\n *\n * Log message format may include information about context, in which the logged event took place. Context is application specific list of short items, such as current API request id, current transaction id, etc. Creating a contextualized logger is cheap, because it still uses the parent logger for all the main functionality. Once the context is no more relevant, the contextualized logger can be simply thrown away. A contextualized logger itself can be used to create furhter contextualized loggers. These loggers will include the parent logger's context, plus their own.\n *\n * @param ctx - Context values.\n *\n * @returns Contextualized logger.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "addContext"
+                },
+                {
+                  "kind": "Content",
+                  "text": "("
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ctx"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Logger"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 7
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 0,
+              "parameters": [
+                {
+                  "parameterName": "ctx",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 5
+                  }
+                }
+              ],
+              "name": "addContext"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "(debug:instance,0)",
+              "docComment": "/**\n * Get debug logger for the given category.\n *\n * @remarks\n *\n * The application's runtime environment may be configured to only log debug messages for certain categories in a logger service implementation specific way. This method will return a no-op function if debug messages for the specified category are disabled.\n *\n * @param category - Category name.\n *\n * @returns Debug logger function, that takes the debug message as its only argument.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "debug"
+                },
+                {
+                  "kind": "Content",
+                  "text": "("
+                },
+                {
+                  "kind": "Reference",
+                  "text": "category"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "("
+                },
+                {
+                  "kind": "Reference",
+                  "text": "message"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": string) => void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 9
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 0,
+              "parameters": [
+                {
+                  "parameterName": "category",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 5
+                  }
+                }
+              ],
+              "name": "debug"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "(error:instance,0)",
+              "docComment": "/**\n * Log an error.\n *\n * @param message - Error message to log.\n *\n * @param err - Thrown error, if any. Normally an instance of `Error`, but can be anything.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "error"
+                },
+                {
+                  "kind": "Content",
+                  "text": "("
+                },
+                {
+                  "kind": "Reference",
+                  "text": "message"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "err"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "unknown"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 10,
+                "endIndex": 11
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 0,
+              "parameters": [
+                {
+                  "parameterName": "message",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 5
+                  }
+                },
+                {
+                  "parameterName": "err",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 8,
+                    "endIndex": 9
+                  }
+                }
+              ],
+              "name": "error"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "(isDebugEnabled:instance,0)",
+              "docComment": "/**\n * Tell if debug message are enabled for the specified category.\n *\n * @remarks\n *\n * If constructing a message for the debug logger returned by the {@link Logger.debug | debug()} method is an expensive operation, it sometimes worth checking if the logger is actually a no-op before invoking it. This method allows to perform such check.\n *\n * @param category - Category name.\n *\n * @returns `true` if debug messages are enabled for the category, `false` if the category debug logger is a no-op.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "isDebugEnabled"
+                },
+                {
+                  "kind": "Content",
+                  "text": "("
+                },
+                {
+                  "kind": "Reference",
+                  "text": "category"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 7
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 0,
+              "parameters": [
+                {
+                  "parameterName": "category",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 5
+                  }
+                }
+              ],
+              "name": "isDebugEnabled"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "(writeMessage:instance,0)",
+              "docComment": "/**\n * Write the message to the log output.\n *\n * @remarks\n *\n * This implementation uses `console` to write messages. The method can be overriden in a subclass to provide a different log output.\n *\n * @param isError - `true` if the message is an error message, `false` if it is a debug message.\n *\n * @param message - Formatted message text to output.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "protected "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "writeMessage"
+                },
+                {
+                  "kind": "Content",
+                  "text": "("
+                },
+                {
+                  "kind": "Reference",
+                  "text": "isError"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "message"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 11,
+                "endIndex": 12
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 0,
+              "parameters": [
+                {
+                  "parameterName": "isError",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 5,
+                    "endIndex": 6
+                  }
+                },
+                {
+                  "parameterName": "message",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 9,
+                    "endIndex": 10
+                  }
+                }
+              ],
+              "name": "writeMessage"
+            }
+          ],
+          "implementsTokenRanges": [
+            {
+              "startIndex": 3,
+              "endIndex": 5
+            }
+          ]
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "(Logger:interface)",
+          "docComment": "/**\n * Logger service interface.\n *\n * @remarks\n *\n * Logger service is used by applications to log unexpected application errors as well as debug messages, when enabled. Debug messages are categorized and logger implementations usually allow selectively enabling/disabling certain debug message categories.\n *\n * A logger service is always available on the application, even if not explicitly configured. The {@link DefaultLogger} implementation is used by default.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface "
+            },
+            {
+              "kind": "Reference",
+              "text": "Logger"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "Logger",
+          "members": [
+            {
+              "kind": "MethodSignature",
+              "canonicalReference": "(addContext:0)",
+              "docComment": "/**\n * Create new logger based on this one and add context to it.\n *\n * @remarks\n *\n * Log message format may include information about context, in which the logged event took place. Context is application specific list of short items, such as current API request id, current transaction id, etc. Creating a contextualized logger is cheap, because it still uses the parent logger for all the main functionality. Once the context is no more relevant, the contextualized logger can be simply thrown away. A contextualized logger itself can be used to create furhter contextualized loggers. These loggers will include the parent logger's context, plus their own.\n *\n * @param ctx - Context values.\n *\n * @returns Contextualized logger.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "addContext"
+                },
+                {
+                  "kind": "Content",
+                  "text": "("
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ctx"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Logger"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "returnTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 7
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 0,
+              "parameters": [
+                {
+                  "parameterName": "ctx",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 5
+                  }
+                }
+              ],
+              "name": "addContext"
+            },
+            {
+              "kind": "MethodSignature",
+              "canonicalReference": "(debug:0)",
+              "docComment": "/**\n * Get debug logger for the given category.\n *\n * @remarks\n *\n * The application's runtime environment may be configured to only log debug messages for certain categories in a logger service implementation specific way. This method will return a no-op function if debug messages for the specified category are disabled.\n *\n * @param category - Category name.\n *\n * @returns Debug logger function, that takes the debug message as its only argument.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "debug"
+                },
+                {
+                  "kind": "Content",
+                  "text": "("
+                },
+                {
+                  "kind": "Reference",
+                  "text": "category"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "("
+                },
+                {
+                  "kind": "Reference",
+                  "text": "message"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": string) => void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "returnTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 9
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 0,
+              "parameters": [
+                {
+                  "parameterName": "category",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 5
+                  }
+                }
+              ],
+              "name": "debug"
+            },
+            {
+              "kind": "MethodSignature",
+              "canonicalReference": "(error:0)",
+              "docComment": "/**\n * Log an error.\n *\n * @param message - Error message to log.\n *\n * @param err - Thrown error, if any. Normally an instance of `Error`, but can be anything.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "error"
+                },
+                {
+                  "kind": "Content",
+                  "text": "("
+                },
+                {
+                  "kind": "Reference",
+                  "text": "message"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "err"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "unknown"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "returnTypeTokenRange": {
+                "startIndex": 10,
+                "endIndex": 11
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 0,
+              "parameters": [
+                {
+                  "parameterName": "message",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 5
+                  }
+                },
+                {
+                  "parameterName": "err",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 8,
+                    "endIndex": 9
+                  }
+                }
+              ],
+              "name": "error"
+            },
+            {
+              "kind": "MethodSignature",
+              "canonicalReference": "(isDebugEnabled:0)",
+              "docComment": "/**\n * Tell if debug message are enabled for the specified category.\n *\n * @remarks\n *\n * If constructing a message for the debug logger returned by the {@link Logger.debug | debug()} method is an expensive operation, it sometimes worth checking if the logger is actually a no-op before invoking it. This method allows to perform such check.\n *\n * @param category - Category name.\n *\n * @returns `true` if debug messages are enabled for the category, `false` if the category debug logger is a no-op.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "isDebugEnabled"
+                },
+                {
+                  "kind": "Content",
+                  "text": "("
+                },
+                {
+                  "kind": "Reference",
+                  "text": "category"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "returnTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 7
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 0,
+              "parameters": [
+                {
+                  "parameterName": "category",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 5
+                  }
+                }
+              ],
+              "name": "isDebugEnabled"
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "(LogMessage:interface)",
+          "docComment": "/**\n * Log message with its context.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface "
+            },
+            {
+              "kind": "Reference",
+              "text": "LogMessage"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "LogMessage",
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "category",
+              "docComment": "/**\n * Message category, \"ERROR\" if error message.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "category"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "category",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "context",
+              "docComment": "/**\n * Message runtime context.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "context"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "context",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "error",
+              "docComment": "/**\n * Error, if any.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "error"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "unknown"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "error",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "message",
+              "docComment": "/**\n * Message text.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "message"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "message",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "ts",
+              "docComment": "/**\n * Message timestamp.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ts"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Date"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "ts",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "(Service:interface)",
+          "docComment": "/**\n * Interface for optional methods that may be defined on a service.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface "
+            },
+            {
+              "kind": "Reference",
+              "text": "Service"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "Service",
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "shutdown",
+              "docComment": "/**\n * Gracefully shutdown the service.\n *\n * @returns Nothing, if service shuts down synchronously, or, for asynchronous shutdown, a promise that resolves when the service shutdown is complete. Thrown errors and rejected promises are logged, but otherwise ignored.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "shutdown"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "() => "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<void> | void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "shutdown",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 5
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "shutdownDependencies",
+              "docComment": "/**\n * Get services that may not be shut down before this service completes its shutdown.\n *\n * @returns List dependency service keys.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "shutdownDependencies"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ServiceKey"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<unknown>[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "shutdownDependencies",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 5
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "TypeAlias",
+          "canonicalReference": "ApplicationPlusService",
+          "docComment": "/**\n * Application extended with a service.\n *\n * @typeParam A - The base application type.\n *\n * @typeParam K - The service key.\n *\n * @typeParam S - The service type.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare type "
+            },
+            {
+              "kind": "Reference",
+              "text": "ApplicationPlusService"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "A"
+            },
+            {
+              "kind": "Content",
+              "text": " extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Application"
+            },
+            {
+              "kind": "Content",
+              "text": ", "
+            },
+            {
+              "kind": "Reference",
+              "text": "K"
+            },
+            {
+              "kind": "Content",
+              "text": " extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "ServiceKey"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "S"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            },
+            {
+              "kind": "Content",
+              "text": ", "
+            },
+            {
+              "kind": "Reference",
+              "text": "S"
+            },
+            {
+              "kind": "Content",
+              "text": "> = "
+            },
+            {
+              "kind": "Reference",
+              "text": "A"
+            },
+            {
+              "kind": "Content",
+              "text": " & {\n    readonly ["
+            },
+            {
+              "kind": "Reference",
+              "text": "serviceKey"
+            },
+            {
+              "kind": "Content",
+              "text": " in "
+            },
+            {
+              "kind": "Reference",
+              "text": "K"
+            },
+            {
+              "kind": "Content",
+              "text": "]: "
+            },
+            {
+              "kind": "Reference",
+              "text": "S"
+            },
+            {
+              "kind": "Content",
+              "text": ";\n}"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "ApplicationPlusService",
+          "typeParameters": [
+            {
+              "typeParameterName": "A",
+              "constraintTokenRange": {
+                "startIndex": 5,
+                "endIndex": 6
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            },
+            {
+              "typeParameterName": "K",
+              "constraintTokenRange": {
+                "startIndex": 9,
+                "endIndex": 13
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            },
+            {
+              "typeParameterName": "S",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "typeTokenRange": {
+            "startIndex": 16,
+            "endIndex": 24
+          }
+        },
+        {
+          "kind": "TypeAlias",
+          "canonicalReference": "MessageVariable",
+          "docComment": "/**\n * Message variable implementation.\n *\n * @param msg - Log message descriptor.\n *\n * @param param - Parameter from the variable placeholder in the format string. The parameter is the string that follows the colon after the variable name in the variable placeholder.\n *\n * @returns Variable value, or `undefined` if variable value is unavailable.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare type "
+            },
+            {
+              "kind": "Reference",
+              "text": "MessageVariable"
+            },
+            {
+              "kind": "Content",
+              "text": " = "
+            },
+            {
+              "kind": "Content",
+              "text": "("
+            },
+            {
+              "kind": "Reference",
+              "text": "msg"
+            },
+            {
+              "kind": "Content",
+              "text": ": "
+            },
+            {
+              "kind": "Reference",
+              "text": "LogMessage"
+            },
+            {
+              "kind": "Content",
+              "text": ", "
+            },
+            {
+              "kind": "Reference",
+              "text": "param"
+            },
+            {
+              "kind": "Content",
+              "text": "?: string) => string | undefined"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "MessageVariable",
+          "typeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 10
+          }
+        },
+        {
+          "kind": "TypeAlias",
+          "canonicalReference": "ServiceFactory",
+          "docComment": "/**\n * Function, that creates a service instance.\n *\n * @remarks\n *\n * Service factory functions are associated with service keys and added to the application when it is being configured. When the application is initialized (see {@link Application.init | init()} method), the service factory functions are called to produce service instances, which are then bound to the application instance under the provided service keys.\n *\n * The application instance passed into the service factory function has all services configured before this one initialized and available. This makes it possible for services to depend on each other.\n *\n * If the service factory function throws an error or returns a promise that rejects, the initialization process is aborted, all services that have already been initialized are shutdown and removed from the application, and the initialization ends with the error.\n *\n * @param app - The application with all services configured before this one initialized and available.\n *\n * @typeParam A - The application type extended with all services configured before this one.\n *\n * @typeParam S - Type of the service the factory function creates.\n *\n * @returns The service instance or a promise of it.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare type "
+            },
+            {
+              "kind": "Reference",
+              "text": "ServiceFactory"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "A"
+            },
+            {
+              "kind": "Content",
+              "text": " extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Application"
+            },
+            {
+              "kind": "Content",
+              "text": ", "
+            },
+            {
+              "kind": "Reference",
+              "text": "S"
+            },
+            {
+              "kind": "Content",
+              "text": "> = "
+            },
+            {
+              "kind": "Content",
+              "text": "("
+            },
+            {
+              "kind": "Reference",
+              "text": "app"
+            },
+            {
+              "kind": "Content",
+              "text": ": "
+            },
+            {
+              "kind": "Reference",
+              "text": "A"
+            },
+            {
+              "kind": "Content",
+              "text": ") => "
+            },
+            {
+              "kind": "Reference",
+              "text": "Promise"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "S"
+            },
+            {
+              "kind": "Content",
+              "text": "> | "
+            },
+            {
+              "kind": "Reference",
+              "text": "S"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "ServiceFactory",
+          "typeParameters": [
+            {
+              "typeParameterName": "A",
+              "constraintTokenRange": {
+                "startIndex": 5,
+                "endIndex": 6
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            },
+            {
+              "typeParameterName": "S",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "typeTokenRange": {
+            "startIndex": 9,
+            "endIndex": 19
+          }
+        },
+        {
+          "kind": "TypeAlias",
+          "canonicalReference": "ServiceKey",
+          "docComment": "/**\n * Service key, which is name of the {@link Application} instance property, to which the service instance is bound.\n *\n * @typeParam S - Corresponding service type.\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare type "
+            },
+            {
+              "kind": "Reference",
+              "text": "ServiceKey"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "S"
+            },
+            {
+              "kind": "Content",
+              "text": "> = "
+            },
+            {
+              "kind": "Content",
+              "text": "string"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "ServiceKey",
+          "typeParameters": [
+            {
+              "typeParameterName": "S",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "typeTokenRange": {
+            "startIndex": 5,
+            "endIndex": 6
+          }
+        }
+      ]
+    }
+  ]
+}

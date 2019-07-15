@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json.schemastore.org/package",
+  "name": "@x2node/common",
+  "version": "1.0.0-dev.0",
+  "description": "X2 Framework: Common module.",
+  "keywords": [
+    "x2node"
+  ],
+  "author": "Lev Himmelfarb <lev@boylesoftware.com>",
+  "homepage": "https://x2node.com/",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "module": "lib/index.es.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/boylesoftware/x2node2.git",
+    "directory": "packages/common"
+  },
+  "bugs": {
+    "url": "https://github.com/boylesoftware/x2node2/issues"
+  },
+  "scripts": {
+    "clean": "rimraf build/ lib/",
+    "build": "tsc && api-extractor run -l && rollup -c",
+    "lint": "eslint --max-warnings 0 --ext .ts --parser-options=tsconfigRootDir:. src/",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run lint",
+    "preversion": "npm run lint",
+    "postversion": "git push && git push --tags"
+  },
+  "engines": {
+    "node": ">=10.15.1"
+  }
+}
