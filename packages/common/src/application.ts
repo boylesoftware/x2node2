@@ -20,8 +20,8 @@ export type ServiceKey<S> = string;
  * Interface for optional methods that may be defined on a service.
  *
  * @remarks
- * Since all members of this interface are optional, services do not *have* to
- * implement this interface.
+ * Since all members of this interface are optional, services do not
+ * <em>have</em> to implement this interface.
  */
 export interface Service {
 

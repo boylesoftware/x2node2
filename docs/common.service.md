@@ -26,5 +26,5 @@ export interface Service
 
 ## Remarks
 
-Since all members of this interface are optional, services do not \*have\* to implement this interface.
+Since all members of this interface are optional, services do not <em>have</em> to implement this interface.
 
