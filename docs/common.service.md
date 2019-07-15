@@ -16,6 +16,15 @@ export interface Service
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [shutdown](./common.service.shutdown.md) | <code>() =&gt; Promise&lt;void&gt; &#124; void</code> | Gracefully shutdown the service. |
-|  [shutdownDependencies](./common.service.shutdowndependencies.md) | <code>ServiceKey&lt;unknown&gt;[]</code> | Get services that may not be shut down before this service completes its shutdown. |
+|  [shutdownDependencies](./common.service.shutdowndependencies.md) | <code>ServiceKey&lt;unknown&gt;[]</code> | List of services (identified by their service keys) that may not be shut down before this service completes its shutdown. |
+
+## Methods
+
+|  Method | Description |
+|  --- | --- |
+|  [shutdown()](./common.service.shutdown.md) | Gracefully shutdown the service. |
+
+## Remarks
+
+Since all members of this interface are optional, services do not \*have\* to implement this interface.
 

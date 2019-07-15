@@ -2,12 +2,22 @@
 
 [Home](./index.md) &gt; [@x2node/common](./common.md) &gt; [Service](./common.service.md) &gt; [shutdown](./common.service.shutdown.md)
 
-## Service.shutdown property
+## Service.shutdown() method
 
 Gracefully shutdown the service.
 
 <b>Signature:</b>
 
 ```typescript
-shutdown?: () => Promise<void> | void;
+shutdown?(): Promise<void> | void;
 ```
+<b>Returns:</b>
+
+`Promise<void> | void`
+
+Nothing, if service shuts down synchronously, or, for asynchronous shutdown, a promise that resolves when the service shutdown is complete.
+
+## Remarks
+
+Thrown errors and rejected promises are logged, but otherwise ignored. The service is removed from the application and the shutdown process continues.
+

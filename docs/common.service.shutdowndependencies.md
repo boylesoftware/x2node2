@@ -4,7 +4,7 @@
 
 ## Service.shutdownDependencies property
 
-Get services that may not be shut down before this service completes its shutdown.
+List of services (identified by their service keys) that may not be shut down before this service completes its shutdown.
 
 <b>Signature:</b>
 

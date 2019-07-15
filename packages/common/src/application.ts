@@ -18,25 +18,30 @@ export type ServiceKey<S> = string;
 
 /**
  * Interface for optional methods that may be defined on a service.
+ *
+ * @remarks
+ * Since all members of this interface are optional, services do not *have* to
+ * implement this interface.
  */
 export interface Service {
 
   /**
-   * Get services that may not be shut down before this service completes its
-   * shutdown.
-   *
-   * @returns List dependency service keys.
+   * List of services (identified by their service keys) that may not be shut
+   * down before this service completes its shutdown.
    */
   readonly shutdownDependencies?: ServiceKey<unknown>[];
 
   /**
    * Gracefully shutdown the service.
    *
+   * @remarks
+   * Thrown errors and rejected promises are logged, but otherwise ignored. The
+   * service is removed from the application and the shutdown process continues.
+   *
    * @returns Nothing, if service shuts down synchronously, or, for asynchronous
    * shutdown, a promise that resolves when the service shutdown is complete.
-   * Thrown errors and rejected promises are logged, but otherwise ignored.
    */
-  shutdown?: () => Promise<void> | void;
+  shutdown?(): Promise<void> | void;
 }
 
 /**

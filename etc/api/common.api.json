@@ -2031,7 +2031,7 @@
         {
           "kind": "Interface",
           "canonicalReference": "(Service:interface)",
-          "docComment": "/**\n * Interface for optional methods that may be defined on a service.\n */\n",
+          "docComment": "/**\n * Interface for optional methods that may be defined on a service.\n *\n * @remarks\n *\n * Since all members of this interface are optional, services do not *have* to implement this interface.\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -2050,9 +2050,9 @@
           "name": "Service",
           "members": [
             {
-              "kind": "PropertySignature",
-              "canonicalReference": "shutdown",
-              "docComment": "/**\n * Gracefully shutdown the service.\n *\n * @returns Nothing, if service shuts down synchronously, or, for asynchronous shutdown, a promise that resolves when the service shutdown is complete. Thrown errors and rejected promises are logged, but otherwise ignored.\n */\n",
+              "kind": "MethodSignature",
+              "canonicalReference": "(shutdown:0)",
+              "docComment": "/**\n * Gracefully shutdown the service.\n *\n * @remarks\n *\n * Thrown errors and rejected promises are logged, but otherwise ignored. The service is removed from the application and the shutdown process continues.\n *\n * @returns Nothing, if service shuts down synchronously, or, for asynchronous shutdown, a promise that resolves when the service shutdown is complete.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Reference",
@@ -2060,11 +2060,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "?: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "() => "
+                  "text": "?(): "
                 },
                 {
                   "kind": "Reference",
@@ -2079,17 +2075,19 @@
                   "text": ";"
                 }
               ],
-              "releaseTag": "Public",
-              "name": "shutdown",
-              "propertyTypeTokenRange": {
+              "returnTypeTokenRange": {
                 "startIndex": 2,
-                "endIndex": 5
-              }
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 0,
+              "parameters": [],
+              "name": "shutdown"
             },
             {
               "kind": "PropertySignature",
               "canonicalReference": "shutdownDependencies",
-              "docComment": "/**\n * Get services that may not be shut down before this service completes its shutdown.\n *\n * @returns List dependency service keys.\n */\n",
+              "docComment": "/**\n * List of services (identified by their service keys) that may not be shut down before this service completes its shutdown.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",

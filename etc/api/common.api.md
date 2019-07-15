@@ -70,7 +70,7 @@ export type MessageVariable = (msg: LogMessage, param?: string) => string | unde
 
 // @public
 export interface Service {
-    shutdown?: () => Promise<void> | void;
+    shutdown?(): Promise<void> | void;
     readonly shutdownDependencies?: ServiceKey<unknown>[];
 }
 
