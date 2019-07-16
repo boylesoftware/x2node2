@@ -36,6 +36,7 @@ export interface LogMessage {
 /**
  * Message variable implementation.
  *
+ * @function
  * @param msg - Log message descriptor.
  * @param param - Parameter from the variable placeholder in the format string.
  * The parameter is the string that follows the colon after the variable name in
