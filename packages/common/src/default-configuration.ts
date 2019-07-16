@@ -1,9 +1,10 @@
+// Copyright (c) Boyle Software, Inc. All rights reserved. Licensed under the MIT license.
+
 import { Configuration } from "./configuration";
 
 /**
  * Default implementation of the {@link Configuration} service that takes
- * configuration options from the process environment variables (see
- * `process.env`).
+ * configuration options from the process environment variables.
  *
  * @public
  */

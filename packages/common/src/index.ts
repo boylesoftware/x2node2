@@ -1,14 +1,14 @@
 // Copyright (c) Boyle Software, Inc. All rights reserved. Licensed under the MIT license.
 
 /**
- * Common mobule the provides foundation for the rest of the X2 Framrwork and
- * applications that use it.
+ * Common module that provides foundation for the rest of the
+ * <i>X2 Framrwork</i> and applications that use it.
  *
  * @remarks
- * This mobule deals with the notion of the X2 application, its lifecycle,
- * services, which are singletons that provide service layer functionality to
- * the rest of the application, as well as common basic functionality such as
- * logging and application configuration.
+ * This mobule deals with the notion of the application as a whole, its
+ * lifecycle, services, which are singletons that provide service layer
+ * functionality to the rest of the application, as well as common basic
+ * functionality such as logging and application configuration.
  *
  * @packageDocumentation
  */

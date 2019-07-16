@@ -1,3 +1,5 @@
+// Copyright (c) Boyle Software, Inc. All rights reserved. Licensed under the MIT license.
+
 import { Logger } from "./logger";
 
 /**
@@ -34,14 +36,15 @@ export interface LogMessage {
 }
 
 /**
- * Message variable implementation.
+ * Function that provides implementation for a message variable.
  *
- * @function
- * @param msg - Log message descriptor.
- * @param param - Parameter from the variable placeholder in the format string.
- * The parameter is the string that follows the colon after the variable name in
- * the variable placeholder.
- * @returns Variable value, or `undefined` if variable value is unavailable.
+ * @remarks
+ * The function takes the log message description and, if applicable, the
+ * parameter from the variable placeholder in the format string. The parameter
+ * is the string that follows the colon after the variable name in the
+ * placeholder. The function then returns the variable value (the string, with
+ * which to replace the placeholder), or `undefined` if variable value is
+ * unavailable.
  *
  * @public
  */
@@ -51,7 +54,7 @@ export type MessageVariable = (msg: LogMessage, param?: string) => string | unde
  * Builder for a log message part.
  *
  * @remarks
- * A message part builder can be associated with a single message variable.
+ * A message part builder can include a single message variable.
  *
  * An array of part builders comprises a full message builder. To compile the
  * final message, the parts produced by the part builders are concatenated.
@@ -65,19 +68,19 @@ interface MessagePartBuilder {
   readonly prefix: string;
 
   /**
-   * If `true` and the message variable value is empty, the `prefix` is not
-   * included in the final log message.
+   * If `true` and the message variable value is `undefined`, the `prefix` is
+   * not included in the final log message.
    */
   readonly noPrefixIfEmpty: boolean;
 
   /**
-   * Message variable implementation if the part is for a message variable.
+   * Message variable implementation if the part includes a message variable.
    */
   readonly variable?: MessageVariable;
 
   /**
    * Message variable parameter (string that follows the colon after the
-   * variable name in the variable placeholder in the format string), if any.
+   * variable name in the placeholder in the format string), if any.
    */
   readonly variableParam?: string;
 }
@@ -115,7 +118,8 @@ const DEFAULT_VARS: { [key: string]: MessageVariable } = {
 function noopLogger(): void { }
 
 /**
- * Default logger service implementation.
+ * Default logger service implementation that writes log messages to the
+ * console.
  *
  * @remarks
  * This implementation uses `console.error()` and `console.log()` to output
