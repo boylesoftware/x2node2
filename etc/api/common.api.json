@@ -7,7 +7,7 @@
   },
   "kind": "Package",
   "canonicalReference": "@x2node/common",
-  "docComment": "/**\n * Common mobule the provides foundation for the rest of the X2 Framrwork and applications that use it.\n *\n * @remarks\n *\n * This mobule deals with the notion of the X2 application, its lifecycle, services, which are singletons that provide service layer functionality to the rest of the application, as well as common basic functionality such as logging and application configuration.\n *\n * @packageDocumentation\n */\n",
+  "docComment": "/**\n * Common module that provides foundation for the rest of the <i>X2 Framrwork</i> and applications that use it.\n *\n * @remarks\n *\n * This mobule deals with the notion of the application as a whole, its lifecycle, services, which are singletons that provide service layer functionality to the rest of the application, as well as common basic functionality such as logging and application configuration.\n *\n * @packageDocumentation\n */\n",
   "name": "@x2node/common",
   "members": [
     {
@@ -832,7 +832,7 @@
         {
           "kind": "Interface",
           "canonicalReference": "(Configuration:interface)",
-          "docComment": "/**\n * Application configuration service interface.\n *\n * @remarks\n *\n * A configuration service is always available on the application, even if not explicitly configured. The {@link DefaultConfiguration} implementation is used by default.\n */\n",
+          "docComment": "/**\n * Application configuration service interface.\n *\n * @remarks\n *\n * The configuration is used to provide the application with information about its runtime environment. The configuration consists of configuration options, identified by names, and their values. The options may include such things as the database URL, or the port, on which to listen for incoming API requests, or an application encryption key, etc.\n *\n * A configuration service is always available on the application, even if not explicitly configured. The {@link DefaultConfiguration} implementation is used by default.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -853,7 +853,7 @@
             {
               "kind": "MethodSignature",
               "canonicalReference": "(get:0)",
-              "docComment": "/**\n * Get configuration option value.\n *\n * @param key - Configuration option key.\n *\n * @returns Configuration option value, if available.\n */\n",
+              "docComment": "/**\n * Get configuration option value.\n *\n * @param option - Configuration option name.\n *\n * @returns Configuration option value, if available.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Reference",
@@ -865,7 +865,7 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "key"
+                  "text": "option"
                 },
                 {
                   "kind": "Content",
@@ -896,7 +896,7 @@
               "overloadIndex": 0,
               "parameters": [
                 {
-                  "parameterName": "key",
+                  "parameterName": "option",
                   "parameterTypeTokenRange": {
                     "startIndex": 4,
                     "endIndex": 5
@@ -908,7 +908,7 @@
             {
               "kind": "MethodSignature",
               "canonicalReference": "(getRequired:0)",
-              "docComment": "/**\n * Get required configuration option value. Throws an error if option is not available.\n *\n * @param key - Configuration option key.\n *\n * @returns Configuration option value.\n */\n",
+              "docComment": "/**\n * Get required configuration option value. Throws an error if option is not available.\n *\n * @param option - Configuration option name.\n *\n * @returns Configuration option value.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Reference",
@@ -920,7 +920,7 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "key"
+                  "text": "option"
                 },
                 {
                   "kind": "Content",
@@ -951,7 +951,7 @@
               "overloadIndex": 0,
               "parameters": [
                 {
-                  "parameterName": "key",
+                  "parameterName": "option",
                   "parameterTypeTokenRange": {
                     "startIndex": 4,
                     "endIndex": 5
@@ -966,7 +966,7 @@
         {
           "kind": "Class",
           "canonicalReference": "(DefaultConfiguration:class)",
-          "docComment": "/**\n * Default implementation of the {@link Configuration} service that takes configuration options from the process environment variables (see `process.env`).\n *\n * @public\n */\n",
+          "docComment": "/**\n * Default implementation of the {@link Configuration} service that takes configuration options from the process environment variables.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -995,7 +995,7 @@
             {
               "kind": "Method",
               "canonicalReference": "(get:instance,0)",
-              "docComment": "/**\n * Get configuration option value.\n *\n * @param key - Configuration option key.\n *\n * @returns Configuration option value, if available.\n */\n",
+              "docComment": "/**\n * Get configuration option value.\n *\n * @param option - Configuration option name.\n *\n * @returns Configuration option value, if available.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Reference",
@@ -1051,7 +1051,7 @@
             {
               "kind": "Method",
               "canonicalReference": "(getRequired:instance,0)",
-              "docComment": "/**\n * Get required configuration option value. Throws an error if option is not available.\n *\n * @param key - Configuration option key.\n *\n * @returns Configuration option value.\n */\n",
+              "docComment": "/**\n * Get required configuration option value. Throws an error if option is not available.\n *\n * @param option - Configuration option name.\n *\n * @returns Configuration option value.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Reference",
@@ -1115,7 +1115,7 @@
         {
           "kind": "Class",
           "canonicalReference": "(DefaultLogger:class)",
-          "docComment": "/**\n * Default logger service implementation.\n *\n * @remarks\n *\n * This implementation uses `console.error()` and `console.log()` to output error and debug messages respectively. It is used by default by applications when no other logger service is configured explicitly.\n *\n * This implementation uses `NODE_DEBUG` environment variable to configure what debug message categories get logged. To enable a given debug log category, the environmant variable, which is a comma-separated list, must include either the exact category name, or category name prefix followed by a star. For the puprpose of the prefix matching, the category names are split at underscores. For example, to enable debug messages for category \"X2_DB_SQL\", the `NODE_DEBUG` must include any of the following: \"X2*\", \"X2_DB*\", \"X2_DB_SQL\" or \"X2_DB_SQL*\". Note also, that `NODE_DEBUG` is case-insensitive.\n *\n * Another feature of this implementation is configurable log message format, which can be provided to the class constructor. The format string includes variables in curly braces that get replaced by certain values. The following variables are supported by default:\n *\n * * _ts_ - Message timestamp in ISO format (see `Date.toISOString()`). * _pid_ - The Node process PID (see `process.pid`). * _cat_ - The message category. \"ERROR\" for error messages. * _msg_ - The message text. * _env:VAR_ - Value of the environment variable, where _VAR_ if the variable name (see `process.env`). * _ctx_ - Comma-space-separated list of context values (see {@link Logger.addContext | addContext()} on `Logger` interface). The whole list is surrounded by square brackets. * _err_ - Error information for error messages. Includes error stack trace if the error object is an instance of `Error`.\n *\n * The variable name in a variable placeholder in the format string can be prefixed with a question marks. In that case, if the variable able is empty, the part of the format string preceeding the placeholder up to the previous variable placeholder or the beginning of the format string is omitted. For example, the default format string is \"{ts} {?ctx} {cat}: {msg}\\n{?err}\".\n *\n * The constructor also can take definitions for additional message variables not included in the default set (or overriding the defaults).\n *\n * Also, this implementation can be used as a base class for another logger service implementation. The extended class can override {@link DefaultLogger.writeMessage | writeMessage()} method to provide its own logic for writing log messages.\n *\n * @public\n */\n",
+          "docComment": "/**\n * Default logger service implementation that writes log messages to the console.\n *\n * @remarks\n *\n * This implementation uses `console.error()` and `console.log()` to output error and debug messages respectively. It is used by default by applications when no other logger service is configured explicitly.\n *\n * This implementation uses `NODE_DEBUG` environment variable to configure what debug message categories get logged. To enable a given debug log category, the environmant variable, which is a comma-separated list, must include either the exact category name, or category name prefix followed by a star. For the puprpose of the prefix matching, the category names are split at underscores. For example, to enable debug messages for category \"X2_DB_SQL\", the `NODE_DEBUG` must include any of the following: \"X2*\", \"X2_DB*\", \"X2_DB_SQL\" or \"X2_DB_SQL*\". Note also, that `NODE_DEBUG` is case-insensitive.\n *\n * Another feature of this implementation is configurable log message format, which can be provided to the class constructor. The format string includes variables in curly braces that get replaced by certain values. The following variables are supported by default:\n *\n * * _ts_ - Message timestamp in ISO format (see `Date.toISOString()`). * _pid_ - The Node process PID (see `process.pid`). * _cat_ - The message category. \"ERROR\" for error messages. * _msg_ - The message text. * _env:VAR_ - Value of the environment variable, where _VAR_ if the variable name (see `process.env`). * _ctx_ - Comma-space-separated list of context values (see {@link Logger.addContext | addContext()} on `Logger` interface). The whole list is surrounded by square brackets. * _err_ - Error information for error messages. Includes error stack trace if the error object is an instance of `Error`.\n *\n * The variable name in a variable placeholder in the format string can be prefixed with a question marks. In that case, if the variable able is empty, the part of the format string preceeding the placeholder up to the previous variable placeholder or the beginning of the format string is omitted. For example, the default format string is \"{ts} {?ctx} {cat}: {msg}\\n{?err}\".\n *\n * The constructor also can take definitions for additional message variables not included in the default set (or overriding the defaults).\n *\n * Also, this implementation can be used as a base class for another logger service implementation. The extended class can override {@link DefaultLogger.writeMessage | writeMessage()} method to provide its own logic for writing log messages.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -1221,7 +1221,7 @@
             {
               "kind": "Method",
               "canonicalReference": "(addContext:instance,0)",
-              "docComment": "/**\n * Create new logger based on this one and add context to it.\n *\n * @remarks\n *\n * Log message format may include information about context, in which the logged event took place. Context is application specific list of short items, such as current API request id, current transaction id, etc. Creating a contextualized logger is cheap, because it still uses the parent logger for all the main functionality. Once the context is no more relevant, the contextualized logger can be simply thrown away. A contextualized logger itself can be used to create furhter contextualized loggers. These loggers will include the parent logger's context, plus their own.\n *\n * @param ctx - Context values.\n *\n * @returns Contextualized logger.\n */\n",
+              "docComment": "/**\n * Create new logger based on this one and add context to it.\n *\n * @remarks\n *\n * Log message format may include information about context, in which the logged event took place. Context is application specific list of short items, such as current API request id, current transaction id, etc. Creating a contextualized logger is cheap, because it still uses the parent logger for all the main functionality. Once the context is no more relevant, the contextualized logger can be simply thrown away. A contextualized logger itself can be used to create furhter contextualized loggers. These loggers will include the parent logger's context, plus their own.\n *\n * @param ctx - Additional context items.\n *\n * @returns Contextualized logger.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Reference",
@@ -1277,7 +1277,7 @@
             {
               "kind": "Method",
               "canonicalReference": "(debug:instance,0)",
-              "docComment": "/**\n * Get debug logger for the given category.\n *\n * @remarks\n *\n * The application's runtime environment may be configured to only log debug messages for certain categories in a logger service implementation specific way. This method will return a no-op function if debug messages for the specified category are disabled.\n *\n * @param category - Category name.\n *\n * @returns Debug logger function, that takes the debug message as its only argument.\n */\n",
+              "docComment": "/**\n * Get debug logger for the given category.\n *\n * @remarks\n *\n * The application's runtime environment may be configured to only log debug messages for certain categories in a way specific to the given logger service implementation. This method will return a no-op function if debug messages for the specified category are disabled.\n *\n * @param category - Category name.\n *\n * @returns Debug logger function, that takes the debug message as its only argument.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Reference",
@@ -1341,7 +1341,7 @@
             {
               "kind": "Method",
               "canonicalReference": "(error:instance,0)",
-              "docComment": "/**\n * Log an error.\n *\n * @param message - Error message to log.\n *\n * @param err - Thrown error, if any. Normally an instance of `Error`, but can be anything.\n */\n",
+              "docComment": "/**\n * Log an application error.\n *\n * @param message - Error message to log.\n *\n * @param err - The error object, if any. Normally an instance of `Error`, but can be anything.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Reference",
@@ -1420,7 +1420,7 @@
             {
               "kind": "Method",
               "canonicalReference": "(isDebugEnabled:instance,0)",
-              "docComment": "/**\n * Tell if debug message are enabled for the specified category.\n *\n * @remarks\n *\n * If constructing a message for the debug logger returned by the {@link Logger.debug | debug()} method is an expensive operation, it sometimes worth checking if the logger is actually a no-op before invoking it. This method allows to perform such check.\n *\n * @param category - Category name.\n *\n * @returns `true` if debug messages are enabled for the category, `false` if the category debug logger is a no-op.\n */\n",
+              "docComment": "/**\n * Tell if debug messages are enabled for the specified category.\n *\n * @remarks\n *\n * If constructing a debug message is an expensive operation, it sometimes worth checking if the debug messages for the given category are enabled before calling the logger function returned by the {@link Logger} service's {@link Logger.debug | debug()} method. The {@link Logger.isDebugEnabled | isDebugEnabled()} method allows to perform such check.\n *\n * @param category - Category name.\n *\n * @returns `true` if debug messages are enabled for the category, `false` if the category logger is a no-op.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Reference",
@@ -1567,7 +1567,7 @@
         {
           "kind": "Interface",
           "canonicalReference": "(Logger:interface)",
-          "docComment": "/**\n * Logger service interface.\n *\n * @remarks\n *\n * Logger service is used by applications to log unexpected application errors as well as debug messages, when enabled. Debug messages are categorized and logger implementations usually allow selectively enabling/disabling certain debug message categories.\n *\n * A logger service is always available on the application, even if not explicitly configured. The {@link DefaultLogger} implementation is used by default.\n *\n * @public\n */\n",
+          "docComment": "/**\n * Logger service interface.\n *\n * @remarks\n *\n * Logger service is used by the application to log unexpected application errors as well as debug messages, when enabled. Debug messages are categorized and logger implementations usually allow selective enabling/disabling of certain message categories.\n *\n * A logger service is always available on the application, even if not explicitly configured. The {@link DefaultLogger} implementation is used by default.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -1588,7 +1588,7 @@
             {
               "kind": "MethodSignature",
               "canonicalReference": "(addContext:0)",
-              "docComment": "/**\n * Create new logger based on this one and add context to it.\n *\n * @remarks\n *\n * Log message format may include information about context, in which the logged event took place. Context is application specific list of short items, such as current API request id, current transaction id, etc. Creating a contextualized logger is cheap, because it still uses the parent logger for all the main functionality. Once the context is no more relevant, the contextualized logger can be simply thrown away. A contextualized logger itself can be used to create furhter contextualized loggers. These loggers will include the parent logger's context, plus their own.\n *\n * @param ctx - Context values.\n *\n * @returns Contextualized logger.\n */\n",
+              "docComment": "/**\n * Create new logger based on this one and add context to it.\n *\n * @remarks\n *\n * Log message format may include information about context, in which the logged event took place. Context is application specific list of short items, such as current API request id, current transaction id, etc. Creating a contextualized logger is cheap, because it still uses the parent logger for all the main functionality. Once the context is no more relevant, the contextualized logger can be simply thrown away. A contextualized logger itself can be used to create furhter contextualized loggers. These loggers will include the parent logger's context, plus their own.\n *\n * @param ctx - Additional context items.\n *\n * @returns Contextualized logger.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Reference",
@@ -1643,7 +1643,7 @@
             {
               "kind": "MethodSignature",
               "canonicalReference": "(debug:0)",
-              "docComment": "/**\n * Get debug logger for the given category.\n *\n * @remarks\n *\n * The application's runtime environment may be configured to only log debug messages for certain categories in a logger service implementation specific way. This method will return a no-op function if debug messages for the specified category are disabled.\n *\n * @param category - Category name.\n *\n * @returns Debug logger function, that takes the debug message as its only argument.\n */\n",
+              "docComment": "/**\n * Get debug logger for the given category.\n *\n * @remarks\n *\n * The application's runtime environment may be configured to only log debug messages for certain categories in a way specific to the given logger service implementation. This method will return a no-op function if debug messages for the specified category are disabled.\n *\n * @param category - Category name.\n *\n * @returns Debug logger function, that takes the debug message as its only argument.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Reference",
@@ -1706,7 +1706,7 @@
             {
               "kind": "MethodSignature",
               "canonicalReference": "(error:0)",
-              "docComment": "/**\n * Log an error.\n *\n * @param message - Error message to log.\n *\n * @param err - Thrown error, if any. Normally an instance of `Error`, but can be anything.\n */\n",
+              "docComment": "/**\n * Log an application error.\n *\n * @param message - Error message to log.\n *\n * @param err - The error object, if any. Normally an instance of `Error`, but can be anything.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Reference",
@@ -1784,7 +1784,7 @@
             {
               "kind": "MethodSignature",
               "canonicalReference": "(isDebugEnabled:0)",
-              "docComment": "/**\n * Tell if debug message are enabled for the specified category.\n *\n * @remarks\n *\n * If constructing a message for the debug logger returned by the {@link Logger.debug | debug()} method is an expensive operation, it sometimes worth checking if the logger is actually a no-op before invoking it. This method allows to perform such check.\n *\n * @param category - Category name.\n *\n * @returns `true` if debug messages are enabled for the category, `false` if the category debug logger is a no-op.\n */\n",
+              "docComment": "/**\n * Tell if debug messages are enabled for the specified category.\n *\n * @remarks\n *\n * If constructing a debug message is an expensive operation, it sometimes worth checking if the debug messages for the given category are enabled before calling the logger function returned by the {@link Logger} service's {@link Logger.debug | debug()} method. The {@link Logger.isDebugEnabled | isDebugEnabled()} method allows to perform such check.\n *\n * @param category - Category name.\n *\n * @returns `true` if debug messages are enabled for the category, `false` if the category logger is a no-op.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Reference",
@@ -2275,7 +2275,7 @@
         {
           "kind": "TypeAlias",
           "canonicalReference": "MessageVariable",
-          "docComment": "/**\n * Message variable implementation.\n *\n * @param msg - Log message descriptor.\n *\n * @param param - Parameter from the variable placeholder in the format string. The parameter is the string that follows the colon after the variable name in the variable placeholder.\n *\n * @returns Variable value, or `undefined` if variable value is unavailable.\n *\n * @public\n */\n",
+          "docComment": "/**\n * Function that provides implementation for a message variable.\n *\n * @remarks\n *\n * The function takes the log message description and, if applicable, the parameter from the variable placeholder in the format string. The parameter is the string that follows the colon after the variable name in the placeholder. The function then returns the variable value (the string, with which to replace the placeholder), or `undefined` if variable value is unavailable.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",

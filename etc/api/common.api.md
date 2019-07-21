@@ -26,8 +26,8 @@ export type ApplicationPlusService<A extends Application, K extends ServiceKey<S
 
 // @public
 export interface Configuration {
-    get(key: string): string | undefined;
-    getRequired(key: string): string;
+    get(option: string): string | undefined;
+    getRequired(option: string): string;
 }
 
 // @public
