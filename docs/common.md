@@ -4,15 +4,15 @@
 
 ## common package
 
-Common mobule the provides foundation for the rest of the X2 Framrwork and applications that use it.
+Common module that provides foundation for the rest of the <i>X2 Framrwork</i> and applications that use it.
 
 ## Classes
 
 |  Class | Description |
 |  --- | --- |
 |  [Application](./common.application.md) | An \_x2node\_ application. |
-|  [DefaultConfiguration](./common.defaultconfiguration.md) | Default implementation of the [Configuration](./common.configuration.md) service that takes configuration options from the process environment variables (see <code>process.env</code>). |
-|  [DefaultLogger](./common.defaultlogger.md) | Default logger service implementation. |
+|  [DefaultConfiguration](./common.defaultconfiguration.md) | Default implementation of the [Configuration](./common.configuration.md) service that takes configuration options from the process environment variables. |
+|  [DefaultLogger](./common.defaultlogger.md) | Default logger service implementation that writes log messages to the console. |
 
 ## Interfaces
 
@@ -28,11 +28,11 @@ Common mobule the provides foundation for the rest of the X2 Framrwork and appli
 |  Type Alias | Description |
 |  --- | --- |
 |  [ApplicationPlusService](./common.applicationplusservice.md) | Application extended with a service. |
-|  [MessageVariable](./common.messagevariable.md) | Message variable implementation. |
+|  [MessageVariable](./common.messagevariable.md) | Function that provides implementation for a message variable. |
 |  [ServiceFactory](./common.servicefactory.md) | Function, that creates a service instance. |
 |  [ServiceKey](./common.servicekey.md) | Service key, which is name of the [Application](./common.application.md) instance property, to which the service instance is bound. |
 
 ## Remarks
 
-This mobule deals with the notion of the X2 application, its lifecycle, services, which are singletons that provide service layer functionality to the rest of the application, as well as common basic functionality such as logging and application configuration.
+This mobule deals with the notion of the application as a whole, its lifecycle, services, which are singletons that provide service layer functionality to the rest of the application, as well as common basic functionality such as logging and application configuration.
 

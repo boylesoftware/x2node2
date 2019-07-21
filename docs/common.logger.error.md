@@ -4,7 +4,7 @@
 
 ## Logger.error() method
 
-Log an error.
+Log an application error.
 
 <b>Signature:</b>
 
@@ -17,7 +17,7 @@ error(message: string, err?: unknown): void;
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  message | <code>string</code> | Error message to log. |
-|  err | <code>unknown</code> | Thrown error, if any. Normally an instance of <code>Error</code>, but can be anything. |
+|  err | <code>unknown</code> | The error object, if any. Normally an instance of <code>Error</code>, but can be anything. |
 
 <b>Returns:</b>
 

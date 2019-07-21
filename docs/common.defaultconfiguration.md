@@ -4,7 +4,7 @@
 
 ## DefaultConfiguration class
 
-Default implementation of the [Configuration](./common.configuration.md) service that takes configuration options from the process environment variables (see `process.env`<!-- -->).
+Default implementation of the [Configuration](./common.configuration.md) service that takes configuration options from the process environment variables.
 
 <b>Signature:</b>
 

@@ -4,7 +4,7 @@
 
 ## DefaultLogger class
 
-Default logger service implementation.
+Default logger service implementation that writes log messages to the console.
 
 <b>Signature:</b>
 
@@ -24,8 +24,8 @@ export declare class DefaultLogger implements Logger
 |  --- | --- | --- |
 |  [addContext(ctx)](./common.defaultlogger.addcontext.md) |  | Create new logger based on this one and add context to it. |
 |  [debug(category)](./common.defaultlogger.debug.md) |  | Get debug logger for the given category. |
-|  [error(message, err)](./common.defaultlogger.error.md) |  | Log an error. |
-|  [isDebugEnabled(category)](./common.defaultlogger.isdebugenabled.md) |  | Tell if debug message are enabled for the specified category. |
+|  [error(message, err)](./common.defaultlogger.error.md) |  | Log an application error. |
+|  [isDebugEnabled(category)](./common.defaultlogger.isdebugenabled.md) |  | Tell if debug messages are enabled for the specified category. |
 |  [writeMessage(isError, message)](./common.defaultlogger.writemessage.md) |  | Write the message to the log output. |
 
 ## Remarks

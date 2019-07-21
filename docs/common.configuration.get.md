@@ -9,14 +9,14 @@ Get configuration option value.
 <b>Signature:</b>
 
 ```typescript
-get(key: string): string | undefined;
+get(option: string): string | undefined;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  key | <code>string</code> | Configuration option key. |
+|  option | <code>string</code> | Configuration option name. |
 
 <b>Returns:</b>
 

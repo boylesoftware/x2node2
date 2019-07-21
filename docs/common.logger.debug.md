@@ -26,5 +26,5 @@ Debug logger function, that takes the debug message as its only argument.
 
 ## Remarks
 
-The application's runtime environment may be configured to only log debug messages for certain categories in a logger service implementation specific way. This method will return a no-op function if debug messages for the specified category are disabled.
+The application's runtime environment may be configured to only log debug messages for certain categories in a way specific to the given logger service implementation. This method will return a no-op function if debug messages for the specified category are disabled.
 

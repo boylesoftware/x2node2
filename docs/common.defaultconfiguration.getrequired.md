@@ -16,7 +16,7 @@ getRequired(key: string): string;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  key | <code>string</code> | Configuration option key. |
+|  key | <code>string</code> |  |
 
 <b>Returns:</b>
 

@@ -16,7 +16,7 @@ addContext(ctx: string[]): Logger;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  ctx | <code>string[]</code> | Context values. |
+|  ctx | <code>string[]</code> | Additional context items. |
 
 <b>Returns:</b>
 

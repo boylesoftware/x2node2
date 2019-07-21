@@ -9,14 +9,14 @@ Get required configuration option value. Throws an error if option is not availa
 <b>Signature:</b>
 
 ```typescript
-getRequired(key: string): string;
+getRequired(option: string): string;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  key | <code>string</code> | Configuration option key. |
+|  option | <code>string</code> | Configuration option name. |
 
 <b>Returns:</b>
 

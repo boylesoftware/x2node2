@@ -4,10 +4,15 @@
 
 ## MessageVariable type
 
-Message variable implementation.
+Function that provides implementation for a message variable.
 
 <b>Signature:</b>
 
 ```typescript
 export declare type MessageVariable = (msg: LogMessage, param?: string) => string | undefined;
 ```
+
+## Remarks
+
+The function takes the log message description and, if applicable, the parameter from the variable placeholder in the format string. The parameter is the string that follows the colon after the variable name in the placeholder. The function then returns the variable value (the string, with which to replace the placeholder), or `undefined` if variable value is unavailable.
+

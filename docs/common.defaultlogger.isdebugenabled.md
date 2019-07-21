@@ -4,7 +4,7 @@
 
 ## DefaultLogger.isDebugEnabled() method
 
-Tell if debug message are enabled for the specified category.
+Tell if debug messages are enabled for the specified category.
 
 <b>Signature:</b>
 
@@ -22,9 +22,9 @@ isDebugEnabled(category: string): boolean;
 
 `boolean`
 
-`true` if debug messages are enabled for the category, `false` if the category debug logger is a no-op.
+`true` if debug messages are enabled for the category, `false` if the category logger is a no-op.
 
 ## Remarks
 
-If constructing a message for the debug logger returned by the [debug()](./common.logger.debug.md) method is an expensive operation, it sometimes worth checking if the logger is actually a no-op before invoking it. This method allows to perform such check.
+If constructing a debug message is an expensive operation, it sometimes worth checking if the debug messages for the given category are enabled before calling the logger function returned by the [Logger](./common.logger.md) service's [debug()](./common.logger.debug.md) method. The [isDebugEnabled()](./common.logger.isdebugenabled.md) method allows to perform such check.
 

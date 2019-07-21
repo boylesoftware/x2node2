@@ -16,10 +16,12 @@ export interface Configuration
 
 |  Method | Description |
 |  --- | --- |
-|  [get(key)](./common.configuration.get.md) | Get configuration option value. |
-|  [getRequired(key)](./common.configuration.getrequired.md) | Get required configuration option value. Throws an error if option is not available. |
+|  [get(option)](./common.configuration.get.md) | Get configuration option value. |
+|  [getRequired(option)](./common.configuration.getrequired.md) | Get required configuration option value. Throws an error if option is not available. |
 
 ## Remarks
+
+The configuration is used to provide the application with information about its runtime environment. The configuration consists of configuration options, identified by names, and their values. The options may include such things as the database URL, or the port, on which to listen for incoming API requests, or an application encryption key, etc.
 
 A configuration service is always available on the application, even if not explicitly configured. The [DefaultConfiguration](./common.defaultconfiguration.md) implementation is used by default.
 
