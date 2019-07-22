@@ -3,14 +3,12 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "bootstrap": "lerna bootstrap",
-    "clean": "lerna clean && lerna run clean",
+    "lerna": "lerna",
+    "postinstall": "lerna bootstrap",
+    "clean": "lerna run clean",
     "build": "lerna run build",
     "lint": "lerna run lint",
     "docs": "api-documenter markdown -i ./etc/api -o ./docs"
-  },
-  "engines": {
-    "node": ">=10.15.1"
   },
   "devDependencies": {
     "@microsoft/api-documenter": "^7.3.8",
@@ -23,5 +21,8 @@
     "rimraf": "^2.6.3",
     "rollup": "^1.17.0",
     "typescript": "^3.5.2"
+  },
+  "engines": {
+    "node": ">=10.15.1"
   }
 }

@@ -1,8 +1,8 @@
 {
   "$schema": "http://json.schemastore.org/package",
-  "name": "@x2node/common",
+  "name": "@x2node/db-connection-mysql",
   "version": "1.0.0-dev.0",
-  "description": "X2 Framework: Common module.",
+  "description": "X2 Framework: MySQL driver for the SQL database operations module.",
   "keywords": [
     "x2node"
   ],
@@ -22,7 +22,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/boylesoftware/x2node2.git",
-    "directory": "packages/common"
+    "directory": "packages/db-connection-mysql"
   },
   "scripts": {
     "clean": "rimraf build/ lib/",
@@ -32,6 +32,15 @@
     "prepublishOnly": "npm run lint",
     "preversion": "npm run build && npm run lint",
     "postversion": "git push && git push --tags"
+  },
+  "dependencies": {
+    "mysql2": "^1.6.5"
+  },
+  "devDependencies": {
+    "@x2node/db": "^1.0.0-dev.0"
+  },
+  "peerDependencies": {
+    "@x2node/db": "1.0.x"
   },
   "engines": {
     "node": ">=10.15.1"

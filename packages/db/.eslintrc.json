@@ -1,0 +1,6 @@
+{
+  "extends": "../../etc/eslintrc_base.json",
+  "parserOptions": {
+    "tsconfigRootDir": "./packages/db"
+  }
+}
