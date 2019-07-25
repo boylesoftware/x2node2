@@ -4,11 +4,73 @@
 
 ```ts
 
-// @public (undocumented)
-export class QQ {
+import { Service } from '@x2node/common';
+
+// @public
+export class Database {
+    constructor(opts: DatabaseOptions);
+    readonly shape: DatabaseShape;
 }
 
+// @public
+export interface DatabaseConnection {
+    release(): void;
+}
 
-// (No @packageDocumentation comment for this package)
+// @public
+export interface DatabaseConnectionProvider extends Service {
+    readonly dialect: SQLDialect;
+    getConnection(): Promise<DatabaseConnection>;
+}
+
+// @public
+export interface DatabaseMonitor {
+    release(): void;
+}
+
+// @public
+export interface DatabaseMonitorProvider extends Service {
+    getMonitor(con: DatabaseConnection): Promise<DatabaseMonitor>;
+}
+
+// @public
+export interface DatabaseOptions {
+    connectionProvider: DatabaseConnectionProvider;
+    monitorProvider: DatabaseMonitorProvider;
+    recordTypes: RecordType[];
+}
+
+// @public
+export interface DatabaseShape {
+    readonly recordTypes: ReadonlyArray<RecordType>;
+}
+
+// @public
+export const DB_CONNECTION_PROVIDER_SERVICE = "databaseConnectionProvider";
+
+// @public
+export const DB_MONITOR_PROVIDER_SERVICE = "databaseMonitorProvider";
+
+// @public
+export const LOG_CATEGORY = "X2_DB";
+
+// @public
+export interface RecordType {
+    // (undocumented)
+    new (...args: any): any;
+}
+
+// @public
+export interface SQLDialect {
+    booleanLiteral(val: boolean): string;
+    stringLiteral(val: string): string;
+}
+
+// @public
+export abstract class StandardSQLDialect implements SQLDialect {
+    booleanLiteral(val: boolean): string;
+    stringLiteral(val: string): string;
+}
+
 
 ```

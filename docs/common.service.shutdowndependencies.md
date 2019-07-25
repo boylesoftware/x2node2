@@ -9,5 +9,5 @@ List of services (identified by their service keys) that may not be shut down be
 <b>Signature:</b>
 
 ```typescript
-readonly shutdownDependencies?: ServiceKey<unknown>[];
+readonly shutdownDependencies?: string[];
 ```

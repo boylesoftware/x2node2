@@ -11,13 +11,13 @@
     "docs": "api-documenter markdown -i ./etc/api -o ./docs"
   },
   "devDependencies": {
-    "@microsoft/api-documenter": "^7.3.8",
-    "@microsoft/api-extractor": "^7.3.2",
+    "@microsoft/api-documenter": "^7.3.11",
+    "@microsoft/api-extractor": "^7.3.4",
     "@types/node": "^12.6.8",
     "@typescript-eslint/eslint-plugin": "^1.13.0",
     "@typescript-eslint/parser": "^1.13.0",
     "eslint": "^6.1.0",
-    "lerna": "^3.16.1",
+    "lerna": "^3.16.4",
     "rimraf": "^2.6.3",
     "rollup": "^1.17.0",
     "typescript": "^3.5.2"

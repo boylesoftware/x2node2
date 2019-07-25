@@ -7,7 +7,13 @@
 <b>Signature:</b>
 
 ```typescript
-services<K0 extends ServiceKey<S0>, S0, A0 extends ApplicationPlusService<this, K0, S0>, K1 extends ServiceKey<S1>, S1, A1 extends ApplicationPlusService<A0, K1, S1>>(binder0: [K0, ServiceFactory<this, S0>], binder1: [K1, ServiceFactory<A0, S1>]): A1;
+services<K0 extends string, S0, K1 extends string, S1>(binder0: [K0, ServiceFactory<this, S0>], binder1: [K1, ServiceFactory<this & {
+        readonly [K in K0]: S0;
+    }, S1>]): this & {
+        readonly [K in K0]: S0;
+    } & {
+        readonly [K in K1]: S1;
+    };
 ```
 
 ## Parameters
@@ -15,9 +21,13 @@ services<K0 extends ServiceKey<S0>, S0, A0 extends ApplicationPlusService<this, 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  binder0 | <code>[K0, ServiceFactory&lt;this, S0&gt;]</code> |  |
-|  binder1 | <code>[K1, ServiceFactory&lt;A0, S1&gt;]</code> |  |
+|  binder1 | <code>[K1, ServiceFactory&lt;this &amp; {</code><br/><code>        readonly [K in K0]: S0;</code><br/><code>    }, S1&gt;]</code> |  |
 
 <b>Returns:</b>
 
-`A1`
+`this & {
+        readonly [K in K0]: S0;
+    } & {
+        readonly [K in K1]: S1;
+    }`
 

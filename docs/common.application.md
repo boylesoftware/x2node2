@@ -16,7 +16,7 @@ export declare class Application
 
 |  Constructor | Modifiers | Description |
 |  --- | --- | --- |
-|  [(constructor)()](./common.application.(constructor).md) |  | Create new uninitialized application instance. |
+|  [(constructor)()](./common.application._constructor_.md) |  | Create new uninitialized application instance. |
 
 ## Properties
 
@@ -33,6 +33,9 @@ export declare class Application
 |  [init()](./common.application.init.md) |  | Initialize the application and make it ready to use. |
 |  [services(binder0)](./common.application.services.md) |  |  |
 |  [services(binder0, binder1)](./common.application.services_1.md) |  |  |
+|  [services(binder0, binder1, binder2)](./common.application.services_2.md) |  |  |
+|  [services(binder0, binder1, binder2, binder3)](./common.application.services_3.md) |  |  |
+|  [services(binder0, binder1, binder2, binder3, binder4)](./common.application.services_4.md) |  |  |
 |  [showMessage(message)](./common.application.showmessage.md) |  | Show message in the application console. |
 |  [shutdown()](./common.application.shutdown.md) |  | Gracefully shutdown the application. |
 

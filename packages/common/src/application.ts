@@ -1,3 +1,5 @@
+// Copyright (c) Boyle Software, Inc. All rights reserved. Licensed under the MIT license.
+
 import { Logger } from "./logger";
 import { DefaultLogger } from "./default-logger";
 import { Configuration } from "./configuration";
@@ -9,19 +11,13 @@ import { DefaultConfiguration } from "./default-configuration";
 const DEFAULT_LOG_FORMAT = "{ts} {?ctx} {cat}: {msg}\n{?err}";
 
 /**
- * Service key, which is name of the {@link Application} instance property, to
- * which the service instance is bound.
- *
- * @typeParam S - Corresponding service type.
- */
-export type ServiceKey<S> = string;
-
-/**
  * Interface for optional methods that may be defined on a service.
  *
  * @remarks
  * Since all members of this interface are optional, services do not
  * <em>have</em> to implement this interface.
+ *
+ * @public
  */
 export interface Service {
 
@@ -29,7 +25,7 @@ export interface Service {
    * List of services (identified by their service keys) that may not be shut
    * down before this service completes its shutdown.
    */
-  readonly shutdownDependencies?: ServiceKey<unknown>[];
+  readonly shutdownDependencies?: string[];
 
   /**
    * Gracefully shutdown the service.
@@ -69,19 +65,24 @@ export interface Service {
  * @param app - The application with all services configured before this one
  * initialized and available.
  * @returns The service instance or a promise of it.
+ *
+ * @public
  */
 export type ServiceFactory<A extends Application, S> = (app: A) => Promise<S> | S;
 
 /**
- * Application extended with a service.
+ * Standard service key for the configuration service.
  *
- * @typeParam A - The base application type.
- * @typeParam K - The service key.
- * @typeParam S - The service type.
+ * @public
  */
-export type ApplicationPlusService<A extends Application, K extends ServiceKey<S>, S> = A & {
-  readonly [serviceKey in K]: S;
-};
+export const CONFIG_SERVICE = "config";
+
+/**
+ * Standard service key for the logger service.
+ *
+ * @public
+ */
+export const LOGGER_SERVICE = "logger";
 
 /**
  * An _x2node_ application.
@@ -125,7 +126,7 @@ export class Application {
    * Service binders.
    */
   private readonly _serviceBinders: [
-    ServiceKey<unknown>,
+    string,
     ServiceFactory<Application, unknown>
   ][] = [];
 
@@ -157,7 +158,7 @@ export class Application {
   /**
    * Initialized application services (service key, service instance tuples).
    */
-  private readonly _services: [ServiceKey<unknown>, unknown][] = [];
+  private readonly _services: [string, unknown][] = [];
 
   /**
    * Tells if the application has been successfully initialized and is ready to
@@ -195,8 +196,8 @@ export class Application {
    * after it is shut down.
    *
    * The default logger format string is taken from `X2_LOG_FORMAT` environment
-   * variable. If not provided, "{ts} {?ctx} {cat}: {msg}\n{?err}" is used by
-   * default.
+   * variable. If not provided, "\{ts\} \{?ctx\} \{cat\}: \{msg\}\\n\{?err\}" is
+   * used by default.
    */
   public readonly logger: Logger;
 
@@ -219,18 +220,50 @@ export class Application {
     this.logger = this._defaultLogger;
   }
 
-  public services<
-    K0 extends ServiceKey<S0>, S0, A0 extends ApplicationPlusService<this, K0, S0>
-  >(
+  // TODO: comment and add more overloads
+  public services<K0 extends string, S0>(
     binder0: [K0, ServiceFactory<this, S0>]
-  ): A0;
-  public services<
-    K0 extends ServiceKey<S0>, S0, A0 extends ApplicationPlusService<this, K0, S0>,
-    K1 extends ServiceKey<S1>, S1, A1 extends ApplicationPlusService<A0, K1, S1>
-  >(
+  ): this & { readonly [K in K0]: S0 };
+
+  public services<K0 extends string, S0, K1 extends string, S1>(
     binder0: [K0, ServiceFactory<this, S0>],
-    binder1: [K1, ServiceFactory<A0, S1>]
-  ): A1;
+    binder1: [K1, ServiceFactory<this & { readonly [K in K0]: S0 }, S1>]
+  ): this & { readonly [K in K0]: S0 } & { readonly [K in K1]: S1 };
+
+  public services<K0 extends string, S0, K1 extends string, S1,
+    K2 extends string, S2>(
+    binder0: [K0, ServiceFactory<this, S0>],
+    binder1: [K1, ServiceFactory<this & { readonly [K in K0]: S0 }, S1>],
+    binder2: [K2, ServiceFactory<this & { readonly [K in K0]: S0 }
+    & { readonly [K in K1]: S1 }, S2>]
+  ): this & { readonly [K in K0]: S0 } & { readonly [K in K1]: S1 }
+  & { readonly [K in K2]: S2 };
+
+  public services<K0 extends string, S0, K1 extends string, S1,
+    K2 extends string, S2, K3 extends string, S3>(
+    binder0: [K0, ServiceFactory<this, S0>],
+    binder1: [K1, ServiceFactory<this & { readonly [K in K0]: S0 }, S1>],
+    binder2: [K2, ServiceFactory<this & { readonly [K in K0]: S0 }
+    & { readonly [K in K1]: S1 }, S2>],
+    binder3: [K3, ServiceFactory<this & { readonly [K in K0]: S0 }
+    & { readonly [K in K1]: S1 } & { readonly [K in K2]: S2 }, S3>]
+  ): this & { readonly [K in K0]: S0 } & { readonly [K in K1]: S1 }
+  & { readonly [K in K2]: S2 } & { readonly [K in K3]: S3 };
+
+  public services<K0 extends string, S0, K1 extends string, S1,
+    K2 extends string, S2, K3 extends string, S3, K4 extends string, S4>(
+    binder0: [K0, ServiceFactory<this, S0>],
+    binder1: [K1, ServiceFactory<this & { readonly [K in K0]: S0 }, S1>],
+    binder2: [K2, ServiceFactory<this & { readonly [K in K0]: S0 }
+    & { readonly [K in K1]: S1 }, S2>],
+    binder3: [K3, ServiceFactory<this & { readonly [K in K0]: S0 }
+    & { readonly [K in K1]: S1 } & { readonly [K in K2]: S2 }, S3>],
+    binder4: [K4, ServiceFactory<this & { readonly [K in K0]: S0 }
+    & { readonly [K in K1]: S1 } & { readonly [K in K2]: S2 }
+    & { readonly [K in K3]: S3 }, S4>]
+  ): this & { readonly [K in K0]: S0 } & { readonly [K in K1]: S1 }
+  & { readonly [K in K2]: S2 } & { readonly [K in K3]: S3 }
+  & { readonly [K in K4]: S4 };
 
   /**
    * Configure application services.
@@ -260,7 +293,7 @@ export class Application {
    * @returns Uninitialized, but configured application.
    */
   public services(
-    ...binders: [ServiceKey<unknown>, ServiceFactory<Application, unknown>][]
+    ...binders: [string, ServiceFactory<Application, unknown>][]
   ): this {
 
     if (this._ready || this._initPromise || this._shutdownPromise) {
@@ -358,7 +391,7 @@ export class Application {
       },
       async (err): Promise<never> => {
         this._initPromise = null;
-        this.showMessage("error initalizing the application: " + err.message);
+        this.showMessage("application initialization error: " + err.message);
         return this.shutdown().then((): Promise<never> => Promise.reject(err));
       }
     );
@@ -512,9 +545,7 @@ export class Application {
    * @param serviceKey - Service key.
    * @param service - Initialized service instance.
    */
-  private _addService<S>(
-    serviceKey: ServiceKey<S>, service: S
-  ): void {
+  private _addService<S>(serviceKey: string, service: S): void {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const app = this as any;
@@ -535,7 +566,7 @@ export class Application {
    *
    * @param serviceKey - Service key.
    */
-  private _removeService(serviceKey: ServiceKey<unknown>): void {
+  private _removeService(serviceKey: string): void {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const app = this as any;
@@ -544,9 +575,9 @@ export class Application {
     delete app[serviceKey];
 
     // restore default services
-    if (serviceKey === "config") {
+    if (serviceKey === CONFIG_SERVICE) {
       app.config = this._defaultConfig;
-    } else if (serviceKey === "logger") {
+    } else if (serviceKey === LOGGER_SERVICE) {
       app.logger = this._defaultLogger;
     }
   }

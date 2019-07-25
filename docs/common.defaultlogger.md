@@ -16,7 +16,7 @@ export declare class DefaultLogger implements Logger
 
 |  Constructor | Modifiers | Description |
 |  --- | --- | --- |
-|  [(constructor)(format, extraVars)](./common.defaultlogger.(constructor).md) |  | Create new logger service instance. |
+|  [(constructor)(format, extraVars)](./common.defaultlogger._constructor_.md) |  | Create new logger service instance. |
 
 ## Methods
 

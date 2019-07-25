@@ -1,32 +1,238 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.3.2",
-    "schemaVersion": 1001,
+    "toolVersion": "7.3.4",
+    "schemaVersion": 1002,
     "oldestForwardsCompatibleVersion": 1001
   },
   "kind": "Package",
-  "canonicalReference": "@x2node/db-connection-mysql",
-  "docComment": "",
+  "docComment": "/**\n * Implementation of <i>X2 Framework</i>'s database connection provider for <i>MySQL</i> compatible databases.\n *\n * @remarks\n *\n * The implementation supports {@link https://www.mysql.com/ | MySQL} (versions 5.6 and up), {@link https://mariadb.org/ | MariaDB} (versions 10.0 and up) as well as {@link https://aws.amazon.com/rds/aurora/ | Amazon Aurora}.\n *\n * Uses {@link https://www.npmjs.com/package/mysql2 | mysql2} module for the underlying functionality.\n *\n * @packageDocumentation\n */\n",
   "name": "@x2node/db-connection-mysql",
   "members": [
     {
       "kind": "EntryPoint",
-      "canonicalReference": "",
       "name": "",
       "members": [
         {
-          "kind": "Class",
-          "canonicalReference": "(QQMySQL:class)",
-          "docComment": "",
+          "kind": "TypeAlias",
+          "docComment": "/**\n * Authentication switch handler function.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare class "
+              "text": "export declare type "
             },
             {
               "kind": "Reference",
-              "text": "QQMySQL"
+              "text": "AuthSwitchHandler"
+            },
+            {
+              "kind": "Content",
+              "text": " = "
+            },
+            {
+              "kind": "Content",
+              "text": "("
+            },
+            {
+              "kind": "Reference",
+              "text": "params"
+            },
+            {
+              "kind": "Content",
+              "text": ": {\n    "
+            },
+            {
+              "kind": "Reference",
+              "text": "pluginName"
+            },
+            {
+              "kind": "Content",
+              "text": "?: string;\n    "
+            },
+            {
+              "kind": "Reference",
+              "text": "pluginData"
+            },
+            {
+              "kind": "Content",
+              "text": ": "
+            },
+            {
+              "kind": "Reference",
+              "text": "Buffer"
+            },
+            {
+              "kind": "Content",
+              "text": ";\n}, "
+            },
+            {
+              "kind": "Reference",
+              "text": "cb"
+            },
+            {
+              "kind": "Content",
+              "text": ": ("
+            },
+            {
+              "kind": "Reference",
+              "text": "err"
+            },
+            {
+              "kind": "Content",
+              "text": ": "
+            },
+            {
+              "kind": "Reference",
+              "text": "Error"
+            },
+            {
+              "kind": "Content",
+              "text": " | null, "
+            },
+            {
+              "kind": "Reference",
+              "text": "data"
+            },
+            {
+              "kind": "Content",
+              "text": "?: "
+            },
+            {
+              "kind": "Reference",
+              "text": "Buffer"
+            },
+            {
+              "kind": "Content",
+              "text": ") => void) => void"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "AuthSwitchHandler",
+          "typeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 22
+          }
+        },
+        {
+          "kind": "Function",
+          "docComment": "/**\n * Create database connection provider.\n *\n * @remarks\n *\n * Depending on what type of options are passing in, a connection pool or a single shared connection provider is created. The single shared connection provider does not allow concurrent connection use.\n *\n * @param app - The application.\n *\n * @param options - Connection or connection pool options.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function "
+            },
+            {
+              "kind": "Reference",
+              "text": "createMySQLDatabaseConnectionProvider"
+            },
+            {
+              "kind": "Content",
+              "text": "("
+            },
+            {
+              "kind": "Reference",
+              "text": "app"
+            },
+            {
+              "kind": "Content",
+              "text": ": "
+            },
+            {
+              "kind": "Reference",
+              "text": "Application"
+            },
+            {
+              "kind": "Content",
+              "text": ", "
+            },
+            {
+              "kind": "Reference",
+              "text": "options"
+            },
+            {
+              "kind": "Content",
+              "text": ": "
+            },
+            {
+              "kind": "Content",
+              "text": "string | "
+            },
+            {
+              "kind": "Reference",
+              "text": "MySQLConnectionOptions"
+            },
+            {
+              "kind": "Content",
+              "text": " | "
+            },
+            {
+              "kind": "Reference",
+              "text": "MySQLConnectionPoolOptions"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "Promise"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "DatabaseConnectionProvider"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 14,
+            "endIndex": 18
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 0,
+          "parameters": [
+            {
+              "parameterName": "app",
+              "parameterTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 6
+              }
+            },
+            {
+              "parameterName": "options",
+              "parameterTypeTokenRange": {
+                "startIndex": 9,
+                "endIndex": 13
+              }
+            }
+          ],
+          "name": "createMySQLDatabaseConnectionProvider"
+        },
+        {
+          "kind": "Interface",
+          "docComment": "/**\n * Descrpitor of a field that comes from the database (e.g. `SELECT` query result set).\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface "
+            },
+            {
+              "kind": "Reference",
+              "text": "FieldInfo"
             },
             {
               "kind": "Content",
@@ -34,9 +240,1814 @@
             }
           ],
           "releaseTag": "Public",
-          "name": "QQMySQL",
+          "name": "FieldInfo",
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * Function for getting the field binary value.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "buffer"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Content",
+                  "text": "() => "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Buffer"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | null"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "buffer",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 5
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * Database name or empty string.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "db"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "db",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * Function for getting the field geometry value.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "geometry"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Content",
+                  "text": "() => "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "GeometryValue"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | null"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "geometry",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 5
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * Value field width in bytes.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "length"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "length",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * Column name (alias) or empty string.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "name"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "name",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * Function for getting the field string value.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Content",
+                  "text": "() => string | null"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "string",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * Table name (alias) or empty string.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "table"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "table",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * Value type.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ValueType"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "type",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "TypeAlias",
+          "docComment": "/**\n * Database `GEOMERTY` type value.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare type "
+            },
+            {
+              "kind": "Reference",
+              "text": "GeometryValue"
+            },
+            {
+              "kind": "Content",
+              "text": " = "
+            },
+            {
+              "kind": "Reference",
+              "text": "PointValue"
+            },
+            {
+              "kind": "Content",
+              "text": " | "
+            },
+            {
+              "kind": "Reference",
+              "text": "GeometryValueArray"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "GeometryValue",
+          "typeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 6
+          }
+        },
+        {
+          "kind": "Interface",
+          "docComment": "/**\n * Array of database `GEOMETRY` type values.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface "
+            },
+            {
+              "kind": "Reference",
+              "text": "GeometryValueArray"
+            },
+            {
+              "kind": "Content",
+              "text": " extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Array"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "GeometryValue"
+            },
+            {
+              "kind": "Content",
+              "text": "> "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "GeometryValueArray",
           "members": [],
-          "implementsTokenRanges": []
+          "extendsTokenRanges": [
+            {
+              "startIndex": 3,
+              "endIndex": 7
+            }
+          ]
+        },
+        {
+          "kind": "Interface",
+          "docComment": "/**\n * Database connection options.\n *\n * @remarks\n *\n * This is mostly the {@link https://www.npmjs.com/package/mysql2 | mysql2} module connection configuration object with some farmework specific constraints.\n *\n * <em>Note, that only own properties are effective.</em>\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface "
+            },
+            {
+              "kind": "Reference",
+              "text": "MySQLConnectionOptions"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "MySQLConnectionOptions",
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * Authentication switch handler.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "authSwitchHandler"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "AuthSwitchHandler"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "authSwitchHandler",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * Determines if big number values are always returned as strings even if the value fits in a `Number`.\n *\n * @remarks\n *\n * This option is relevant only when {@link MySQLConnectionOptions.supportBigNumbers | supportBigNumbers} is `true` and since {@link MySQLConnectionOptions.supportBigNumbers | supportBigNumbers} is forced to be `false`, this option is never relevant.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "bigNumberStrings"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "bigNumberStrings",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * Collation for the connection.\n *\n * @remarks\n *\n * Overrides {@link MySQLConnectionOptions.charsetNumber | charsetNumber} option.\n *\n * @defaultValue\n *\n * \"utf8mb4_general_ci\"\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "charset"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "charset",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * Collation ID for the connection.\n *\n * @remarks\n *\n * See {@link https://dev.mysql.com/doc/refman/5.6/en/adding-collation-choosing-id.html}.\n *\n * @defaultValue\n *\n * 224 (corresponds to \"utf8mb4_general_ci\")\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "charsetNumber"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "charsetNumber",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * Use compressed protocol (recommended).\n *\n * @defaultValue\n *\n * `false`\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "compress"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "compress",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * Connection attributes.\n *\n * @remarks\n *\n * See {@link https://dev.mysql.com/doc/refman/5.6/en/performance-schema-connection-attribute-tables.html}.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "connectAttributes"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        ["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "attName"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": string]: string;\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "connectAttributes",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 5
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * Milliseconds before a timeout occurs during the initial connection to the MySQL server.\n *\n * @defaultValue\n *\n * 10000\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "connectTimeout"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "connectTimeout",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * Database name.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "database"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "database",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * Return date values as strings instead of converting them to `Date` objects.\n *\n * @remarks\n *\n * The framework relies on date values returned as `Date` objects, therefore this option must be `false` or omitted.\n *\n * @defaultValue\n *\n * `false`\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "dateStrings"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "false"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "dateStrings",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * If `true`, the underlying module prints debug information to the console.\n *\n * @defaultValue\n *\n * `false`\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "debug"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "debug",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * Return `DECIMAL` values as numbers instead of strings.\n *\n * @remarks\n *\n * The framework relies on `DECIMAL` values to be returned as strings, therefore this option must be `false` or omitted.\n *\n * @defaultValue\n *\n * `false`\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "decimalNumbers"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "false"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "decimalNumbers",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * Comma-separated list of connection flags to add or to remove (if flag is prefixed with a minus sign) to/from the default flags.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "flags"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "flags",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * Database host.\n *\n * @defaultValue\n *\n * \"localhost\"\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "host"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "host",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * Unused (the underlying module does not use this functionality).\n *\n * @remarks\n *\n * Originally, allow connecting to MySQL instances that ask for the old (insecure) authentication method.\n *\n * @defaultValue\n *\n * `false`\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "insecureAuth"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "insecureAuth",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * Unused (the underlying module does not use this functionality).\n *\n * @remarks\n *\n * Originally, the source IP address to use for TCP connection.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "localAddress"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "localAddress",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * Maximum number of cached prepared statements.\n *\n * @defaultValue\n *\n * 16000\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "maxPreparedStatements"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "maxPreparedStatements",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * Irrelevant (the framework does not use this functionality of the underlying module).\n *\n * @remarks\n *\n * Originally, allow multiple SQL statements per query.\n *\n * @defaultValue\n *\n * `false`\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "multipleStatements"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "multipleStatements",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * Irrelevant (the framework does not use this functionality of the underlying module).\n *\n * @remarks\n *\n * Originally, allow named placeholders in SQL queries.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "namedPlaceholders"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "namedPlaceholders",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * Nest columns in table objects in result sets.\n *\n * @remarks\n *\n * The framework relies on a certain shape of the result sets returned by the underlying module, so this option must be `false` or omitted.\n *\n * @defaultValue\n *\n * `false`\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "nestTables"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "false"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "nestTables",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * Database user password.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "password"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "password",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * SHA-1 digest of the database user password.\n *\n * @remarks\n *\n * Overrides {@link MySQLConnectionOptions.password | password} option.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "passwordSha1"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Buffer"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "passwordSha1",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * Database port.\n *\n * @defaultValue\n *\n * 3306\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "port"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "port",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * Return rows are arrays instead of objects.\n *\n * @remarks\n *\n * The framework relies on a certain shape of the result sets returned by the underlying module, so this option must be `false` or omitted.\n *\n * @defaultValue\n *\n * `false`\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "rowsAsArray"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "false"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "rowsAsArray",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * Path to a Unix domain socket to connect to.\n *\n * @remarks\n *\n * Overrides {@link MySQLConnectionOptions.host | host} and {@link MySQLConnectionOptions.port | port} options.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "socketPath"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "socketPath",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * SSL options for the database connection.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "ssl"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"Amazon RDS\" | "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "SecureContextOptions"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "ssl",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 4
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * Stream to use for the connection, or a function that provides the stream.\n *\n * @remarks\n *\n * Overrides {@link MySQLConnectionOptions.socketPath | socketPath}, {@link MySQLConnectionOptions.host | host} and {@link MySQLConnectionOptions.port | port} options.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "stream"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Duplex"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | (("
+                },
+                {
+                  "kind": "Reference",
+                  "text": "cb"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": ("
+                },
+                {
+                  "kind": "Reference",
+                  "text": "err"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Error"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | null, "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "stream"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Duplex"
+                },
+                {
+                  "kind": "Content",
+                  "text": ") => void) => void)"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "stream",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 14
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * Irrelevant (the framework does not use this functionality of the underlying module).\n *\n * @remarks\n *\n * Originally, tells if objects passed as values to SQL statements with placeholders are substituted with object string values (via calling `toString()` on the object) (if `true`), or expanded to comma-separated lists of `field = value` constructs (if `false`).\n *\n * @defaultValue\n *\n * `false`\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "stringifyObjects"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "stringifyObjects",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * Determines if numbers returned from the database that do not fit in JavaScript's `Number` are represented as strings instead.\n *\n * @remarks\n *\n * The framework relies on numbers to be always represented as `Number` instances. Therefore, this option must be `false` or omitted. Use string (or other) data types to represent numeric values that can be large enough to not fit in a `Number`.\n *\n * @defaultValue\n *\n * `false`\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "supportBigNumbers"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "false"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "supportBigNumbers",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * MySQL server's timezone.\n *\n * @remarks\n *\n * MySQL stores datetime values without timezone information. The value of this option is used to interpret the timezone of the values stored in the database and serialize/deserialize `Date` instances.\n *\n * Can be \"local\" (same as the application timezone), \"Z\" (UTC) or offset in the form \"+HH:MM\" or \"-HH:MM\".\n *\n * @defaultValue\n *\n * \"local\"\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "timezone"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "timezone",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * Unused (the underlying module does not use this functionality).\n *\n * @remarks\n *\n * Originally, generate stack traces on errors.\n *\n * @defaultValue\n *\n * `true`\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "trace"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "trace",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * Determines how column values are converted into JavaScript types.\n *\n * @remarks\n *\n * A custom type cast function can be provided. Otherwise, must be `true` or omitted to use the default.\n *\n * The framework relies on the default type casting logic being enabled, so any custom type cast function must respect it.\n *\n * @defaultValue\n *\n * `true`\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "typeCast"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "true | "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "TypeCastFunc"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "typeCast",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 4
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * Database URI.\n *\n * @remarks\n *\n * May include host, port, database, username and password. Any additional options can be provided as query string parameters.\n *\n * Any option individually specified in the options object overrides anything extracted from the URI.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "uri"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "uri",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * Database user name.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "user"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "user",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 3
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "Interface",
+          "docComment": "/**\n * Database connection pool options.\n *\n * @remarks\n *\n * <em>Note, that only own properties are effective.</em>\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface "
+            },
+            {
+              "kind": "Reference",
+              "text": "MySQLConnectionPoolOptions"
+            },
+            {
+              "kind": "Content",
+              "text": " extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "MySQLConnectionOptions"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "MySQLConnectionPoolOptions",
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * Maximum number of connections in the pool.\n *\n * @remarks\n *\n * If 0, there is no limit.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "connectionLimit"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "connectionLimit",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * When {@link MySQLConnectionPoolOptions.waitForConnections | waitForConnections} is `true`, maximum number of connections allowed to wait.\n *\n * @remarks\n *\n * If 0, there is no limit.\n *\n * @defaultValue\n *\n * 0\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "queueLimit"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "queueLimit",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * Wait for a connection to be returned to the pool if new connection is requested and {@link MySQLConnectionPoolOptions.connectionLimit | connectionLimit} connections have been already issued.\n *\n * @defaultValue\n *\n * `true`\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "waitForConnections"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "waitForConnections",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 3
+              }
+            }
+          ],
+          "extendsTokenRanges": [
+            {
+              "startIndex": 3,
+              "endIndex": 5
+            }
+          ]
+        },
+        {
+          "kind": "Function",
+          "docComment": "/**\n * Returns service binder for the MySQL database connection provider.\n *\n * @param options - Connection options or a function that returns it given the application.\n *\n * @returns Database connection provider service binder.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function "
+            },
+            {
+              "kind": "Reference",
+              "text": "mySQLDatabaseConnectionProvider"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "A"
+            },
+            {
+              "kind": "Content",
+              "text": " extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Application"
+            },
+            {
+              "kind": "Content",
+              "text": ">("
+            },
+            {
+              "kind": "Reference",
+              "text": "options"
+            },
+            {
+              "kind": "Content",
+              "text": ": "
+            },
+            {
+              "kind": "Content",
+              "text": "(string | "
+            },
+            {
+              "kind": "Reference",
+              "text": "MySQLConnectionOptions"
+            },
+            {
+              "kind": "Content",
+              "text": " | "
+            },
+            {
+              "kind": "Reference",
+              "text": "MySQLConnectionPoolOptions"
+            },
+            {
+              "kind": "Content",
+              "text": " | (("
+            },
+            {
+              "kind": "Reference",
+              "text": "app"
+            },
+            {
+              "kind": "Content",
+              "text": ": "
+            },
+            {
+              "kind": "Reference",
+              "text": "A"
+            },
+            {
+              "kind": "Content",
+              "text": ") => (string | "
+            },
+            {
+              "kind": "Reference",
+              "text": "MySQLConnectionOptions"
+            },
+            {
+              "kind": "Content",
+              "text": " | "
+            },
+            {
+              "kind": "Reference",
+              "text": "MySQLConnectionPoolOptions"
+            },
+            {
+              "kind": "Content",
+              "text": ")))"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Content",
+              "text": "[typeof "
+            },
+            {
+              "kind": "Reference",
+              "text": "DB_CONNECTION_PROVIDER_SERVICE"
+            },
+            {
+              "kind": "Content",
+              "text": ", "
+            },
+            {
+              "kind": "Reference",
+              "text": "ServiceFactory"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "A"
+            },
+            {
+              "kind": "Content",
+              "text": ", "
+            },
+            {
+              "kind": "Reference",
+              "text": "DatabaseConnectionProvider"
+            },
+            {
+              "kind": "Content",
+              "text": ">]"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 23,
+            "endIndex": 32
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 0,
+          "parameters": [
+            {
+              "parameterName": "options",
+              "parameterTypeTokenRange": {
+                "startIndex": 9,
+                "endIndex": 22
+              }
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "A",
+              "constraintTokenRange": {
+                "startIndex": 5,
+                "endIndex": 6
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "mySQLDatabaseConnectionProvider"
+        },
+        {
+          "kind": "Interface",
+          "docComment": "/**\n * Database `POINT` type value.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface "
+            },
+            {
+              "kind": "Reference",
+              "text": "PointValue"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "PointValue",
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "x"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "x",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "y"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "y",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 3
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "TypeAlias",
+          "docComment": "/**\n * Custom type caster function.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare type "
+            },
+            {
+              "kind": "Reference",
+              "text": "TypeCastFunc"
+            },
+            {
+              "kind": "Content",
+              "text": " = "
+            },
+            {
+              "kind": "Content",
+              "text": "("
+            },
+            {
+              "kind": "Reference",
+              "text": "field"
+            },
+            {
+              "kind": "Content",
+              "text": ": "
+            },
+            {
+              "kind": "Reference",
+              "text": "FieldInfo"
+            },
+            {
+              "kind": "Content",
+              "text": ", "
+            },
+            {
+              "kind": "Reference",
+              "text": "next"
+            },
+            {
+              "kind": "Content",
+              "text": ": () => any) => any"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "TypeCastFunc",
+          "typeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 10
+          }
+        },
+        {
+          "kind": "TypeAlias",
+          "docComment": "/**\n * Database value type.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare type "
+            },
+            {
+              "kind": "Reference",
+              "text": "ValueType"
+            },
+            {
+              "kind": "Content",
+              "text": " = "
+            },
+            {
+              "kind": "Content",
+              "text": "(\"DECIMAL\" | \"TINY\" | \"SHORT\" | \"LONG\" | \"FLOAT\" | \"DOUBLE\" | \"NULL\" | \"TIMESTAMP\" | \"LONGLONG\" | \"INT24\" | \"DATE\" | \"TIME\" | \"DATETIME\" | \"YEAR\" | \"NEWDATE\" | \"VARCHAR\" | \"BIT\" | \"JSON\" | \"NEWDECIMAL\" | \"ENUM\" | \"SET\" | \"TINY_BLOB\" | \"MEDIUM_BLOB\" | \"LONG_BLOB\" | \"BLOB\" | \"VAR_STRING\" | \"STRING\" | \"GEOMETRY\")"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "ValueType",
+          "typeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 4
+          }
         }
       ]
     }

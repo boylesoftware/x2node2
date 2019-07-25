@@ -16,7 +16,7 @@ export interface Service
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [shutdownDependencies](./common.service.shutdowndependencies.md) | <code>ServiceKey&lt;unknown&gt;[]</code> | List of services (identified by their service keys) that may not be shut down before this service completes its shutdown. |
+|  [shutdownDependencies](./common.service.shutdowndependencies.md) | <code>string[]</code> | List of services (identified by their service keys) that may not be shut down before this service completes its shutdown. |
 
 ## Methods
 

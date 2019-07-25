@@ -157,7 +157,8 @@ function noopLogger(): void { }
  * prefixed with a question marks. In that case, if the variable able is empty,
  * the part of the format string preceeding the placeholder up to the previous
  * variable placeholder or the beginning of the format string is omitted. For
- * example, the default format string is "{ts} {?ctx} {cat}: {msg}\n{?err}".
+ * example, the default format string is
+ * "\{ts\} \{?ctx\} \{cat\}: \{msg\}\\n\{?err\}".
  *
  * The constructor also can take definitions for additional message variables
  * not included in the default set (or overriding the defaults).
@@ -271,7 +272,8 @@ export class DefaultLogger implements Logger {
         ind < parts.length - 1 ?
           `${parts[ind]}(\\*|_${rest(parts, ind + 1)})?` : `${parts[ind]}\\*?`
       );
-      const categoryRE = RegExp(`(^|,)\\s*${rest(category.split("_"), 0)}\\s*(,|$)`, "i");
+      const categoryRE = RegExp(
+        `(^|,)\\s*${rest(category.split("_"), 0)}\\s*(,|$)`, "i");
       enabled = categoryRE.test(process.env["NODE_DEBUG"] || "");
       this._enabledCategories[category] = enabled;
     }
@@ -316,7 +318,11 @@ export class DefaultLogger implements Logger {
    * @param err - Error, if any, for an error message.
    * @returns Formatted log message.
    */
-  private _formatMessage(category: string, message: string, err?: unknown): string {
+  private _formatMessage(
+    category: string,
+    message: string,
+    err?: unknown
+  ): string {
 
     const msg: LogMessage = {
       ts: new Date(),

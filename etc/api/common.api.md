@@ -12,17 +12,91 @@ export class Application {
     readonly logger: Logger;
     readonly ready: boolean;
     // (undocumented)
-    services<K0 extends ServiceKey<S0>, S0, A0 extends ApplicationPlusService<this, K0, S0>>(binder0: [K0, ServiceFactory<this, S0>]): A0;
+    services<K0 extends string, S0, K1 extends string, S1, K2 extends string, S2>(binder0: [K0, ServiceFactory<this, S0>], binder1: [K1, ServiceFactory<this & {
+        readonly [K in K0]: S0;
+    }, S1>], binder2: [K2, ServiceFactory<this & {
+        readonly [K in K0]: S0;
+    } & {
+        readonly [K in K1]: S1;
+    }, S2>]): this & {
+        readonly [K in K0]: S0;
+    } & {
+        readonly [K in K1]: S1;
+    } & {
+        readonly [K in K2]: S2;
+    };
     // (undocumented)
-    services<K0 extends ServiceKey<S0>, S0, A0 extends ApplicationPlusService<this, K0, S0>, K1 extends ServiceKey<S1>, S1, A1 extends ApplicationPlusService<A0, K1, S1>>(binder0: [K0, ServiceFactory<this, S0>], binder1: [K1, ServiceFactory<A0, S1>]): A1;
+    services<K0 extends string, S0, K1 extends string, S1, K2 extends string, S2, K3 extends string, S3>(binder0: [K0, ServiceFactory<this, S0>], binder1: [K1, ServiceFactory<this & {
+        readonly [K in K0]: S0;
+    }, S1>], binder2: [K2, ServiceFactory<this & {
+        readonly [K in K0]: S0;
+    } & {
+        readonly [K in K1]: S1;
+    }, S2>], binder3: [K3, ServiceFactory<this & {
+        readonly [K in K0]: S0;
+    } & {
+        readonly [K in K1]: S1;
+    } & {
+        readonly [K in K2]: S2;
+    }, S3>]): this & {
+        readonly [K in K0]: S0;
+    } & {
+        readonly [K in K1]: S1;
+    } & {
+        readonly [K in K2]: S2;
+    } & {
+        readonly [K in K3]: S3;
+    };
+    // (undocumented)
+    services<K0 extends string, S0, K1 extends string, S1, K2 extends string, S2, K3 extends string, S3, K4 extends string, S4>(binder0: [K0, ServiceFactory<this, S0>], binder1: [K1, ServiceFactory<this & {
+        readonly [K in K0]: S0;
+    }, S1>], binder2: [K2, ServiceFactory<this & {
+        readonly [K in K0]: S0;
+    } & {
+        readonly [K in K1]: S1;
+    }, S2>], binder3: [K3, ServiceFactory<this & {
+        readonly [K in K0]: S0;
+    } & {
+        readonly [K in K1]: S1;
+    } & {
+        readonly [K in K2]: S2;
+    }, S3>], binder4: [K4, ServiceFactory<this & {
+        readonly [K in K0]: S0;
+    } & {
+        readonly [K in K1]: S1;
+    } & {
+        readonly [K in K2]: S2;
+    } & {
+        readonly [K in K3]: S3;
+    }, S4>]): this & {
+        readonly [K in K0]: S0;
+    } & {
+        readonly [K in K1]: S1;
+    } & {
+        readonly [K in K2]: S2;
+    } & {
+        readonly [K in K3]: S3;
+    } & {
+        readonly [K in K4]: S4;
+    };
+    // (undocumented)
+    services<K0 extends string, S0>(binder0: [K0, ServiceFactory<this, S0>]): this & {
+        readonly [K in K0]: S0;
+    };
+    // (undocumented)
+    services<K0 extends string, S0, K1 extends string, S1>(binder0: [K0, ServiceFactory<this, S0>], binder1: [K1, ServiceFactory<this & {
+        readonly [K in K0]: S0;
+    }, S1>]): this & {
+        readonly [K in K0]: S0;
+    } & {
+        readonly [K in K1]: S1;
+    };
     protected showMessage(message: string): void;
     shutdown(): Promise<void>;
     }
 
 // @public
-export type ApplicationPlusService<A extends Application, K extends ServiceKey<S>, S> = A & {
-    readonly [serviceKey in K]: S;
-};
+export const CONFIG_SERVICE = "config";
 
 // @public
 export interface Configuration {
@@ -57,6 +131,9 @@ export interface Logger {
 }
 
 // @public
+export const LOGGER_SERVICE = "logger";
+
+// @public
 export interface LogMessage {
     readonly category: string;
     readonly context: string[];
@@ -71,14 +148,11 @@ export type MessageVariable = (msg: LogMessage, param?: string) => string | unde
 // @public
 export interface Service {
     shutdown?(): Promise<void> | void;
-    readonly shutdownDependencies?: ServiceKey<unknown>[];
+    readonly shutdownDependencies?: string[];
 }
 
 // @public
 export type ServiceFactory<A extends Application, S> = (app: A) => Promise<S> | S;
-
-// @public
-export type ServiceKey<S> = string;
 
 
 ```

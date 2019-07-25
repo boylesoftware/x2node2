@@ -4,11 +4,103 @@
 
 ```ts
 
-// @public (undocumented)
-export class QQMySQL {
+import { Application } from '@x2node/common';
+import { DatabaseConnectionProvider } from '@x2node/db';
+import { DB_CONNECTION_PROVIDER_SERVICE } from '@x2node/db';
+import { Duplex } from 'stream';
+import { SecureContextOptions } from 'tls';
+import { ServiceFactory } from '@x2node/common';
+
+// @public
+export type AuthSwitchHandler = (params: {
+    pluginName?: string;
+    pluginData: Buffer;
+}, cb: (err: Error | null, data?: Buffer) => void) => void;
+
+// @public
+export function createMySQLDatabaseConnectionProvider(app: Application, options: string | MySQLConnectionOptions | MySQLConnectionPoolOptions): Promise<DatabaseConnectionProvider>;
+
+// @public
+export interface FieldInfo {
+    buffer: () => Buffer | null;
+    readonly db: string;
+    geometry: () => GeometryValue | null;
+    readonly length: number;
+    readonly name: string;
+    string: () => string | null;
+    readonly table: string;
+    readonly type: ValueType;
 }
 
+// @public
+export type GeometryValue = PointValue | GeometryValueArray;
 
-// (No @packageDocumentation comment for this package)
+// @public
+export interface GeometryValueArray extends Array<GeometryValue> {
+}
+
+// @public
+export interface MySQLConnectionOptions {
+    authSwitchHandler?: AuthSwitchHandler;
+    bigNumberStrings?: boolean;
+    charset?: string;
+    charsetNumber?: number;
+    compress?: boolean;
+    connectAttributes?: {
+        [attName: string]: string;
+    };
+    connectTimeout?: number;
+    database?: string;
+    dateStrings?: false;
+    debug?: boolean;
+    decimalNumbers?: false;
+    flags?: string;
+    host?: string;
+    insecureAuth?: boolean;
+    localAddress?: string;
+    maxPreparedStatements?: number;
+    multipleStatements?: boolean;
+    namedPlaceholders?: boolean;
+    nestTables?: false;
+    password?: string;
+    passwordSha1?: Buffer;
+    port?: number;
+    rowsAsArray?: false;
+    socketPath?: string;
+    ssl?: "Amazon RDS" | SecureContextOptions;
+    stream?: Duplex | ((cb: (err: Error | null, stream?: Duplex) => void) => void);
+    stringifyObjects?: boolean;
+    supportBigNumbers?: false;
+    timezone?: string;
+    trace?: boolean;
+    typeCast?: true | TypeCastFunc;
+    uri?: string;
+    user?: string;
+}
+
+// @public
+export interface MySQLConnectionPoolOptions extends MySQLConnectionOptions {
+    connectionLimit: number;
+    queueLimit?: number;
+    waitForConnections?: boolean;
+}
+
+// @public
+export function mySQLDatabaseConnectionProvider<A extends Application>(options: (string | MySQLConnectionOptions | MySQLConnectionPoolOptions | ((app: A) => (string | MySQLConnectionOptions | MySQLConnectionPoolOptions)))): [typeof DB_CONNECTION_PROVIDER_SERVICE, ServiceFactory<A, DatabaseConnectionProvider>];
+
+// @public
+export interface PointValue {
+    // (undocumented)
+    x: number;
+    // (undocumented)
+    y: number;
+}
+
+// @public
+export type TypeCastFunc = (field: FieldInfo, next: () => any) => any;
+
+// @public
+export type ValueType = ("DECIMAL" | "TINY" | "SHORT" | "LONG" | "FLOAT" | "DOUBLE" | "NULL" | "TIMESTAMP" | "LONGLONG" | "INT24" | "DATE" | "TIME" | "DATETIME" | "YEAR" | "NEWDATE" | "VARCHAR" | "BIT" | "JSON" | "NEWDECIMAL" | "ENUM" | "SET" | "TINY_BLOB" | "MEDIUM_BLOB" | "LONG_BLOB" | "BLOB" | "VAR_STRING" | "STRING" | "GEOMETRY");
+
 
 ```

@@ -37,9 +37,11 @@
     "mysql2": "^1.6.5"
   },
   "devDependencies": {
+    "@x2node/common": "^1.0.0-dev.0",
     "@x2node/db": "^1.0.0-dev.0"
   },
   "peerDependencies": {
+    "@x2node/common": "1.0.x",
     "@x2node/db": "1.0.x"
   },
   "engines": {

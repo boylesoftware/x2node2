@@ -23,14 +23,19 @@ Common module that provides foundation for the rest of the <i>X2 Framrwork</i> a
 |  [LogMessage](./common.logmessage.md) | Log message with its context. |
 |  [Service](./common.service.md) | Interface for optional methods that may be defined on a service. |
 
+## Variables
+
+|  Variable | Description |
+|  --- | --- |
+|  [CONFIG\_SERVICE](./common.config_service.md) | Standard service key for the configuration service. |
+|  [LOGGER\_SERVICE](./common.logger_service.md) | Standard service key for the logger service. |
+
 ## Type Aliases
 
 |  Type Alias | Description |
 |  --- | --- |
-|  [ApplicationPlusService](./common.applicationplusservice.md) | Application extended with a service. |
 |  [MessageVariable](./common.messagevariable.md) | Function that provides implementation for a message variable. |
 |  [ServiceFactory](./common.servicefactory.md) | Function, that creates a service instance. |
-|  [ServiceKey](./common.servicekey.md) | Service key, which is name of the [Application](./common.application.md) instance property, to which the service instance is bound. |
 
 ## Remarks
 

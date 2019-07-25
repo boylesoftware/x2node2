@@ -7,7 +7,9 @@
 <b>Signature:</b>
 
 ```typescript
-services<K0 extends ServiceKey<S0>, S0, A0 extends ApplicationPlusService<this, K0, S0>>(binder0: [K0, ServiceFactory<this, S0>]): A0;
+services<K0 extends string, S0>(binder0: [K0, ServiceFactory<this, S0>]): this & {
+        readonly [K in K0]: S0;
+    };
 ```
 
 ## Parameters
@@ -18,5 +20,7 @@ services<K0 extends ServiceKey<S0>, S0, A0 extends ApplicationPlusService<this, 
 
 <b>Returns:</b>
 
-`A0`
+`this & {
+        readonly [K in K0]: S0;
+    }`
 
