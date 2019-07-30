@@ -21,9 +21,9 @@ Promise the resolves when the shutdown is complete (that is when all application
 
 Once called, the application starts shutting down all of its services in the reverse initialization order. Any errors encountered during services shutdown are logged, but otherwise ignored.
 
-If `shutdown()` is called when the application is already shutting down, the same shutdown promise will be returned. This, however, should not be normal application behavior. A corresponding warning message will be logged in the console.
+If [Application.shutdown()](./common.application.shutdown.md) is called when the application is already shutting down, the same shutdown promise will be returned. This, however, should not be normal application behavior. A corresponding warning message will be logged in the console.
 
-It is safe to call `shutdown()` on an uninitialized application or application that has been shut down. The returned promise will resolve immediately.
+It is safe to call [Application.shutdown()](./common.application.shutdown.md) on an uninitialized application or application that has been shut down. The returned promise will resolve immediately.
 
-It is also possible to call `shutdown()` while the application is being initialized via the [init()](./common.application.init.md) method. In that case, the initialization process will be aborted, all services already initialized will be shut down.
+It is also possible to call [Application.shutdown()](./common.application.shutdown.md) while the application is being initialized via the [Application.init()](./common.application.init.md) method. In that case, the initialization process will be aborted, all services already initialized will be shut down.
 

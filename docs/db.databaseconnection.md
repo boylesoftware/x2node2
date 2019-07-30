@@ -12,9 +12,19 @@ Database connection.
 export interface DatabaseConnection 
 ```
 
+## Properties
+
+|  Property | Type | Description |
+|  --- | --- | --- |
+|  [sessionId](./db.databaseconnection.sessionid.md) | <code>string</code> | Underlynig database connection (session) id. |
+
 ## Methods
 
 |  Method | Description |
 |  --- | --- |
+|  [beginTransaction(mode)](./db.databaseconnection.begintransaction.md) | Begin database transaction. |
+|  [endTransaction(res)](./db.databaseconnection.endtransaction.md) | End database transaction. |
+|  [executeQuery(sql, parser)](./db.databaseconnection.executequery.md) | Execute query (<code>SELECT</code> statement) on the connection. |
+|  [executeStatement(sql)](./db.databaseconnection.executestatement.md) | Execute statement on the connection. |
 |  [release()](./db.databaseconnection.release.md) | Release connection back to the connection provider. |
 

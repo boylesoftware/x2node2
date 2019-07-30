@@ -4,7 +4,7 @@
 
 ## MySQLConnectionPoolOptions.waitForConnections property
 
-Wait for a connection to be returned to the pool if new connection is requested and [connectionLimit](./db-connection-mysql.mysqlconnectionpooloptions.connectionlimit.md) connections have been already issued.
+Wait for a connection to be returned to the pool if new connection is requested and [MySQLConnectionPoolOptions.connectionLimit](./db-connection-mysql.mysqlconnectionpooloptions.connectionlimit.md) connections have been already issued.
 
 <b>Signature:</b>
 

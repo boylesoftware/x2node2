@@ -10,7 +10,7 @@ Common module that provides foundation for the rest of the <i>X2 Framrwork</i> a
 
 |  Class | Description |
 |  --- | --- |
-|  [Application](./common.application.md) | An \_x2node\_ application. |
+|  [Application](./common.application.md) | An application. |
 |  [DefaultConfiguration](./common.defaultconfiguration.md) | Default implementation of the [Configuration](./common.configuration.md) service that takes configuration options from the process environment variables. |
 |  [DefaultLogger](./common.defaultlogger.md) | Default logger service implementation that writes log messages to the console. |
 

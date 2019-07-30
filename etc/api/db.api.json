@@ -128,7 +128,311 @@
           "members": [
             {
               "kind": "MethodSignature",
-              "docComment": "/**\n * Release connection back to the connection provider.\n *\n * @remarks\n *\n * The connection object is no longer usable after this method call.\n *\n * Note for implementations: throwing an error from this method normally leads to the application crash.\n */\n",
+              "docComment": "/**\n * Begin database transaction.\n *\n * @remarks\n *\n * Throws an error if there is already an active transaction associated with this connection (considered a programming error).\n *\n * Once transaction is started, it must be ended using {@link DatabaseConnection.endTransaction} method before the connection is released.\n *\n * This method may not be called if there is already an active transaction associated with the connection. An error is thrown if attempted (considered a programming error).\n *\n * @param mode - Transaction mode.\n *\n * @returns Promise that resolves when transaction is successfully started and rejects if was unable to start transaction.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "beginTransaction"
+                },
+                {
+                  "kind": "Content",
+                  "text": "("
+                },
+                {
+                  "kind": "Reference",
+                  "text": "mode"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "TxMode"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<void>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "returnTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 8
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 0,
+              "parameters": [
+                {
+                  "parameterName": "mode",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 5
+                  }
+                }
+              ],
+              "name": "beginTransaction"
+            },
+            {
+              "kind": "MethodSignature",
+              "docComment": "/**\n * End database transaction.\n *\n * @remarks\n *\n * If `resolve` is {@link TxResolve.Commit}, throws an error if there is no active transaction associated with this connection (considered a programming error). Rollback is the same, but is allowed to be performed after an unsuccessful commit.\n *\n * Once <em>successfully</em> ended, a new transaction can be started on the same connection, or the connenction can be released.\n *\n * Connection can be released after a rollback even if it was unsuccessful. Normally, if transaction rollback was unsuccessful, releasing the connection destroys it (even if connection pool is utilized).\n *\n * @param res - Transaction resolution.\n *\n * @returns Promise that resolves when transaction is successfully ended and rejects if there was an error attempting to end the transaction.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "endTransaction"
+                },
+                {
+                  "kind": "Content",
+                  "text": "("
+                },
+                {
+                  "kind": "Reference",
+                  "text": "res"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "TxResolve"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<void>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "returnTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 8
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 0,
+              "parameters": [
+                {
+                  "parameterName": "res",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 5
+                  }
+                }
+              ],
+              "name": "endTransaction"
+            },
+            {
+              "kind": "MethodSignature",
+              "docComment": "/**\n * Execute query (`SELECT` statement) on the connection.\n *\n * @remarks\n *\n * Not allowed when there is an unresolved promise returned by one of the transaction methods (in other words when the connection is in transitional transaction status).\n *\n * @param sql - Query SQL.\n *\n * @param parser - Query result parser.\n *\n * @typeParam R - Type of the query result object.\n *\n * @returns Promise of the query result. The promise is rejected if there was an error.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "executeQuery"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "R"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">("
+                },
+                {
+                  "kind": "Reference",
+                  "text": "sql"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "parser"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QueryResultParser"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "R"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "R"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "returnTypeTokenRange": {
+                "startIndex": 15,
+                "endIndex": 19
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 0,
+              "parameters": [
+                {
+                  "parameterName": "sql",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 7
+                  }
+                },
+                {
+                  "parameterName": "parser",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 10,
+                    "endIndex": 14
+                  }
+                }
+              ],
+              "typeParameters": [
+                {
+                  "typeParameterName": "R",
+                  "constraintTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  }
+                }
+              ],
+              "name": "executeQuery"
+            },
+            {
+              "kind": "MethodSignature",
+              "docComment": "/**\n * Execute statement on the connection.\n *\n * @remarks\n *\n * Not allowed when there is an unresolved promise returned by one of the transaction methods (in other words when the connection is in transitional transaction status).\n *\n * @param sql - Statement SQL.\n *\n * @returns Promise of the statement execution result. The promise is rejected if there was an error.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "executeStatement"
+                },
+                {
+                  "kind": "Content",
+                  "text": "("
+                },
+                {
+                  "kind": "Reference",
+                  "text": "sql"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "StatementResult"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "returnTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 10
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 0,
+              "parameters": [
+                {
+                  "parameterName": "sql",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 5
+                  }
+                }
+              ],
+              "name": "executeStatement"
+            },
+            {
+              "kind": "MethodSignature",
+              "docComment": "/**\n * Release connection back to the connection provider.\n *\n * @remarks\n *\n * The connection object is no longer usable after this method call.\n *\n * If there is an active transaction associated with the connection (see {@link DatabaseConnection.beginTransaction} method), the connection cannot be released until the transaction is ended. This method throws an error and the application crashes (considered a programming error) if attempted.\n *\n * Note to implementors: throwing an error from this method normally leads to the application crash.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Reference",
@@ -155,6 +459,38 @@
               "overloadIndex": 0,
               "parameters": [],
               "name": "release"
+            },
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * Underlynig database connection (session) id.\n *\n * @remarks\n *\n * This value may help identify a particular connection when a connection pool is involved, or identify the corresponding session on the database server side.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "sessionId"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "sessionId",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              }
             }
           ],
           "extendsTokenRanges": []
@@ -221,7 +557,7 @@
             },
             {
               "kind": "MethodSignature",
-              "docComment": "/**\n * Allocate new database connection.\n *\n * @remarks\n *\n * After the connection is no longer needed it must be released via it's {@link DatabaseConnection.release | release()} method.\n *\n * @returns Promise of the active database connection. The promise is rejected if the connection cannot be established.\n */\n",
+              "docComment": "/**\n * Allocate new database connection.\n *\n * @remarks\n *\n * After the connection is no longer needed it must be released via its {@link DatabaseConnection.release} method.\n *\n * @returns Promise of the active database connection. The promise is rejected if the connection cannot be established.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Reference",
@@ -352,7 +688,7 @@
           "members": [
             {
               "kind": "MethodSignature",
-              "docComment": "/**\n * Allocate monitor instance and associate it with the provided database connection.\n *\n * @remarks\n *\n * After the monitor instance no longer needed, it must be release using its {@link DatabaseMonitor.release | release()} method.\n *\n * @param con - Database connection.\n *\n * @returns Promise of the monitor. The promise is rejected if the monitor cannot be allocated.\n */\n",
+              "docComment": "/**\n * Allocate monitor instance and associate it with the provided database connection.\n *\n * @remarks\n *\n * After the monitor instance no longer needed, it must be release using its {@link DatabaseMonitor.release} method.\n *\n * @param con - Database connection.\n *\n * @returns Promise of the monitor. The promise is rejected if the monitor cannot be allocated.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Reference",
@@ -661,6 +997,142 @@
             "startIndex": 0,
             "endIndex": 0
           }
+        },
+        {
+          "kind": "Interface",
+          "docComment": "/**\n * SQL query (`SELECT` statement) result parser.\n *\n * @remarks\n *\n * A parser instance is passed into a query execution method and is fed with selected data row by row constructing the result object internally. Once the query execution is complete and all rows have been fed to the parser, the constructed query execution result object can be retrieved from the parser.\n *\n * Errors thrown from the parser methods cause the query execution result promise being rejected with the thrown error.\n *\n * @typeParam R - Type of the query result object constructed by the parser.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface "
+            },
+            {
+              "kind": "Reference",
+              "text": "QueryResultParser"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "R"
+            },
+            {
+              "kind": "Content",
+              "text": "> "
+            }
+          ],
+          "releaseTag": "Public",
+          "typeParameters": [
+            {
+              "typeParameterName": "R",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "QueryResultParser",
+          "members": [
+            {
+              "kind": "MethodSignature",
+              "docComment": "/**\n * Add result set row to the parser.\n *\n * @param row - The result set row.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "addRow"
+                },
+                {
+                  "kind": "Content",
+                  "text": "("
+                },
+                {
+                  "kind": "Reference",
+                  "text": "row"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        ["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "field"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": string]: unknown;\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "returnTypeTokenRange": {
+                "startIndex": 8,
+                "endIndex": 9
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 0,
+              "parameters": [
+                {
+                  "parameterName": "row",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 7
+                  }
+                }
+              ],
+              "name": "addRow"
+            },
+            {
+              "kind": "MethodSignature",
+              "docComment": "/**\n * Get constructed query result object once all rows have been fed to the parser.\n *\n * @returns Query result object.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "getResult"
+                },
+                {
+                  "kind": "Content",
+                  "text": "(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "R"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "returnTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 3
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 0,
+              "parameters": [],
+              "name": "getResult"
+            }
+          ],
+          "extendsTokenRanges": []
         },
         {
           "kind": "Interface",
@@ -1008,6 +1480,233 @@
             {
               "startIndex": 3,
               "endIndex": 5
+            }
+          ]
+        },
+        {
+          "kind": "Interface",
+          "docComment": "/**\n * Result of a SQL statement execution.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface "
+            },
+            {
+              "kind": "Reference",
+              "text": "StatementResult"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "StatementResult",
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * When inserting into a table with an auto-generated id column, this is the inserted id value.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "generatedId"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "generatedId",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "docComment": "/**\n * Number of table rows affected by the statement (e.g. inserted, updated or deleted).\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "numAffectedRows"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "numAffectedRows",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "Enum",
+          "docComment": "/**\n * Transaction mode.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare enum "
+            },
+            {
+              "kind": "Reference",
+              "text": "TxMode"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "TxMode",
+          "members": [
+            {
+              "kind": "EnumMember",
+              "docComment": "/**\n * Read-only transaction.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "ReadOnly"
+                },
+                {
+                  "kind": "Content",
+                  "text": " = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "1"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "ReadOnly",
+              "initializerTokenRange": {
+                "startIndex": 2,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "EnumMember",
+              "docComment": "/**\n * Read/write transaction.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "ReadWrite"
+                },
+                {
+                  "kind": "Content",
+                  "text": " = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "0"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "ReadWrite",
+              "initializerTokenRange": {
+                "startIndex": 2,
+                "endIndex": 3
+              }
+            }
+          ]
+        },
+        {
+          "kind": "Enum",
+          "docComment": "/**\n * Transaction resolution.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare enum "
+            },
+            {
+              "kind": "Reference",
+              "text": "TxResolve"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "TxResolve",
+          "members": [
+            {
+              "kind": "EnumMember",
+              "docComment": "/**\n * Commit transaction.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "Commit"
+                },
+                {
+                  "kind": "Content",
+                  "text": " = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "0"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "Commit",
+              "initializerTokenRange": {
+                "startIndex": 2,
+                "endIndex": 3
+              }
+            },
+            {
+              "kind": "EnumMember",
+              "docComment": "/**\n * Rollback transaction.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "Rollback"
+                },
+                {
+                  "kind": "Content",
+                  "text": " = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "1"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "Rollback",
+              "initializerTokenRange": {
+                "startIndex": 2,
+                "endIndex": 3
+              }
             }
           ]
         }

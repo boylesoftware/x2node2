@@ -19,5 +19,5 @@ Promise of the active database connection. The promise is rejected if the connec
 
 ## Remarks
 
-After the connection is no longer needed it must be released via it's [release()](./db.databaseconnection.release.md) method.
+After the connection is no longer needed it must be released via its [DatabaseConnection.release()](./db.databaseconnection.release.md) method.
 

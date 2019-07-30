@@ -183,8 +183,8 @@ export interface MySQLConnectionOptions {
    * Path to a Unix domain socket to connect to.
    *
    * @remarks
-   * Overrides {@link MySQLConnectionOptions.host | host} and
-   * {@link MySQLConnectionOptions.port | port} options.
+   * Overrides {@link MySQLConnectionOptions.host} and
+   * {@link MySQLConnectionOptions.port} options.
    */
   socketPath?: string;
 
@@ -192,9 +192,9 @@ export interface MySQLConnectionOptions {
    * Stream to use for the connection, or a function that provides the stream.
    *
    * @remarks
-   * Overrides {@link MySQLConnectionOptions.socketPath | socketPath},
-   * {@link MySQLConnectionOptions.host | host} and
-   * {@link MySQLConnectionOptions.port | port} options.
+   * Overrides {@link MySQLConnectionOptions.socketPath},
+   * {@link MySQLConnectionOptions.host} and
+   * {@link MySQLConnectionOptions.port} options.
    */
   stream?: Duplex | ((cb: (err: Error | null, stream?: Duplex) => void) => void);
 
@@ -248,7 +248,7 @@ export interface MySQLConnectionOptions {
    * SHA-1 digest of the database user password.
    *
    * @remarks
-   * Overrides {@link MySQLConnectionOptions.password | password} option.
+   * Overrides {@link MySQLConnectionOptions.password} option.
    */
   passwordSha1?: Buffer;
 
@@ -272,8 +272,7 @@ export interface MySQLConnectionOptions {
    * Collation for the connection.
    *
    * @remarks
-   * Overrides {@link MySQLConnectionOptions.charsetNumber | charsetNumber}
-   * option.
+   * Overrides {@link MySQLConnectionOptions.charsetNumber} option.
    *
    * @defaultValue "utf8mb4_general_ci"
    */
@@ -367,10 +366,9 @@ export interface MySQLConnectionOptions {
    *
    * @remarks
    * This option is relevant only when
-   * {@link MySQLConnectionOptions.supportBigNumbers | supportBigNumbers} is
-   * `true` and since
-   * {@link MySQLConnectionOptions.supportBigNumbers | supportBigNumbers} is
-   * forced to be `false`, this option is never relevant.
+   * {@link MySQLConnectionOptions.supportBigNumbers} is `true` and since
+   * {@link MySQLConnectionOptions.supportBigNumbers} is forced to be `false`,
+   * this option is never relevant.
    */
   bigNumberStrings?: boolean;
 
@@ -473,8 +471,7 @@ export interface MySQLConnectionPoolOptions extends MySQLConnectionOptions {
 
   /**
    * Wait for a connection to be returned to the pool if new connection is
-   * requested and
-   * {@link MySQLConnectionPoolOptions.connectionLimit | connectionLimit}
+   * requested and {@link MySQLConnectionPoolOptions.connectionLimit}
    * connections have been already issued.
    *
    * @defaultValue `true`
@@ -482,9 +479,8 @@ export interface MySQLConnectionPoolOptions extends MySQLConnectionOptions {
   waitForConnections?: boolean;
 
   /**
-   * When
-   * {@link MySQLConnectionPoolOptions.waitForConnections | waitForConnections}
-   * is `true`, maximum number of connections allowed to wait.
+   * When {@link MySQLConnectionPoolOptions.waitForConnections} is `true`,
+   * maximum number of connections allowed to wait.
    *
    * @remarks
    * If 0, there is no limit.

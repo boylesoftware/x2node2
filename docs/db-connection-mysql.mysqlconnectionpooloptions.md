@@ -17,8 +17,8 @@ export interface MySQLConnectionPoolOptions extends MySQLConnectionOptions
 |  Property | Type | Description |
 |  --- | --- | --- |
 |  [connectionLimit](./db-connection-mysql.mysqlconnectionpooloptions.connectionlimit.md) | <code>number</code> | Maximum number of connections in the pool. |
-|  [queueLimit](./db-connection-mysql.mysqlconnectionpooloptions.queuelimit.md) | <code>number</code> | When [waitForConnections](./db-connection-mysql.mysqlconnectionpooloptions.waitforconnections.md) is <code>true</code>, maximum number of connections allowed to wait. |
-|  [waitForConnections](./db-connection-mysql.mysqlconnectionpooloptions.waitforconnections.md) | <code>boolean</code> | Wait for a connection to be returned to the pool if new connection is requested and [connectionLimit](./db-connection-mysql.mysqlconnectionpooloptions.connectionlimit.md) connections have been already issued. |
+|  [queueLimit](./db-connection-mysql.mysqlconnectionpooloptions.queuelimit.md) | <code>number</code> | When [MySQLConnectionPoolOptions.waitForConnections](./db-connection-mysql.mysqlconnectionpooloptions.waitforconnections.md) is <code>true</code>, maximum number of connections allowed to wait. |
+|  [waitForConnections](./db-connection-mysql.mysqlconnectionpooloptions.waitforconnections.md) | <code>boolean</code> | Wait for a connection to be returned to the pool if new connection is requested and [MySQLConnectionPoolOptions.connectionLimit](./db-connection-mysql.mysqlconnectionpooloptions.connectionlimit.md) connections have been already issued. |
 
 ## Remarks
 

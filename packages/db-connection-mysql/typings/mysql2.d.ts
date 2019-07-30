@@ -2,6 +2,7 @@
 
 import { Duplex } from "stream";
 import { SecureContextOptions } from "tls";
+import { EventEmitter } from "events";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
@@ -71,7 +72,14 @@ export interface Connection {
   connect(cb: (err: ConnectionError | null) => void): void;
   end(cb: (err: ConnectionError | undefined) => void): void;
   destroy(): void;
-  query(sql: string, cb: (err: ConnectionError | null, result: QueryResult) => void): void;
+  query(sql: string): EventEmitter | undefined;
+  query(
+    sql: string,
+    cb: (
+      err: ConnectionError | null,
+      result: StatementResult | QueryResult
+    ) => void
+  ): void;
 }
 
 export interface Pool {
@@ -81,7 +89,7 @@ export interface Pool {
 }
 
 export interface ConnectionError extends Error {
-  readonly fatal?: boolean;
+  fatal?: boolean;
   readonly code?: string;
 }
 
@@ -89,7 +97,13 @@ export interface ConnectionError extends Error {
 // Query
 //////////////////////////////////////////////////////////////////////////////
 
-export interface QueryResult {
+export interface StatementResult {
+  readonly fieldCount: number;
   readonly affectedRows: number;
-  //...
+  readonly insertId: number;
+  readonly info: string;
+  readonly serverStatus: number;
+  readonly warningStatus: number;
 }
+
+export type QueryResult = { [field: string]: unknown }[];

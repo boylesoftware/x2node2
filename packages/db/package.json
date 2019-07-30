@@ -27,6 +27,7 @@
   "scripts": {
     "clean": "rimraf build/ lib/",
     "build": "tsc && api-extractor run -l -v && rollup -c",
+    "rebuild": "npm run clean && npm run build",
     "lint": "eslint --max-warnings 0 --ext .ts --parser-options=tsconfigRootDir:. src/",
     "prepare": "npm run build",
     "prepublishOnly": "npm run lint",

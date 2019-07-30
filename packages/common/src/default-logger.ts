@@ -68,8 +68,8 @@ interface MessagePartBuilder {
   readonly prefix: string;
 
   /**
-   * If `true` and the message variable value is `undefined`, the `prefix` is
-   * not included in the final log message.
+   * If `true` and the message variable value is `undefined`, the
+   * {@link MessagePartBuilder.prefix} is not included in the final log message.
    */
   readonly noPrefixIfEmpty: boolean;
 
@@ -112,8 +112,8 @@ const DEFAULT_VARS: { [key: string]: MessageVariable } = {
 };
 
 /**
- * No-op debug message logger returned by {@link DefaultLogger.debug | debug()}
- * method for disabled categories.
+ * No-op debug message logger returned by {@link DefaultLogger.debug} method for
+ * disabled categories.
  */
 function noopLogger(): void { }
 
@@ -148,8 +148,7 @@ function noopLogger(): void { }
  * * _env:VAR_ - Value of the environment variable, where _VAR_ if the variable
  * name (see `process.env`).
  * * _ctx_ - Comma-space-separated list of context values (see
- * {@link Logger.addContext | addContext()} on `Logger` interface). The whole
- * list is surrounded by square brackets.
+ * {@link Logger.addContext}). The whole list is surrounded by square brackets.
  * * _err_ - Error information for error messages. Includes error stack trace if
  * the error object is an instance of `Error`.
  *
@@ -165,8 +164,8 @@ function noopLogger(): void { }
  *
  * Also, this implementation can be used as a base class for another logger
  * service implementation. The extended class can override
- * {@link DefaultLogger.writeMessage | writeMessage()} method to provide its own
- * logic for writing log messages.
+ * {@link DefaultLogger.writeMessage} method to provide its own logic for
+ * writing log messages.
  *
  * @public
  */

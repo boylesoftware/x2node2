@@ -26,5 +26,5 @@ isDebugEnabled(category: string): boolean;
 
 ## Remarks
 
-If constructing a debug message is an expensive operation, it sometimes worth checking if the debug messages for the given category are enabled before calling the logger function returned by the [Logger](./common.logger.md) service's [debug()](./common.logger.debug.md) method. The [isDebugEnabled()](./common.logger.isdebugenabled.md) method allows to perform such check.
+If constructing a debug message is an expensive operation, it sometimes worth checking if the debug messages for the given category are enabled before calling the logger function returned by the [Logger](./common.logger.md) service's [Logger.debug()](./common.logger.debug.md) method. The [Logger.isDebugEnabled()](./common.logger.isdebugenabled.md) method allows to perform such check.
 

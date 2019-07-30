@@ -638,7 +638,7 @@
             },
             {
               "kind": "PropertySignature",
-              "docComment": "/**\n * Determines if big number values are always returned as strings even if the value fits in a `Number`.\n *\n * @remarks\n *\n * This option is relevant only when {@link MySQLConnectionOptions.supportBigNumbers | supportBigNumbers} is `true` and since {@link MySQLConnectionOptions.supportBigNumbers | supportBigNumbers} is forced to be `false`, this option is never relevant.\n */\n",
+              "docComment": "/**\n * Determines if big number values are always returned as strings even if the value fits in a `Number`.\n *\n * @remarks\n *\n * This option is relevant only when {@link MySQLConnectionOptions.supportBigNumbers} is `true` and since {@link MySQLConnectionOptions.supportBigNumbers} is forced to be `false`, this option is never relevant.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Reference",
@@ -666,7 +666,7 @@
             },
             {
               "kind": "PropertySignature",
-              "docComment": "/**\n * Collation for the connection.\n *\n * @remarks\n *\n * Overrides {@link MySQLConnectionOptions.charsetNumber | charsetNumber} option.\n *\n * @defaultValue\n *\n * \"utf8mb4_general_ci\"\n */\n",
+              "docComment": "/**\n * Collation for the connection.\n *\n * @remarks\n *\n * Overrides {@link MySQLConnectionOptions.charsetNumber} option.\n *\n * @defaultValue\n *\n * \"utf8mb4_general_ci\"\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Reference",
@@ -1178,7 +1178,7 @@
             },
             {
               "kind": "PropertySignature",
-              "docComment": "/**\n * SHA-1 digest of the database user password.\n *\n * @remarks\n *\n * Overrides {@link MySQLConnectionOptions.password | password} option.\n */\n",
+              "docComment": "/**\n * SHA-1 digest of the database user password.\n *\n * @remarks\n *\n * Overrides {@link MySQLConnectionOptions.password} option.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Reference",
@@ -1262,7 +1262,7 @@
             },
             {
               "kind": "PropertySignature",
-              "docComment": "/**\n * Path to a Unix domain socket to connect to.\n *\n * @remarks\n *\n * Overrides {@link MySQLConnectionOptions.host | host} and {@link MySQLConnectionOptions.port | port} options.\n */\n",
+              "docComment": "/**\n * Path to a Unix domain socket to connect to.\n *\n * @remarks\n *\n * Overrides {@link MySQLConnectionOptions.host} and {@link MySQLConnectionOptions.port} options.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Reference",
@@ -1322,7 +1322,7 @@
             },
             {
               "kind": "PropertySignature",
-              "docComment": "/**\n * Stream to use for the connection, or a function that provides the stream.\n *\n * @remarks\n *\n * Overrides {@link MySQLConnectionOptions.socketPath | socketPath}, {@link MySQLConnectionOptions.host | host} and {@link MySQLConnectionOptions.port | port} options.\n */\n",
+              "docComment": "/**\n * Stream to use for the connection, or a function that provides the stream.\n *\n * @remarks\n *\n * Overrides {@link MySQLConnectionOptions.socketPath}, {@link MySQLConnectionOptions.host} and {@link MySQLConnectionOptions.port} options.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Reference",
@@ -1653,7 +1653,7 @@
             },
             {
               "kind": "PropertySignature",
-              "docComment": "/**\n * When {@link MySQLConnectionPoolOptions.waitForConnections | waitForConnections} is `true`, maximum number of connections allowed to wait.\n *\n * @remarks\n *\n * If 0, there is no limit.\n *\n * @defaultValue\n *\n * 0\n */\n",
+              "docComment": "/**\n * When {@link MySQLConnectionPoolOptions.waitForConnections} is `true`, maximum number of connections allowed to wait.\n *\n * @remarks\n *\n * If 0, there is no limit.\n *\n * @defaultValue\n *\n * 0\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Reference",
@@ -1681,7 +1681,7 @@
             },
             {
               "kind": "PropertySignature",
-              "docComment": "/**\n * Wait for a connection to be returned to the pool if new connection is requested and {@link MySQLConnectionPoolOptions.connectionLimit | connectionLimit} connections have been already issued.\n *\n * @defaultValue\n *\n * `true`\n */\n",
+              "docComment": "/**\n * Wait for a connection to be returned to the pool if new connection is requested and {@link MySQLConnectionPoolOptions.connectionLimit} connections have been already issued.\n *\n * @defaultValue\n *\n * `true`\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Reference",

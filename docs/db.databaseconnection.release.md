@@ -19,5 +19,7 @@ release(): void;
 
 The connection object is no longer usable after this method call.
 
-Note for implementations: throwing an error from this method normally leads to the application crash.
+If there is an active transaction associated with the connection (see [DatabaseConnection.beginTransaction()](./db.databaseconnection.begintransaction.md) method), the connection cannot be released until the transaction is ended. This method throws an error and the application crashes (considered a programming error) if attempted.
+
+Note to implementors: throwing an error from this method normally leads to the application crash.
 

@@ -14,7 +14,7 @@ export declare type ServiceFactory<A extends Application, S> = (app: A) => Promi
 
 ## Remarks
 
-Service factory functions are associated with service keys and added to the application when it is being configured. When the application is initialized (see [init()](./common.application.init.md) method), the service factory functions are called to produce service instances, which are then bound to the application instance under the provided service keys.
+Service factory functions are associated with service keys and added to the application when it is being configured. When the application is initialized (see [Application.init()](./common.application.init.md) method), the service factory functions are called to produce service instances, which are then bound to the application instance under the provided service keys.
 
 The application instance passed into the service factory function has all services configured before this one initialized and available. This makes it possible for services to depend on each other.
 

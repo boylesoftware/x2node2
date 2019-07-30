@@ -26,5 +26,5 @@ Promise of the monitor. The promise is rejected if the monitor cannot be allocat
 
 ## Remarks
 
-After the monitor instance no longer needed, it must be release using its [release()](./db.databasemonitor.release.md) method.
+After the monitor instance no longer needed, it must be release using its [DatabaseMonitor.release()](./db.databasemonitor.release.md) method.
 

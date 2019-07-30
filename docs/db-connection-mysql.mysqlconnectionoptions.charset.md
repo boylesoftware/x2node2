@@ -14,5 +14,5 @@ charset?: string;
 
 ## Remarks
 
-Overrides [charsetNumber](./db-connection-mysql.mysqlconnectionoptions.charsetnumber.md) option.
+Overrides [MySQLConnectionOptions.charsetNumber](./db-connection-mysql.mysqlconnectionoptions.charsetnumber.md) option.
 

@@ -4,7 +4,7 @@
 
 ## Application class
 
-An \_x2node\_ application.
+An application.
 
 <b>Signature:</b>
 
@@ -41,13 +41,13 @@ export declare class Application
 
 ## Remarks
 
-A single `Application` instance serves as the top object that repsents the Node application and ties all of its components together. An instance is usually created in the very beginning of the application lifecycle. Once created, the instance is uninitialized and is not ready to be used.
+A single [Application](./common.application.md) instance serves as the top object that repsents the Node application and ties all of its components together. An instance is usually created in the very beginning of the application lifecycle. Once created, the instance is uninitialized and is not ready to be used.
 
-Next step is to configure the instance. Normally, that includes adding \_services\_ to the application via one of the `services()` methods. Services are singletons stored on the application object in readonly properties with names called \_service keys\_. This makes the services available to all other application components as well as to each other.
+Next step is to configure the instance. Normally, that includes adding \_services\_ to the application via one of the  methods. Services are singletons stored on the application object in readonly properties with names called \_service keys\_. This makes the services available to all other application components as well as to each other.
 
-Once all services have been configured for the application, it then can be initialized using its [init()](./common.application.init.md) method. The initialization process creates service instances and sets them on the `Application` object under the corresponding service keys. From this point on, the application is ready.
+Once all services have been configured for the application, it then can be initialized using its [Application.init()](./common.application.init.md) method. The initialization process creates service instances and sets them on the application object under the corresponding service keys. From this point on, the application is ready.
 
-The application can be then gracefully shut down using its [shutdown()](./common.application.shutdown.md) method. Services may optionally implement [Service](./common.service.md) interface to provide special shutdown logic, which is invoked during the application shutdown process.
+The application can be then gracefully shut down using its [Application.shutdown()](./common.application.shutdown.md) method. Services may optionally implement [Service](./common.service.md) interface to provide special shutdown logic, which is invoked during the application shutdown process.
 
-The `Application` class can be also extended to provide additional functionality.
+The [Application](./common.application.md) class can be also extended to provide additional functionality.
 

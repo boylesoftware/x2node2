@@ -13,6 +13,13 @@ SQL database operations module for <i>X2 Framework</i>.
 |  [Database](./db.database.md) | Database. |
 |  [StandardSQLDialect](./db.standardsqldialect.md) | Standard SQL dialect implementation that can be used as a base class for more specific dialect imlementations. |
 
+## Enumerations
+
+|  Enumeration | Description |
+|  --- | --- |
+|  [TxMode](./db.txmode.md) | Transaction mode. |
+|  [TxResolve](./db.txresolve.md) | Transaction resolution. |
+
 ## Interfaces
 
 |  Interface | Description |
@@ -23,8 +30,10 @@ SQL database operations module for <i>X2 Framework</i>.
 |  [DatabaseMonitorProvider](./db.databasemonitorprovider.md) | Provider of database monitor instances. |
 |  [DatabaseOptions](./db.databaseoptions.md) | Options used to create database object. |
 |  [DatabaseShape](./db.databaseshape.md) | Descriptor of the data stored in the database. |
+|  [QueryResultParser](./db.queryresultparser.md) | SQL query (<code>SELECT</code> statement) result parser. |
 |  [RecordType](./db.recordtype.md) | Class that represents a record type. |
 |  [SQLDialect](./db.sqldialect.md) | SQL dialect. |
+|  [StatementResult](./db.statementresult.md) | Result of a SQL statement execution. |
 
 ## Variables
 

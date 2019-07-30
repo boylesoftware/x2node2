@@ -46,9 +46,9 @@ export interface Service {
  * @remarks
  * Service factory functions are associated with service keys and added to the
  * application when it is being configured. When the application is initialized
- * (see {@link Application.init | init()} method), the service factory functions
- * are called to produce service instances, which are then bound to the
- * application instance under the provided service keys.
+ * (see {@link Application.init} method), the service factory functions are
+ * called to produce service instances, which are then bound to the application
+ * instance under the provided service keys.
  *
  * The application instance passed into the service factory function has all
  * services configured before this one initialized and available. This makes it
@@ -85,32 +85,32 @@ export const CONFIG_SERVICE = "config";
 export const LOGGER_SERVICE = "logger";
 
 /**
- * An _x2node_ application.
+ * An application.
  *
  * @remarks
- * A single `Application` instance serves as the top object that repsents the
- * Node application and ties all of its components together. An instance is
+ * A single {@link Application} instance serves as the top object that repsents
+ * the Node application and ties all of its components together. An instance is
  * usually created in the very beginning of the application lifecycle. Once
  * created, the instance is uninitialized and is not ready to be used.
  *
  * Next step is to configure the instance. Normally, that includes adding
- * _services_ to the application via one of the `services()` methods. Services
- * are singletons stored on the application object in readonly properties with
- * names called _service keys_. This makes the services available to all other
- * application components as well as to each other.
+ * _services_ to the application via one of the {@link Application.services}
+ * methods. Services are singletons stored on the application object in readonly
+ * properties with names called _service keys_. This makes the services
+ * available to all other application components as well as to each other.
  *
  * Once all services have been configured for the application, it then can
- * be initialized using its {@link Application.init | init()} method. The
- * initialization process creates service instances and sets them on the
- * `Application` object under the corresponding service keys. From this point
- * on, the application is ready.
+ * be initialized using its {@link Application.init} method. The initialization
+ * process creates service instances and sets them on the application object
+ * under the corresponding service keys. From this point on, the application is
+ * ready.
  *
  * The application can be then gracefully shut down using its
- * {@link Application.shutdown | shutdown()} method. Services may optionally
- * implement {@link Service} interface to provide special shutdown logic, which
- * is invoked during the application shutdown process.
+ * {@link Application.shutdown} method. Services may optionally implement
+ * {@link Service} interface to provide special shutdown logic, which is invoked
+ * during the application shutdown process.
  *
- * The `Application` class can be also extended to provide additional
+ * The {@link Application} class can be also extended to provide additional
  * functionality.
  *
  * @public
@@ -167,9 +167,9 @@ export class Application {
    * @remarks
    * When a new application instance is created, this flag is initially `false`.
    * It becomes `true` after the application is successfully initialized (see
-   * {@link Application.init | init()} method). When the application is shutting
-   * down or has shut down (see {@link Application.shutdown | shutdown()}), this
-   * flag turns back to `false`.
+   * {@link Application.init} method). When the application is shutting down or
+   * has shut down (see {@link Application.shutdown}), this flag turns back to
+   * `false`.
    */
   public get ready(): boolean { return this._ready; }
 
@@ -270,20 +270,20 @@ export class Application {
    *
    * @remarks
    * Services are configured by specifying service keys and corresponding
-   * service factory functions after the new `Application` instance is created
-   * but before it is initialized. Calling this method at any other point will
-   * throw an error.
+   * service factory functions after the new {@link Application} instance is
+   * created but before it is initialized. Calling this method at any other
+   * point will throw an error.
    *
    * The combination of a service key and the corresponding service factory
    * function is called _service binder_. The order, in which service binders
-   * are passed to the `services()` method is important: every service factory
-   * function receives application instance with initialized and available
-   * services that were specified before it. This allows services to depend on
-   * other services.
+   * are passed to the {@link Application.services} method is important: every
+   * service factory function receives application instance with initialized and
+   * available services that were specified before it. This allows services to
+   * depend on other services.
    *
    * It is an error to provide more than ne binder for the same service key if
-   * the corresponding services have shutdown logic (that is have `shutdown()`
-   * method on them).
+   * the corresponding services have shutdown logic (that is have
+   * {@link Service.shutdown} method on them).
    *
    * Note, that the returned application instance does not yet have the service
    * instances bound to the service keys. That happens only after successful
@@ -314,22 +314,22 @@ export class Application {
    * This method must be called before the newly created and configured
    * application can be used. Calling this method creates, configures and
    * initializes all application services. After successful initialization, the
-   * application's {@link Application.ready | ready} flag becomes `true` and
-   * the `init()` method can no longer be called (will throw an error if
-   * attempted).
+   * application's {@link Application.ready} flag becomes `true` and the
+   * {@link Application.init} method can no longer be called (will throw an
+   * error if attempted).
    *
-   * If `init()` is called (asynchronously) before active initialization is
-   * complete, the same initialization promise is returned. This, however,
-   * should not be normal application behavior. A corresponding warning message
-   * will be logged in the console.
+   * If {@link Application.init} is called (asynchronously) before active
+   * initialization is complete, the same initialization promise is returned.
+   * This, however, should not be normal application behavior. A corresponding
+   * warning message will be logged in the console.
    *
-   * An error will be thrown if `init()` is called while the application is
-   * being shutdown via the {@link Application.shutdown | shutdown()} method.
-   * On the other hand, it is possible to call the
-   * {@link Application.shutdown | shutdown()} method before the initialization
-   * is complete. In that case, the initialization will be aborted, all services
-   * already initialized will be shut down. The promise returned by the `init()`
-   * method will reject with an error after the shutdown is complete.
+   * An error will be thrown if {@link Application.init} is called while the
+   * application is being shutdown via the {@link Application.shutdown} method.
+   * On the other hand, it is possible to call the {@link Application.shutdown}
+   * method before the initialization is complete. In that case, the
+   * initialization will be aborted, all services already initialized will be
+   * shut down. The promise returned by the {@link Application.init} method will
+   * reject with an error after the shutdown is complete.
    *
    * @returns Promise, which resolves with the initialized application or
    * rejects with an application initialization error.
@@ -408,19 +408,19 @@ export class Application {
    * the reverse initialization order. Any errors encountered during services
    * shutdown are logged, but otherwise ignored.
    *
-   * If `shutdown()` is called when the application is already shutting down,
-   * the same shutdown promise will be returned. This, however, should not be
-   * normal application behavior. A corresponding warning message will be logged
-   * in the console.
+   * If {@link Application.shutdown} is called when the application is already
+   * shutting down, the same shutdown promise will be returned. This, however,
+   * should not be normal application behavior. A corresponding warning message
+   * will be logged in the console.
    *
-   * It is safe to call `shutdown()` on an uninitialized application or
-   * application that has been shut down. The returned promise will resolve
-   * immediately.
+   * It is safe to call {@link Application.shutdown} on an uninitialized
+   * application or application that has been shut down. The returned promise
+   * will resolve immediately.
    *
-   * It is also possible to call `shutdown()` while the application is being
-   * initialized via the {@link Application.init | init()} method. In that case,
-   * the initialization process will be aborted, all services already
-   * initialized will be shut down.
+   * It is also possible to call {@link Application.shutdown} while the
+   * application is being initialized via the {@link Application.init} method.
+   * In that case, the initialization process will be aborted, all services
+   * already initialized will be shut down.
    *
    * @returns Promise the resolves when the shutdown is complete (that is when
    * all application services complete shutdown). The promise never rejects

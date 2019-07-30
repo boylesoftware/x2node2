@@ -14,5 +14,5 @@ bigNumberStrings?: boolean;
 
 ## Remarks
 
-This option is relevant only when [supportBigNumbers](./db-connection-mysql.mysqlconnectionoptions.supportbignumbers.md) is `true` and since [supportBigNumbers](./db-connection-mysql.mysqlconnectionoptions.supportbignumbers.md) is forced to be `false`<!-- -->, this option is never relevant.
+This option is relevant only when [MySQLConnectionOptions.supportBigNumbers](./db-connection-mysql.mysqlconnectionoptions.supportbignumbers.md) is `true` and since [MySQLConnectionOptions.supportBigNumbers](./db-connection-mysql.mysqlconnectionoptions.supportbignumbers.md) is forced to be `false`<!-- -->, this option is never relevant.
 

@@ -14,5 +14,5 @@ socketPath?: string;
 
 ## Remarks
 
-Overrides [host](./db-connection-mysql.mysqlconnectionoptions.host.md) and [port](./db-connection-mysql.mysqlconnectionoptions.port.md) options.
+Overrides [MySQLConnectionOptions.host](./db-connection-mysql.mysqlconnectionoptions.host.md) and [MySQLConnectionOptions.port](./db-connection-mysql.mysqlconnectionoptions.port.md) options.
 

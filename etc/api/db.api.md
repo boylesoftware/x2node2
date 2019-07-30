@@ -14,7 +14,12 @@ export class Database {
 
 // @public
 export interface DatabaseConnection {
+    beginTransaction(mode: TxMode): Promise<void>;
+    endTransaction(res: TxResolve): Promise<void>;
+    executeQuery<R>(sql: string, parser: QueryResultParser<R>): Promise<R>;
+    executeStatement(sql: string): Promise<StatementResult>;
     release(): void;
+    readonly sessionId: string;
 }
 
 // @public
@@ -55,6 +60,14 @@ export const DB_MONITOR_PROVIDER_SERVICE = "databaseMonitorProvider";
 export const LOG_CATEGORY = "X2_DB";
 
 // @public
+export interface QueryResultParser<R> {
+    addRow(row: {
+        [field: string]: unknown;
+    }): void;
+    getResult(): R;
+}
+
+// @public
 export interface RecordType {
     // (undocumented)
     new (...args: any): any;
@@ -70,6 +83,24 @@ export interface SQLDialect {
 export abstract class StandardSQLDialect implements SQLDialect {
     booleanLiteral(val: boolean): string;
     stringLiteral(val: string): string;
+}
+
+// @public
+export interface StatementResult {
+    readonly generatedId?: number;
+    readonly numAffectedRows: number;
+}
+
+// @public
+export enum TxMode {
+    ReadOnly = 1,
+    ReadWrite = 0
+}
+
+// @public
+export enum TxResolve {
+    Commit = 0,
+    Rollback = 1
 }
 
 

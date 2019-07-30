@@ -48,9 +48,8 @@ export interface Logger {
    * If constructing a debug message is an expensive operation, it sometimes
    * worth checking if the debug messages for the given category are enabled
    * before calling the logger function returned by the {@link Logger} service's
-   * {@link Logger.debug | debug()} method. The
-   * {@link Logger.isDebugEnabled | isDebugEnabled()} method allows to perform
-   * such check.
+   * {@link Logger.debug} method. The {@link Logger.isDebugEnabled} method
+   * allows to perform such check.
    *
    * @param category - Category name.
    * @returns `true` if debug messages are enabled for the category, `false`

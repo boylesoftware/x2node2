@@ -14,5 +14,5 @@ passwordSha1?: Buffer;
 
 ## Remarks
 
-Overrides [password](./db-connection-mysql.mysqlconnectionoptions.password.md) option.
+Overrides [MySQLConnectionOptions.password](./db-connection-mysql.mysqlconnectionoptions.password.md) option.
 

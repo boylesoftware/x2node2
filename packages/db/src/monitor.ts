@@ -24,7 +24,7 @@ export interface DatabaseMonitorProvider extends Service {
    *
    * @remarks
    * After the monitor instance no longer needed, it must be release using its
-   * {@link DatabaseMonitor.release | release()} method.
+   * {@link DatabaseMonitor.release} method.
    *
    * @param con - Database connection.
    * @returns Promise of the monitor. The promise is rejected if the monitor

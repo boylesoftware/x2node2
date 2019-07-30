@@ -14,5 +14,5 @@ readonly ready: boolean;
 
 ## Remarks
 
-When a new application instance is created, this flag is initially `false`<!-- -->. It becomes `true` after the application is successfully initialized (see [init()](./common.application.init.md) method). When the application is shutting down or has shut down (see [shutdown()](./common.application.shutdown.md)<!-- -->), this flag turns back to `false`<!-- -->.
+When a new application instance is created, this flag is initially `false`<!-- -->. It becomes `true` after the application is successfully initialized (see [Application.init()](./common.application.init.md) method). When the application is shutting down or has shut down (see [Application.shutdown()](./common.application.shutdown.md)<!-- -->), this flag turns back to `false`<!-- -->.
 

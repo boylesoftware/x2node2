@@ -4,7 +4,7 @@
 
 ## MySQLConnectionPoolOptions.queueLimit property
 
-When [waitForConnections](./db-connection-mysql.mysqlconnectionpooloptions.waitforconnections.md) is `true`<!-- -->, maximum number of connections allowed to wait.
+When [MySQLConnectionPoolOptions.waitForConnections](./db-connection-mysql.mysqlconnectionpooloptions.waitforconnections.md) is `true`<!-- -->, maximum number of connections allowed to wait.
 
 <b>Signature:</b>
 

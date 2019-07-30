@@ -14,5 +14,5 @@ stream?: Duplex | ((cb: (err: Error | null, stream?: Duplex) => void) => void);
 
 ## Remarks
 
-Overrides [socketPath](./db-connection-mysql.mysqlconnectionoptions.socketpath.md)<!-- -->, [host](./db-connection-mysql.mysqlconnectionoptions.host.md) and [port](./db-connection-mysql.mysqlconnectionoptions.port.md) options.
+Overrides [MySQLConnectionOptions.socketPath](./db-connection-mysql.mysqlconnectionoptions.socketpath.md)<!-- -->, [MySQLConnectionOptions.host](./db-connection-mysql.mysqlconnectionoptions.host.md) and [MySQLConnectionOptions.port](./db-connection-mysql.mysqlconnectionoptions.port.md) options.
 
