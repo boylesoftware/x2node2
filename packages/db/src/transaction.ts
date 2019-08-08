@@ -1,9 +1,12 @@
 // Copyright (c) Boyle Software, Inc. All rights reserved. Licensed under the MIT license.
 
+import { Logger } from "@x2node/common";
+
 import { SQLDialect } from "./dialect";
 import { DatabaseShape } from "./shape";
 import { DatabaseConnection } from "./connection";
-import { DatabaseMonitor } from "./monitor";
+import { TransactionMonitor } from "./monitor";
+import { Segment } from "./segment";
 
 /**
  * Transaction context.
@@ -13,6 +16,11 @@ import { DatabaseMonitor } from "./monitor";
  * @public
  */
 export interface TransactionContext<P> {
+
+  /**
+   * Logger to use by transaction steps.
+   */
+  readonly $logger: Logger;
 
   /**
    * Transaction parameters.
@@ -63,16 +71,30 @@ export interface TransactionStep<
   Y extends TransactionContext<P>
 > {
 
+  // TODO: must include parameters
+
+  /**
+   * Record collection segments that may be read by the step.
+   */
+  readonly readSegments?: readonly Segment<unknown>[];
+
+  /**
+   * Record collection segments that may be changed by the step.
+   */
+  readonly writeSegments?: readonly Segment<unknown>[];
+
   /**
    * Execute the step.
    *
-   * @param con - Database connection.
-   * @param mon - Database monitor.
+   * @param con - Database connection, in active transaction.
+   * @param mon - Transaction monitor.
    * @param ctx - Transaction context.
    * @returns Promise of the new transaction context. If the promise is
    * rejected, no further steps are executed and the transaction is rolled back.
+   * The returned context object is the same object passed in, but may be
+   * modified by the step and have different shape.
    */
-  execute(con: DatabaseConnection, mon: DatabaseMonitor, ctx: X): Promise<Y>;
+  execute(con: DatabaseConnection, mon: TransactionMonitor, ctx: X): Promise<Y>;
 }
 
 /**
@@ -81,9 +103,9 @@ export interface TransactionStep<
  * @remarks
  * A single transaction definition can be executed more than once generating
  * multiple transactions. A transaction definition wraps a single transaction
- * step, called _master step_, which, in turn, can be compound and consist of
- * multiple nested steps. Execution of a transaction is execution of its master
- * step.
+ * step, called <i>master step</i>, which, in turn, can be compound and consist
+ * of multiple nested steps. Execution of a transaction is execution of its
+ * master step.
  *
  * @typeParam P - Transaction parameters shape.
  * @typeParam R - Type of the transaction result object, which is the

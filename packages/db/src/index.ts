@@ -12,5 +12,6 @@ export * from "./monitor";
 export * from "./dialect";
 export * from "./database";
 export * from "./shape";
+export * from "./segment";
 
 export * from "./dialects/standrard";

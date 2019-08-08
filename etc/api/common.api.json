@@ -1,20 +1,23 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.3.4",
-    "schemaVersion": 1002,
+    "toolVersion": "7.3.6",
+    "schemaVersion": 1003,
     "oldestForwardsCompatibleVersion": 1001
   },
   "kind": "Package",
+  "canonicalReference": "@x2node/common!",
   "docComment": "/**\n * Common module that provides foundation for the rest of the <i>X2 Framrwork</i> and applications that use it.\n *\n * @remarks\n *\n * This mobule deals with the notion of the application as a whole, its lifecycle, services, which are singletons that provide service layer functionality to the rest of the application, as well as common basic functionality such as logging and application configuration.\n *\n * @packageDocumentation\n */\n",
   "name": "@x2node/common",
   "members": [
     {
       "kind": "EntryPoint",
+      "canonicalReference": "@x2node/common!",
       "name": "",
       "members": [
         {
           "kind": "Class",
+          "canonicalReference": "@x2node/common!Application:class",
           "docComment": "/**\n * An application.\n *\n * @remarks\n *\n * A single {@link Application} instance serves as the top object that repsents the Node application and ties all of its components together. An instance is usually created in the very beginning of the application lifecycle. Once created, the instance is uninitialized and is not ready to be used.\n *\n * Next step is to configure the instance. Normally, that includes adding _services_ to the application via one of the {@link Application.services} methods. Services are singletons stored on the application object in readonly properties with names called _service keys_. This makes the services available to all other application components as well as to each other.\n *\n * Once all services have been configured for the application, it then can be initialized using its {@link Application.init} method. The initialization process creates service instances and sets them on the application object under the corresponding service keys. From this point on, the application is ready.\n *\n * The application can be then gracefully shut down using its {@link Application.shutdown} method. Services may optionally implement {@link Service} interface to provide special shutdown logic, which is invoked during the application shutdown process.\n *\n * The {@link Application} class can be also extended to provide additional functionality.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
@@ -35,6 +38,7 @@
           "members": [
             {
               "kind": "Constructor",
+              "canonicalReference": "@x2node/common!Application:constructor(1)",
               "docComment": "/**\n * Create new uninitialized application instance.\n *\n * @remarks\n *\n * The new instance must be configured (e.g. services added) and initialized before it can be used.\n */\n",
               "excerptTokens": [
                 {
@@ -43,11 +47,12 @@
                 }
               ],
               "releaseTag": "Public",
-              "overloadIndex": 0,
+              "overloadIndex": 1,
               "parameters": []
             },
             {
               "kind": "Property",
+              "canonicalReference": "@x2node/common!Application#config:member",
               "docComment": "/**\n * Application configuration service.\n *\n * @remarks\n *\n * The configuration service is different in that it is always available on the application, even before it is initialized. If not explicitely configured, {@link DefaultConfiguration} is used. If explicitely configured, the default configuration is used before the configured service is initialized and after it is shut down.\n */\n",
               "excerptTokens": [
                 {
@@ -81,6 +86,7 @@
             },
             {
               "kind": "Method",
+              "canonicalReference": "@x2node/common!Application#init:member(1)",
               "docComment": "/**\n * Initialize the application and make it ready to use.\n *\n * @remarks\n *\n * This method must be called before the newly created and configured application can be used. Calling this method creates, configures and initializes all application services. After successful initialization, the application's {@link Application.ready} flag becomes `true` and the {@link Application.init} method can no longer be called (will throw an error if attempted).\n *\n * If {@link Application.init} is called (asynchronously) before active initialization is complete, the same initialization promise is returned. This, however, should not be normal application behavior. A corresponding warning message will be logged in the console.\n *\n * An error will be thrown if {@link Application.init} is called while the application is being shutdown via the {@link Application.shutdown} method. On the other hand, it is possible to call the {@link Application.shutdown} method before the initialization is complete. In that case, the initialization will be aborted, all services already initialized will be shut down. The promise returned by the {@link Application.init} method will reject with an error after the shutdown is complete.\n *\n * @returns Promise, which resolves with the initialized application or rejects with an application initialization error.\n */\n",
               "excerptTokens": [
                 {
@@ -110,12 +116,13 @@
                 "endIndex": 4
               },
               "releaseTag": "Public",
-              "overloadIndex": 0,
+              "overloadIndex": 1,
               "parameters": [],
               "name": "init"
             },
             {
               "kind": "Property",
+              "canonicalReference": "@x2node/common!Application#logger:member",
               "docComment": "/**\n * Logger service.\n *\n * @remarks\n *\n * The logger service is different in that it is always available on the application, even before it is initialized. If not explicitely configured, {@link DefaultLogger} is used. If explicitely configured, the default logger is used before the configured logger service is initialized and after it is shut down.\n *\n * The default logger format string is taken from `X2_LOG_FORMAT` environment variable. If not provided, \"\\{ts\\} \\{?ctx\\} \\{cat\\}: \\{msg\\}\\\\n\\{?err\\}\" is used by default.\n */\n",
               "excerptTokens": [
                 {
@@ -149,6 +156,7 @@
             },
             {
               "kind": "Property",
+              "canonicalReference": "@x2node/common!Application#ready:member",
               "docComment": "/**\n * Tells if the application has been successfully initialized and is ready to be used.\n *\n * @remarks\n *\n * When a new application instance is created, this flag is initially `false`. It becomes `true` after the application is successfully initialized (see {@link Application.init} method). When the application is shutting down or has shut down (see {@link Application.shutdown}), this flag turns back to `false`.\n */\n",
               "excerptTokens": [
                 {
@@ -182,6 +190,7 @@
             },
             {
               "kind": "Method",
+              "canonicalReference": "@x2node/common!Application#services:member(1)",
               "docComment": "",
               "excerptTokens": [
                 {
@@ -333,6 +342,7 @@
             },
             {
               "kind": "Method",
+              "canonicalReference": "@x2node/common!Application#services:member(2)",
               "docComment": "",
               "excerptTokens": [
                 {
@@ -625,6 +635,7 @@
             },
             {
               "kind": "Method",
+              "canonicalReference": "@x2node/common!Application#services:member(3)",
               "docComment": "",
               "excerptTokens": [
                 {
@@ -1082,6 +1093,7 @@
             },
             {
               "kind": "Method",
+              "canonicalReference": "@x2node/common!Application#services:member(4)",
               "docComment": "",
               "excerptTokens": [
                 {
@@ -1728,6 +1740,7 @@
             },
             {
               "kind": "Method",
+              "canonicalReference": "@x2node/common!Application#services:member(5)",
               "docComment": "",
               "excerptTokens": [
                 {
@@ -2587,6 +2600,7 @@
             },
             {
               "kind": "Method",
+              "canonicalReference": "@x2node/common!Application#showMessage:member(1)",
               "docComment": "/**\n * Show message in the application console.\n *\n * @param message - The message.\n */\n",
               "excerptTokens": [
                 {
@@ -2632,7 +2646,7 @@
                 "endIndex": 8
               },
               "releaseTag": "Public",
-              "overloadIndex": 0,
+              "overloadIndex": 1,
               "parameters": [
                 {
                   "parameterName": "message",
@@ -2646,6 +2660,7 @@
             },
             {
               "kind": "Method",
+              "canonicalReference": "@x2node/common!Application#shutdown:member(1)",
               "docComment": "/**\n * Gracefully shutdown the application.\n *\n * @remarks\n *\n * Once called, the application starts shutting down all of its services in the reverse initialization order. Any errors encountered during services shutdown are logged, but otherwise ignored.\n *\n * If {@link Application.shutdown} is called when the application is already shutting down, the same shutdown promise will be returned. This, however, should not be normal application behavior. A corresponding warning message will be logged in the console.\n *\n * It is safe to call {@link Application.shutdown} on an uninitialized application or application that has been shut down. The returned promise will resolve immediately.\n *\n * It is also possible to call {@link Application.shutdown} while the application is being initialized via the {@link Application.init} method. In that case, the initialization process will be aborted, all services already initialized will be shut down.\n *\n * @returns Promise the resolves when the shutdown is complete (that is when all application services complete shutdown). The promise never rejects since all shutdown errors are logged, but otherwise ignored.\n */\n",
               "excerptTokens": [
                 {
@@ -2675,7 +2690,7 @@
                 "endIndex": 4
               },
               "releaseTag": "Public",
-              "overloadIndex": 0,
+              "overloadIndex": 1,
               "parameters": [],
               "name": "shutdown"
             }
@@ -2684,6 +2699,7 @@
         },
         {
           "kind": "Variable",
+          "canonicalReference": "@x2node/common!CONFIG_SERVICE:var",
           "docComment": "/**\n * Standard service key for the configuration service.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
@@ -2704,6 +2720,7 @@
         },
         {
           "kind": "Interface",
+          "canonicalReference": "@x2node/common!Configuration:interface",
           "docComment": "/**\n * Application configuration service interface.\n *\n * @remarks\n *\n * The configuration is used to provide the application with information about its runtime environment. The configuration consists of configuration options, identified by names, and their values. The options may include such things as the database URL, or the port, on which to listen for incoming API requests, or an application encryption key, etc.\n *\n * A configuration service is always available on the application, even if not explicitly configured. The {@link DefaultConfiguration} implementation is used by default.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
@@ -2724,6 +2741,7 @@
           "members": [
             {
               "kind": "MethodSignature",
+              "canonicalReference": "@x2node/common!Configuration#get:member(1)",
               "docComment": "/**\n * Get configuration option value.\n *\n * @param option - Configuration option name.\n *\n * @returns Configuration option value, if available.\n */\n",
               "excerptTokens": [
                 {
@@ -2764,7 +2782,7 @@
                 "endIndex": 7
               },
               "releaseTag": "Public",
-              "overloadIndex": 0,
+              "overloadIndex": 1,
               "parameters": [
                 {
                   "parameterName": "option",
@@ -2778,6 +2796,7 @@
             },
             {
               "kind": "MethodSignature",
+              "canonicalReference": "@x2node/common!Configuration#getRequired:member(1)",
               "docComment": "/**\n * Get required configuration option value. Throws an error if option is not available.\n *\n * @param option - Configuration option name.\n *\n * @returns Configuration option value.\n */\n",
               "excerptTokens": [
                 {
@@ -2818,7 +2837,7 @@
                 "endIndex": 7
               },
               "releaseTag": "Public",
-              "overloadIndex": 0,
+              "overloadIndex": 1,
               "parameters": [
                 {
                   "parameterName": "option",
@@ -2835,6 +2854,7 @@
         },
         {
           "kind": "Class",
+          "canonicalReference": "@x2node/common!DefaultConfiguration:class",
           "docComment": "/**\n * Default implementation of the {@link Configuration} service that takes configuration options from the process environment variables.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
@@ -2863,6 +2883,7 @@
           "members": [
             {
               "kind": "Method",
+              "canonicalReference": "@x2node/common!DefaultConfiguration#get:member(1)",
               "docComment": "/**\n * Get configuration option value.\n *\n * @param option - Configuration option name.\n *\n * @returns Configuration option value, if available.\n */\n",
               "excerptTokens": [
                 {
@@ -2904,7 +2925,7 @@
                 "endIndex": 7
               },
               "releaseTag": "Public",
-              "overloadIndex": 0,
+              "overloadIndex": 1,
               "parameters": [
                 {
                   "parameterName": "key",
@@ -2918,6 +2939,7 @@
             },
             {
               "kind": "Method",
+              "canonicalReference": "@x2node/common!DefaultConfiguration#getRequired:member(1)",
               "docComment": "/**\n * Get required configuration option value. Throws an error if option is not available.\n *\n * @param option - Configuration option name.\n *\n * @returns Configuration option value.\n */\n",
               "excerptTokens": [
                 {
@@ -2959,7 +2981,7 @@
                 "endIndex": 7
               },
               "releaseTag": "Public",
-              "overloadIndex": 0,
+              "overloadIndex": 1,
               "parameters": [
                 {
                   "parameterName": "key",
@@ -2981,6 +3003,7 @@
         },
         {
           "kind": "Class",
+          "canonicalReference": "@x2node/common!DefaultLogger:class",
           "docComment": "/**\n * Default logger service implementation that writes log messages to the console.\n *\n * @remarks\n *\n * This implementation uses `console.error()` and `console.log()` to output error and debug messages respectively. It is used by default by applications when no other logger service is configured explicitly.\n *\n * This implementation uses `NODE_DEBUG` environment variable to configure what debug message categories get logged. To enable a given debug log category, the environmant variable, which is a comma-separated list, must include either the exact category name, or category name prefix followed by a star. For the puprpose of the prefix matching, the category names are split at underscores. For example, to enable debug messages for category \"X2_DB_SQL\", the `NODE_DEBUG` must include any of the following: \"X2*\", \"X2_DB*\", \"X2_DB_SQL\" or \"X2_DB_SQL*\". Note also, that `NODE_DEBUG` is case-insensitive.\n *\n * Another feature of this implementation is configurable log message format, which can be provided to the class constructor. The format string includes variables in curly braces that get replaced by certain values. The following variables are supported by default:\n *\n * * _ts_ - Message timestamp in ISO format (see `Date.toISOString()`). * _pid_ - The Node process PID (see `process.pid`). * _cat_ - The message category. \"ERROR\" for error messages. * _msg_ - The message text. * _env:VAR_ - Value of the environment variable, where _VAR_ if the variable name (see `process.env`). * _ctx_ - Comma-space-separated list of context values (see {@link Logger.addContext}). The whole list is surrounded by square brackets. * _err_ - Error information for error messages. Includes error stack trace if the error object is an instance of `Error`.\n *\n * The variable name in a variable placeholder in the format string can be prefixed with a question marks. In that case, if the variable able is empty, the part of the format string preceeding the placeholder up to the previous variable placeholder or the beginning of the format string is omitted. For example, the default format string is \"\\{ts\\} \\{?ctx\\} \\{cat\\}: \\{msg\\}\\\\n\\{?err\\}\".\n *\n * The constructor also can take definitions for additional message variables not included in the default set (or overriding the defaults).\n *\n * Also, this implementation can be used as a base class for another logger service implementation. The extended class can override {@link DefaultLogger.writeMessage} method to provide its own logic for writing log messages.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
@@ -3009,6 +3032,7 @@
           "members": [
             {
               "kind": "Constructor",
+              "canonicalReference": "@x2node/common!DefaultLogger:constructor(1)",
               "docComment": "/**\n * Create new logger service instance.\n *\n * @param format - The log message format string.\n *\n * @param extraVars - Implementation for additional log message variables that can be used in the `format` string.\n */\n",
               "excerptTokens": [
                 {
@@ -3065,7 +3089,7 @@
                 }
               ],
               "releaseTag": "Public",
-              "overloadIndex": 0,
+              "overloadIndex": 1,
               "parameters": [
                 {
                   "parameterName": "format",
@@ -3085,6 +3109,7 @@
             },
             {
               "kind": "Method",
+              "canonicalReference": "@x2node/common!DefaultLogger#addContext:member(1)",
               "docComment": "/**\n * Create new logger based on this one and add context to it.\n *\n * @remarks\n *\n * Log message format may include information about context, in which the logged event took place. Context is application specific list of short items, such as current API request id, current transaction id, etc. Creating a contextualized logger is cheap, because it still uses the parent logger for all the main functionality. Once the context is no more relevant, the contextualized logger can be simply thrown away. A contextualized logger itself can be used to create furhter contextualized loggers. These loggers will include the parent logger's context, plus their own.\n *\n * @param ctx - Additional context items.\n *\n * @returns Contextualized logger.\n */\n",
               "excerptTokens": [
                 {
@@ -3126,7 +3151,7 @@
                 "endIndex": 7
               },
               "releaseTag": "Public",
-              "overloadIndex": 0,
+              "overloadIndex": 1,
               "parameters": [
                 {
                   "parameterName": "ctx",
@@ -3140,6 +3165,7 @@
             },
             {
               "kind": "Method",
+              "canonicalReference": "@x2node/common!DefaultLogger#debug:member(1)",
               "docComment": "/**\n * Get debug logger for the given category.\n *\n * @remarks\n *\n * The application's runtime environment may be configured to only log debug messages for certain categories in a way specific to the given logger service implementation. This method will return a no-op function if debug messages for the specified category are disabled.\n *\n * @param category - Category name.\n *\n * @returns Debug logger function, that takes the debug message as its only argument.\n */\n",
               "excerptTokens": [
                 {
@@ -3189,7 +3215,7 @@
                 "endIndex": 9
               },
               "releaseTag": "Public",
-              "overloadIndex": 0,
+              "overloadIndex": 1,
               "parameters": [
                 {
                   "parameterName": "category",
@@ -3203,6 +3229,7 @@
             },
             {
               "kind": "Method",
+              "canonicalReference": "@x2node/common!DefaultLogger#error:member(1)",
               "docComment": "/**\n * Log an application error.\n *\n * @param message - Error message to log.\n *\n * @param err - The error object, if any. Normally an instance of `Error`, but can be anything.\n */\n",
               "excerptTokens": [
                 {
@@ -3260,7 +3287,7 @@
                 "endIndex": 11
               },
               "releaseTag": "Public",
-              "overloadIndex": 0,
+              "overloadIndex": 1,
               "parameters": [
                 {
                   "parameterName": "message",
@@ -3281,6 +3308,7 @@
             },
             {
               "kind": "Method",
+              "canonicalReference": "@x2node/common!DefaultLogger#isDebugEnabled:member(1)",
               "docComment": "/**\n * Tell if debug messages are enabled for the specified category.\n *\n * @remarks\n *\n * If constructing a debug message is an expensive operation, it sometimes worth checking if the debug messages for the given category are enabled before calling the logger function returned by the {@link Logger} service's {@link Logger.debug} method. The {@link Logger.isDebugEnabled} method allows to perform such check.\n *\n * @param category - Category name.\n *\n * @returns `true` if debug messages are enabled for the category, `false` if the category logger is a no-op.\n */\n",
               "excerptTokens": [
                 {
@@ -3322,7 +3350,7 @@
                 "endIndex": 7
               },
               "releaseTag": "Public",
-              "overloadIndex": 0,
+              "overloadIndex": 1,
               "parameters": [
                 {
                   "parameterName": "category",
@@ -3336,6 +3364,7 @@
             },
             {
               "kind": "Method",
+              "canonicalReference": "@x2node/common!DefaultLogger#writeMessage:member(1)",
               "docComment": "/**\n * Write the message to the log output.\n *\n * @remarks\n *\n * This implementation uses `console` to write messages. The method can be overriden in a subclass to provide a different log output.\n *\n * @param isError - `true` if the message is an error message, `false` if it is a debug message.\n *\n * @param message - Formatted message text to output.\n */\n",
               "excerptTokens": [
                 {
@@ -3397,7 +3426,7 @@
                 "endIndex": 12
               },
               "releaseTag": "Public",
-              "overloadIndex": 0,
+              "overloadIndex": 1,
               "parameters": [
                 {
                   "parameterName": "isError",
@@ -3426,6 +3455,7 @@
         },
         {
           "kind": "Variable",
+          "canonicalReference": "@x2node/common!LOGGER_SERVICE:var",
           "docComment": "/**\n * Standard service key for the logger service.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
@@ -3446,6 +3476,7 @@
         },
         {
           "kind": "Interface",
+          "canonicalReference": "@x2node/common!Logger:interface",
           "docComment": "/**\n * Logger service interface.\n *\n * @remarks\n *\n * Logger service is used by the application to log unexpected application errors as well as debug messages, when enabled. Debug messages are categorized and logger implementations usually allow selective enabling/disabling of certain message categories.\n *\n * A logger service is always available on the application, even if not explicitly configured. The {@link DefaultLogger} implementation is used by default.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
@@ -3466,6 +3497,7 @@
           "members": [
             {
               "kind": "MethodSignature",
+              "canonicalReference": "@x2node/common!Logger#addContext:member(1)",
               "docComment": "/**\n * Create new logger based on this one and add context to it.\n *\n * @remarks\n *\n * Log message format may include information about context, in which the logged event took place. Context is application specific list of short items, such as current API request id, current transaction id, etc. Creating a contextualized logger is cheap, because it still uses the parent logger for all the main functionality. Once the context is no more relevant, the contextualized logger can be simply thrown away. A contextualized logger itself can be used to create furhter contextualized loggers. These loggers will include the parent logger's context, plus their own.\n *\n * @param ctx - Additional context items.\n *\n * @returns Contextualized logger.\n */\n",
               "excerptTokens": [
                 {
@@ -3506,7 +3538,7 @@
                 "endIndex": 7
               },
               "releaseTag": "Public",
-              "overloadIndex": 0,
+              "overloadIndex": 1,
               "parameters": [
                 {
                   "parameterName": "ctx",
@@ -3520,6 +3552,7 @@
             },
             {
               "kind": "MethodSignature",
+              "canonicalReference": "@x2node/common!Logger#debug:member(1)",
               "docComment": "/**\n * Get debug logger for the given category.\n *\n * @remarks\n *\n * The application's runtime environment may be configured to only log debug messages for certain categories in a way specific to the given logger service implementation. This method will return a no-op function if debug messages for the specified category are disabled.\n *\n * @param category - Category name.\n *\n * @returns Debug logger function, that takes the debug message as its only argument.\n */\n",
               "excerptTokens": [
                 {
@@ -3568,7 +3601,7 @@
                 "endIndex": 9
               },
               "releaseTag": "Public",
-              "overloadIndex": 0,
+              "overloadIndex": 1,
               "parameters": [
                 {
                   "parameterName": "category",
@@ -3582,6 +3615,7 @@
             },
             {
               "kind": "MethodSignature",
+              "canonicalReference": "@x2node/common!Logger#error:member(1)",
               "docComment": "/**\n * Log an application error.\n *\n * @param message - Error message to log.\n *\n * @param err - The error object, if any. Normally an instance of `Error`, but can be anything.\n */\n",
               "excerptTokens": [
                 {
@@ -3638,7 +3672,7 @@
                 "endIndex": 11
               },
               "releaseTag": "Public",
-              "overloadIndex": 0,
+              "overloadIndex": 1,
               "parameters": [
                 {
                   "parameterName": "message",
@@ -3659,6 +3693,7 @@
             },
             {
               "kind": "MethodSignature",
+              "canonicalReference": "@x2node/common!Logger#isDebugEnabled:member(1)",
               "docComment": "/**\n * Tell if debug messages are enabled for the specified category.\n *\n * @remarks\n *\n * If constructing a debug message is an expensive operation, it sometimes worth checking if the debug messages for the given category are enabled before calling the logger function returned by the {@link Logger} service's {@link Logger.debug} method. The {@link Logger.isDebugEnabled} method allows to perform such check.\n *\n * @param category - Category name.\n *\n * @returns `true` if debug messages are enabled for the category, `false` if the category logger is a no-op.\n */\n",
               "excerptTokens": [
                 {
@@ -3699,7 +3734,7 @@
                 "endIndex": 7
               },
               "releaseTag": "Public",
-              "overloadIndex": 0,
+              "overloadIndex": 1,
               "parameters": [
                 {
                   "parameterName": "category",
@@ -3716,6 +3751,7 @@
         },
         {
           "kind": "Interface",
+          "canonicalReference": "@x2node/common!LogMessage:interface",
           "docComment": "/**\n * Log message with its context.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
@@ -3736,6 +3772,7 @@
           "members": [
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@x2node/common!LogMessage#category:member",
               "docComment": "/**\n * Message category, \"ERROR\" if error message.\n */\n",
               "excerptTokens": [
                 {
@@ -3768,6 +3805,7 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@x2node/common!LogMessage#context:member",
               "docComment": "/**\n * Message runtime context.\n */\n",
               "excerptTokens": [
                 {
@@ -3800,6 +3838,7 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@x2node/common!LogMessage#error:member",
               "docComment": "/**\n * Error, if any.\n */\n",
               "excerptTokens": [
                 {
@@ -3832,6 +3871,7 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@x2node/common!LogMessage#message:member",
               "docComment": "/**\n * Message text.\n */\n",
               "excerptTokens": [
                 {
@@ -3864,6 +3904,7 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@x2node/common!LogMessage#ts:member",
               "docComment": "/**\n * Message timestamp.\n */\n",
               "excerptTokens": [
                 {
@@ -3899,6 +3940,7 @@
         },
         {
           "kind": "TypeAlias",
+          "canonicalReference": "@x2node/common!MessageVariable:type",
           "docComment": "/**\n * Function that provides implementation for a message variable.\n *\n * @remarks\n *\n * The function takes the log message description and, if applicable, the parameter from the variable placeholder in the format string. The parameter is the string that follows the colon after the variable name in the placeholder. The function then returns the variable value (the string, with which to replace the placeholder), or `undefined` if variable value is unavailable.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
@@ -3955,6 +3997,7 @@
         },
         {
           "kind": "Interface",
+          "canonicalReference": "@x2node/common!Service:interface",
           "docComment": "/**\n * Interface for optional methods that may be defined on a service.\n *\n * @remarks\n *\n * Since all members of this interface are optional, services do not <em>have</em> to implement this interface.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
@@ -3975,6 +4018,7 @@
           "members": [
             {
               "kind": "MethodSignature",
+              "canonicalReference": "@x2node/common!Service#shutdown:member(1)",
               "docComment": "/**\n * Gracefully shutdown the service.\n *\n * @remarks\n *\n * Thrown errors and rejected promises are logged, but otherwise ignored. The service is removed from the application and the shutdown process continues.\n *\n * @returns Nothing, if service shuts down synchronously, or, for asynchronous shutdown, a promise that resolves when the service shutdown is complete.\n */\n",
               "excerptTokens": [
                 {
@@ -4003,12 +4047,13 @@
                 "endIndex": 4
               },
               "releaseTag": "Public",
-              "overloadIndex": 0,
+              "overloadIndex": 1,
               "parameters": [],
               "name": "shutdown"
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@x2node/common!Service#shutdownDependencies:member",
               "docComment": "/**\n * List of services (identified by their service keys) that may not be shut down before this service completes its shutdown.\n */\n",
               "excerptTokens": [
                 {
@@ -4044,6 +4089,7 @@
         },
         {
           "kind": "TypeAlias",
+          "canonicalReference": "@x2node/common!ServiceFactory:type",
           "docComment": "/**\n * Function, that creates a service instance.\n *\n * @remarks\n *\n * Service factory functions are associated with service keys and added to the application when it is being configured. When the application is initialized (see {@link Application.init} method), the service factory functions are called to produce service instances, which are then bound to the application instance under the provided service keys.\n *\n * The application instance passed into the service factory function has all services configured before this one initialized and available. This makes it possible for services to depend on each other.\n *\n * If the service factory function throws an error or returns a promise that rejects, the initialization process is aborted, all services that have already been initialized are shutdown and removed from the application, and the initialization ends with the error.\n *\n * @param app - The application with all services configured before this one initialized and available.\n *\n * @typeParam A - The application type extended with all services configured before this one.\n *\n * @typeParam S - Type of the service the factory function creates.\n *\n * @returns The service instance or a promise of it.\n *\n * @public\n */\n",
           "excerptTokens": [
             {

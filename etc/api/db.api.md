@@ -18,6 +18,7 @@ export interface DatabaseConnection {
     endTransaction(res: TxResolve): Promise<void>;
     executeQuery<R>(sql: string, parser: QueryResultParser<R>): Promise<R>;
     executeStatement(sql: string): Promise<StatementResult>;
+    readonly inTransaction: boolean;
     release(): void;
     readonly sessionId: string;
 }
@@ -29,32 +30,26 @@ export interface DatabaseConnectionProvider extends Service {
 }
 
 // @public
-export interface DatabaseMonitor {
-    release(): void;
-}
-
-// @public
-export interface DatabaseMonitorProvider extends Service {
-    getMonitor(con: DatabaseConnection): Promise<DatabaseMonitor>;
+export interface DatabaseMonitor extends Service {
+    monitorTransaction(con: DatabaseConnection, readSegments: readonly Segment<unknown>[] | null | undefined, writeSegments: readonly Segment<unknown>[] | null | undefined): Promise<TransactionMonitor>;
 }
 
 // @public
 export interface DatabaseOptions {
     connectionProvider: DatabaseConnectionProvider;
-    monitorProvider: DatabaseMonitorProvider;
-    recordTypes: RecordType[];
+    monitor: DatabaseMonitor;
+    recordTypes: RecordType<unknown>[];
 }
 
 // @public
 export interface DatabaseShape {
-    readonly recordTypes: ReadonlyArray<RecordType>;
 }
 
 // @public
 export const DB_CONNECTION_PROVIDER_SERVICE = "databaseConnectionProvider";
 
 // @public
-export const DB_MONITOR_PROVIDER_SERVICE = "databaseMonitorProvider";
+export const DB_MONITOR_SERVICE = "databaseMonitor";
 
 // @public
 export const LOG_CATEGORY = "X2_DB";
@@ -68,9 +63,29 @@ export interface QueryResultParser<R> {
 }
 
 // @public
-export interface RecordType {
+export interface RecordShape<R> {
+    readonly segmentKeys: readonly (keyof R)[];
+    readonly type: RecordType<R>;
+}
+
+// @public
+export interface RecordType<R> {
     // (undocumented)
-    new (...args: any): any;
+    new (): R;
+}
+
+// @public
+export interface Segment<R> {
+    // (undocumented)
+    keys?: {
+        [K in keyof R]?: R[K];
+    };
+    // (undocumented)
+    keys1?: {
+        name: keyof R;
+        values?: unknown[];
+    }[];
+    recordType: RecordShape<R>;
 }
 
 // @public
@@ -89,6 +104,17 @@ export abstract class StandardSQLDialect implements SQLDialect {
 export interface StatementResult {
     readonly generatedId?: number;
     readonly numAffectedRows: number;
+}
+
+// @public
+export interface TransactionMonitor {
+    addSegmentUpdate<R>(segment: Segment<R>): void;
+    readonly currentLastModified: Date;
+    readonly currentVersion: number;
+    saveSegmentUpdates(): Promise<{
+        readonly newVersion: number;
+        readonly newLastModified: Date;
+    }>;
 }
 
 // @public

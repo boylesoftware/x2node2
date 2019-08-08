@@ -1,7 +1,7 @@
 // Copyright (c) Boyle Software, Inc. All rights reserved. Licensed under the MIT license.
 
 import { DatabaseConnectionProvider } from "./connection";
-import { DatabaseMonitorProvider } from "./monitor";
+import { DatabaseMonitor } from "./monitor";
 import { DatabaseShape, RecordType } from "./shape";
 
 import DatabaseShapeImpl from "./internal/shape";
@@ -21,12 +21,12 @@ export interface DatabaseOptions {
   /**
    * Database monitor provider.
    */
-  monitorProvider: DatabaseMonitorProvider;
+  monitor: DatabaseMonitor;
 
   /**
    * Record types stored in the database.
    */
-  recordTypes: RecordType[];
+  recordTypes: RecordType<unknown>[];
 }
 
 /**

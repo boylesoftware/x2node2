@@ -1,20 +1,23 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.3.4",
-    "schemaVersion": 1002,
+    "toolVersion": "7.3.6",
+    "schemaVersion": 1003,
     "oldestForwardsCompatibleVersion": 1001
   },
   "kind": "Package",
+  "canonicalReference": "@x2node/db!",
   "docComment": "/**\n * SQL database operations module for <i>X2 Framework</i>.\n *\n * @packageDocumentation\n */\n",
   "name": "@x2node/db",
   "members": [
     {
       "kind": "EntryPoint",
+      "canonicalReference": "@x2node/db!",
       "name": "",
       "members": [
         {
           "kind": "Class",
+          "canonicalReference": "@x2node/db!Database:class",
           "docComment": "/**\n * Database.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
@@ -35,6 +38,7 @@
           "members": [
             {
               "kind": "Constructor",
+              "canonicalReference": "@x2node/db!Database:constructor(1)",
               "docComment": "/**\n * Create new database object.\n *\n * @param opts - Database options.\n */\n",
               "excerptTokens": [
                 {
@@ -59,7 +63,7 @@
                 }
               ],
               "releaseTag": "Public",
-              "overloadIndex": 0,
+              "overloadIndex": 1,
               "parameters": [
                 {
                   "parameterName": "opts",
@@ -72,6 +76,7 @@
             },
             {
               "kind": "Property",
+              "canonicalReference": "@x2node/db!Database#shape:member",
               "docComment": "/**\n * The database shape.\n */\n",
               "excerptTokens": [
                 {
@@ -108,6 +113,7 @@
         },
         {
           "kind": "Interface",
+          "canonicalReference": "@x2node/db!DatabaseConnection:interface",
           "docComment": "/**\n * Database connection.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
@@ -128,6 +134,7 @@
           "members": [
             {
               "kind": "MethodSignature",
+              "canonicalReference": "@x2node/db!DatabaseConnection#beginTransaction:member(1)",
               "docComment": "/**\n * Begin database transaction.\n *\n * @remarks\n *\n * Throws an error if there is already an active transaction associated with this connection (considered a programming error).\n *\n * Once transaction is started, it must be ended using {@link DatabaseConnection.endTransaction} method before the connection is released.\n *\n * This method may not be called if there is already an active transaction associated with the connection. An error is thrown if attempted (considered a programming error).\n *\n * @param mode - Transaction mode.\n *\n * @returns Promise that resolves when transaction is successfully started and rejects if was unable to start transaction.\n */\n",
               "excerptTokens": [
                 {
@@ -172,7 +179,7 @@
                 "endIndex": 8
               },
               "releaseTag": "Public",
-              "overloadIndex": 0,
+              "overloadIndex": 1,
               "parameters": [
                 {
                   "parameterName": "mode",
@@ -186,6 +193,7 @@
             },
             {
               "kind": "MethodSignature",
+              "canonicalReference": "@x2node/db!DatabaseConnection#endTransaction:member(1)",
               "docComment": "/**\n * End database transaction.\n *\n * @remarks\n *\n * If `resolve` is {@link TxResolve.Commit}, throws an error if there is no active transaction associated with this connection (considered a programming error). Rollback is the same, but is allowed to be performed after an unsuccessful commit.\n *\n * Once <em>successfully</em> ended, a new transaction can be started on the same connection, or the connenction can be released.\n *\n * Connection can be released after a rollback even if it was unsuccessful. Normally, if transaction rollback was unsuccessful, releasing the connection destroys it (even if connection pool is utilized).\n *\n * @param res - Transaction resolution.\n *\n * @returns Promise that resolves when transaction is successfully ended and rejects if there was an error attempting to end the transaction.\n */\n",
               "excerptTokens": [
                 {
@@ -230,7 +238,7 @@
                 "endIndex": 8
               },
               "releaseTag": "Public",
-              "overloadIndex": 0,
+              "overloadIndex": 1,
               "parameters": [
                 {
                   "parameterName": "res",
@@ -244,6 +252,7 @@
             },
             {
               "kind": "MethodSignature",
+              "canonicalReference": "@x2node/db!DatabaseConnection#executeQuery:member(1)",
               "docComment": "/**\n * Execute query (`SELECT` statement) on the connection.\n *\n * @remarks\n *\n * Not allowed when there is an unresolved promise returned by one of the transaction methods (in other words when the connection is in transitional transaction status).\n *\n * @param sql - Query SQL.\n *\n * @param parser - Query result parser.\n *\n * @typeParam R - Type of the query result object.\n *\n * @returns Promise of the query result. The promise is rejected if there was an error.\n */\n",
               "excerptTokens": [
                 {
@@ -332,7 +341,7 @@
                 "endIndex": 19
               },
               "releaseTag": "Public",
-              "overloadIndex": 0,
+              "overloadIndex": 1,
               "parameters": [
                 {
                   "parameterName": "sql",
@@ -366,6 +375,7 @@
             },
             {
               "kind": "MethodSignature",
+              "canonicalReference": "@x2node/db!DatabaseConnection#executeStatement:member(1)",
               "docComment": "/**\n * Execute statement on the connection.\n *\n * @remarks\n *\n * Not allowed when there is an unresolved promise returned by one of the transaction methods (in other words when the connection is in transitional transaction status).\n *\n * @param sql - Statement SQL.\n *\n * @returns Promise of the statement execution result. The promise is rejected if there was an error.\n */\n",
               "excerptTokens": [
                 {
@@ -418,7 +428,7 @@
                 "endIndex": 10
               },
               "releaseTag": "Public",
-              "overloadIndex": 0,
+              "overloadIndex": 1,
               "parameters": [
                 {
                   "parameterName": "sql",
@@ -431,7 +441,41 @@
               "name": "executeStatement"
             },
             {
+              "kind": "PropertySignature",
+              "canonicalReference": "@x2node/db!DatabaseConnection#inTransaction:member",
+              "docComment": "/**\n * Tells if the connection is in active transaction.\n *\n * @remarks\n *\n * This flag is `true` after the promise returned by {@link DatabaseConnection.beginTransaction} resolves and until {@link DatabaseConnection.endTransaction} is called.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "inTransaction"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "inTransaction",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              }
+            },
+            {
               "kind": "MethodSignature",
+              "canonicalReference": "@x2node/db!DatabaseConnection#release:member(1)",
               "docComment": "/**\n * Release connection back to the connection provider.\n *\n * @remarks\n *\n * The connection object is no longer usable after this method call.\n *\n * If there is an active transaction associated with the connection (see {@link DatabaseConnection.beginTransaction} method), the connection cannot be released until the transaction is ended. This method throws an error and the application crashes (considered a programming error) if attempted.\n *\n * Note to implementors: throwing an error from this method normally leads to the application crash.\n */\n",
               "excerptTokens": [
                 {
@@ -456,12 +500,13 @@
                 "endIndex": 3
               },
               "releaseTag": "Public",
-              "overloadIndex": 0,
+              "overloadIndex": 1,
               "parameters": [],
               "name": "release"
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@x2node/db!DatabaseConnection#sessionId:member",
               "docComment": "/**\n * Underlynig database connection (session) id.\n *\n * @remarks\n *\n * This value may help identify a particular connection when a connection pool is involved, or identify the corresponding session on the database server side.\n */\n",
               "excerptTokens": [
                 {
@@ -497,6 +542,7 @@
         },
         {
           "kind": "Interface",
+          "canonicalReference": "@x2node/db!DatabaseConnectionProvider:interface",
           "docComment": "/**\n * Database connection provider (such as a connection pool, for example).\n *\n * @public\n */\n",
           "excerptTokens": [
             {
@@ -525,6 +571,7 @@
           "members": [
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@x2node/db!DatabaseConnectionProvider#dialect:member",
               "docComment": "/**\n * SQL dialect used by the database.\n */\n",
               "excerptTokens": [
                 {
@@ -557,6 +604,7 @@
             },
             {
               "kind": "MethodSignature",
+              "canonicalReference": "@x2node/db!DatabaseConnectionProvider#getConnection:member(1)",
               "docComment": "/**\n * Allocate new database connection.\n *\n * @remarks\n *\n * After the connection is no longer needed it must be released via its {@link DatabaseConnection.release} method.\n *\n * @returns Promise of the active database connection. The promise is rejected if the connection cannot be established.\n */\n",
               "excerptTokens": [
                 {
@@ -593,7 +641,7 @@
                 "endIndex": 6
               },
               "releaseTag": "Public",
-              "overloadIndex": 0,
+              "overloadIndex": 1,
               "parameters": [],
               "name": "getConnection"
             }
@@ -607,7 +655,8 @@
         },
         {
           "kind": "Interface",
-          "docComment": "/**\n * Database monitor instance associated with a specific database connection and therefore a specific database transaction.\n *\n * @public\n */\n",
+          "canonicalReference": "@x2node/db!DatabaseMonitor:interface",
+          "docComment": "/**\n * Database monitor service.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -616,59 +665,6 @@
             {
               "kind": "Reference",
               "text": "DatabaseMonitor"
-            },
-            {
-              "kind": "Content",
-              "text": " "
-            }
-          ],
-          "releaseTag": "Public",
-          "name": "DatabaseMonitor",
-          "members": [
-            {
-              "kind": "MethodSignature",
-              "docComment": "/**\n * Release the instance back to the provider after it is no longer needed.\n *\n * @remarks\n *\n * The monitor instance becomes unusable after this method call.\n *\n * Note, that throwing error from this method normally leads to the application crash.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Reference",
-                  "text": "release"
-                },
-                {
-                  "kind": "Content",
-                  "text": "(): "
-                },
-                {
-                  "kind": "Content",
-                  "text": "void"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "returnTypeTokenRange": {
-                "startIndex": 2,
-                "endIndex": 3
-              },
-              "releaseTag": "Public",
-              "overloadIndex": 0,
-              "parameters": [],
-              "name": "release"
-            }
-          ],
-          "extendsTokenRanges": []
-        },
-        {
-          "kind": "Interface",
-          "docComment": "/**\n * Provider of database monitor instances.\n *\n * @public\n */\n",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "export interface "
-            },
-            {
-              "kind": "Reference",
-              "text": "DatabaseMonitorProvider"
             },
             {
               "kind": "Content",
@@ -684,15 +680,16 @@
             }
           ],
           "releaseTag": "Public",
-          "name": "DatabaseMonitorProvider",
+          "name": "DatabaseMonitor",
           "members": [
             {
               "kind": "MethodSignature",
-              "docComment": "/**\n * Allocate monitor instance and associate it with the provided database connection.\n *\n * @remarks\n *\n * After the monitor instance no longer needed, it must be release using its {@link DatabaseMonitor.release} method.\n *\n * @param con - Database connection.\n *\n * @returns Promise of the monitor. The promise is rejected if the monitor cannot be allocated.\n */\n",
+              "canonicalReference": "@x2node/db!DatabaseMonitor#monitorTransaction:member(1)",
+              "docComment": "/**\n * Allocate monitor for the transaction currently active on the provided database connection.\n *\n * @remarks\n *\n * Before the returned promise resolves, the monitor locks specified record collection segments. All locks are released upon completion of the transaction.\n *\n * The database connection passed to this method must be in active transaction (its {@link DatabaseConnection.inTransaction} flag must be `true`).\n *\n * @param con - Database connection.\n *\n * @param readSegments - Record collection segments that the transaction <em>may</em> read. These segments are locked with a shared lock.\n *\n * @param writeSegments - Record collection segments that the transaction <em>may</em> change. These segments are locked with an exclusive lock.\n *\n * @returns Promise of the transaction monitor. The promise is rejected if the monitor cannot be allocated.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Reference",
-                  "text": "getMonitor"
+                  "text": "monitorTransaction"
                 },
                 {
                   "kind": "Content",
@@ -712,6 +709,54 @@
                 },
                 {
                   "kind": "Content",
+                  "text": ", "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "readSegments"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Content",
+                  "text": "readonly "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Segment"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<unknown>[] | null | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "writeSegments"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Content",
+                  "text": "readonly "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Segment"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<unknown>[] | null | undefined"
+                },
+                {
+                  "kind": "Content",
                   "text": "): "
                 },
                 {
@@ -724,7 +769,7 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "DatabaseMonitor"
+                  "text": "TransactionMonitor"
                 },
                 {
                   "kind": "Content",
@@ -736,11 +781,11 @@
                 }
               ],
               "returnTypeTokenRange": {
-                "startIndex": 6,
-                "endIndex": 10
+                "startIndex": 18,
+                "endIndex": 22
               },
               "releaseTag": "Public",
-              "overloadIndex": 0,
+              "overloadIndex": 1,
               "parameters": [
                 {
                   "parameterName": "con",
@@ -748,9 +793,23 @@
                     "startIndex": 4,
                     "endIndex": 5
                   }
+                },
+                {
+                  "parameterName": "readSegments",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 8,
+                    "endIndex": 11
+                  }
+                },
+                {
+                  "parameterName": "writeSegments",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 14,
+                    "endIndex": 17
+                  }
                 }
               ],
-              "name": "getMonitor"
+              "name": "monitorTransaction"
             }
           ],
           "extendsTokenRanges": [
@@ -762,6 +821,7 @@
         },
         {
           "kind": "Interface",
+          "canonicalReference": "@x2node/db!DatabaseOptions:interface",
           "docComment": "/**\n * Options used to create database object.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
@@ -782,6 +842,7 @@
           "members": [
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@x2node/db!DatabaseOptions#connectionProvider:member",
               "docComment": "/**\n * Database connection provider.\n */\n",
               "excerptTokens": [
                 {
@@ -810,11 +871,12 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@x2node/db!DatabaseOptions#monitor:member",
               "docComment": "/**\n * Database monitor provider.\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Reference",
-                  "text": "monitorProvider"
+                  "text": "monitor"
                 },
                 {
                   "kind": "Content",
@@ -822,7 +884,7 @@
                 },
                 {
                   "kind": "Reference",
-                  "text": "DatabaseMonitorProvider"
+                  "text": "DatabaseMonitor"
                 },
                 {
                   "kind": "Content",
@@ -830,7 +892,7 @@
                 }
               ],
               "releaseTag": "Public",
-              "name": "monitorProvider",
+              "name": "monitor",
               "propertyTypeTokenRange": {
                 "startIndex": 2,
                 "endIndex": 3
@@ -838,6 +900,7 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@x2node/db!DatabaseOptions#recordTypes:member",
               "docComment": "/**\n * Record types stored in the database.\n */\n",
               "excerptTokens": [
                 {
@@ -854,7 +917,7 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "[]"
+                  "text": "<unknown>[]"
                 },
                 {
                   "kind": "Content",
@@ -873,6 +936,7 @@
         },
         {
           "kind": "Interface",
+          "canonicalReference": "@x2node/db!DatabaseShape:interface",
           "docComment": "/**\n * Descriptor of the data stored in the database.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
@@ -890,56 +954,12 @@
           ],
           "releaseTag": "Public",
           "name": "DatabaseShape",
-          "members": [
-            {
-              "kind": "PropertySignature",
-              "docComment": "/**\n * All top-level record types, collections of which are stored in the database.\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "readonly "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "recordTypes"
-                },
-                {
-                  "kind": "Content",
-                  "text": ": "
-                },
-                {
-                  "kind": "Reference",
-                  "text": "ReadonlyArray"
-                },
-                {
-                  "kind": "Content",
-                  "text": "<"
-                },
-                {
-                  "kind": "Reference",
-                  "text": "RecordType"
-                },
-                {
-                  "kind": "Content",
-                  "text": ">"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
-                }
-              ],
-              "releaseTag": "Public",
-              "name": "recordTypes",
-              "propertyTypeTokenRange": {
-                "startIndex": 3,
-                "endIndex": 7
-              }
-            }
-          ],
+          "members": [],
           "extendsTokenRanges": []
         },
         {
           "kind": "Variable",
+          "canonicalReference": "@x2node/db!DB_CONNECTION_PROVIDER_SERVICE:var",
           "docComment": "/**\n * Standard service key for the database connection provider.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
@@ -960,19 +980,20 @@
         },
         {
           "kind": "Variable",
-          "docComment": "/**\n * Standard service key for the database monitor provider.\n *\n * @public\n */\n",
+          "canonicalReference": "@x2node/db!DB_MONITOR_SERVICE:var",
+          "docComment": "/**\n * Standard service key for the database monitor service.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Reference",
-              "text": "DB_MONITOR_PROVIDER_SERVICE"
+              "text": "DB_MONITOR_SERVICE"
             },
             {
               "kind": "Content",
-              "text": " = \"databaseMonitorProvider\""
+              "text": " = \"databaseMonitor\""
             }
           ],
           "releaseTag": "Public",
-          "name": "DB_MONITOR_PROVIDER_SERVICE",
+          "name": "DB_MONITOR_SERVICE",
           "variableTypeTokenRange": {
             "startIndex": 0,
             "endIndex": 0
@@ -980,6 +1001,7 @@
         },
         {
           "kind": "Variable",
+          "canonicalReference": "@x2node/db!LOG_CATEGORY:var",
           "docComment": "/**\n * Base debug log category for the database module.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
@@ -1000,6 +1022,7 @@
         },
         {
           "kind": "Interface",
+          "canonicalReference": "@x2node/db!QueryResultParser:interface",
           "docComment": "/**\n * SQL query (`SELECT` statement) result parser.\n *\n * @remarks\n *\n * A parser instance is passed into a query execution method and is fed with selected data row by row constructing the result object internally. Once the query execution is complete and all rows have been fed to the parser, the constructed query execution result object can be retrieved from the parser.\n *\n * Errors thrown from the parser methods cause the query execution result promise being rejected with the thrown error.\n *\n * @typeParam R - Type of the query result object constructed by the parser.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
@@ -1041,6 +1064,7 @@
           "members": [
             {
               "kind": "MethodSignature",
+              "canonicalReference": "@x2node/db!QueryResultParser#addRow:member(1)",
               "docComment": "/**\n * Add result set row to the parser.\n *\n * @param row - The result set row.\n */\n",
               "excerptTokens": [
                 {
@@ -1089,7 +1113,7 @@
                 "endIndex": 9
               },
               "releaseTag": "Public",
-              "overloadIndex": 0,
+              "overloadIndex": 1,
               "parameters": [
                 {
                   "parameterName": "row",
@@ -1103,6 +1127,7 @@
             },
             {
               "kind": "MethodSignature",
+              "canonicalReference": "@x2node/db!QueryResultParser#getResult:member(1)",
               "docComment": "/**\n * Get constructed query result object once all rows have been fed to the parser.\n *\n * @returns Query result object.\n */\n",
               "excerptTokens": [
                 {
@@ -1127,7 +1152,7 @@
                 "endIndex": 3
               },
               "releaseTag": "Public",
-              "overloadIndex": 0,
+              "overloadIndex": 1,
               "parameters": [],
               "name": "getResult"
             }
@@ -1136,7 +1161,139 @@
         },
         {
           "kind": "Interface",
-          "docComment": "/**\n * Class that represents a record type.\n *\n * @public\n */\n",
+          "canonicalReference": "@x2node/db!RecordShape:interface",
+          "docComment": "/**\n * Descriptor of record type.\n *\n * @typeParam R - Record type.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface "
+            },
+            {
+              "kind": "Reference",
+              "text": "RecordShape"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "R"
+            },
+            {
+              "kind": "Content",
+              "text": "> "
+            }
+          ],
+          "releaseTag": "Public",
+          "typeParameters": [
+            {
+              "typeParameterName": "R",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "RecordShape",
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@x2node/db!RecordShape#segmentKeys:member",
+              "docComment": "/**\n * Names of segment key fields.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "segmentKeys"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Content",
+                  "text": "readonly (keyof "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "R"
+                },
+                {
+                  "kind": "Content",
+                  "text": ")[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "segmentKeys",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 6
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@x2node/db!RecordShape#type:member",
+              "docComment": "/**\n * Record constructor.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RecordType"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "R"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "type",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 7
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@x2node/db!RecordType:interface",
+          "docComment": "/**\n * Class that represents a record type.\n *\n * @typeParam R - Record type.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -1148,39 +1305,45 @@
             },
             {
               "kind": "Content",
-              "text": " "
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "R"
+            },
+            {
+              "kind": "Content",
+              "text": "> "
             }
           ],
           "releaseTag": "Public",
+          "typeParameters": [
+            {
+              "typeParameterName": "R",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
           "name": "RecordType",
           "members": [
             {
               "kind": "ConstructSignature",
+              "canonicalReference": "@x2node/db!RecordType:new(1)",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "new (..."
+                  "text": "new (): "
                 },
                 {
                   "kind": "Reference",
-                  "text": "args"
-                },
-                {
-                  "kind": "Content",
-                  "text": ": "
-                },
-                {
-                  "kind": "Content",
-                  "text": "any"
-                },
-                {
-                  "kind": "Content",
-                  "text": "): "
-                },
-                {
-                  "kind": "Content",
-                  "text": "any"
+                  "text": "R"
                 },
                 {
                   "kind": "Content",
@@ -1188,26 +1351,219 @@
                 }
               ],
               "returnTypeTokenRange": {
-                "startIndex": 5,
-                "endIndex": 6
+                "startIndex": 1,
+                "endIndex": 2
               },
               "releaseTag": "Public",
-              "overloadIndex": 0,
-              "parameters": [
-                {
-                  "parameterName": "args",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 3,
-                    "endIndex": 4
-                  }
-                }
-              ]
+              "overloadIndex": 1,
+              "parameters": []
             }
           ],
           "extendsTokenRanges": []
         },
         {
           "kind": "Interface",
+          "canonicalReference": "@x2node/db!Segment:interface",
+          "docComment": "/**\n * Record collection segment descriptor.\n *\n * @typeParam R - Record type.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface "
+            },
+            {
+              "kind": "Reference",
+              "text": "Segment"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "R"
+            },
+            {
+              "kind": "Content",
+              "text": "> "
+            }
+          ],
+          "releaseTag": "Public",
+          "typeParameters": [
+            {
+              "typeParameterName": "R",
+              "constraintTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "Segment",
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@x2node/db!Segment#keys:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "keys"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        ["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "K"
+                },
+                {
+                  "kind": "Content",
+                  "text": " in keyof "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "R"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "R"
+                },
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "K"
+                },
+                {
+                  "kind": "Content",
+                  "text": "];\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "keys",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 11
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@x2node/db!Segment#keys1:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "keys1"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "name"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": keyof "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "R"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "values"
+                },
+                {
+                  "kind": "Content",
+                  "text": "?: unknown[];\n    }[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "keys1",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 9
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@x2node/db!Segment#recordType:member",
+              "docComment": "/**\n * Record type descriptor.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "recordType"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RecordShape"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "R"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "recordType",
+              "propertyTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 6
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "@x2node/db!SQLDialect:interface",
           "docComment": "/**\n * SQL dialect.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
@@ -1228,6 +1584,7 @@
           "members": [
             {
               "kind": "MethodSignature",
+              "canonicalReference": "@x2node/db!SQLDialect#booleanLiteral:member(1)",
               "docComment": "/**\n * Get SQL Boolean literal for the specified value.\n *\n * @param val - Boolean value.\n *\n * @returns SQL value expression that represents the provided Boolean value.\n */\n",
               "excerptTokens": [
                 {
@@ -1268,7 +1625,7 @@
                 "endIndex": 7
               },
               "releaseTag": "Public",
-              "overloadIndex": 0,
+              "overloadIndex": 1,
               "parameters": [
                 {
                   "parameterName": "val",
@@ -1282,6 +1639,7 @@
             },
             {
               "kind": "MethodSignature",
+              "canonicalReference": "@x2node/db!SQLDialect#stringLiteral:member(1)",
               "docComment": "/**\n * Get SQL string literal for the specified value.\n *\n * @param val - String value.\n *\n * @returns SQL value expression that represents the provided string value.\n */\n",
               "excerptTokens": [
                 {
@@ -1322,7 +1680,7 @@
                 "endIndex": 7
               },
               "releaseTag": "Public",
-              "overloadIndex": 0,
+              "overloadIndex": 1,
               "parameters": [
                 {
                   "parameterName": "val",
@@ -1339,6 +1697,7 @@
         },
         {
           "kind": "Class",
+          "canonicalReference": "@x2node/db!StandardSQLDialect:class",
           "docComment": "/**\n * Standard SQL dialect implementation that can be used as a base class for more specific dialect imlementations.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
@@ -1367,6 +1726,7 @@
           "members": [
             {
               "kind": "Method",
+              "canonicalReference": "@x2node/db!StandardSQLDialect#booleanLiteral:member(1)",
               "docComment": "/**\n * Returns literals \"TRUE\" or \"FALSE\".\n */\n",
               "excerptTokens": [
                 {
@@ -1408,7 +1768,7 @@
                 "endIndex": 7
               },
               "releaseTag": "Public",
-              "overloadIndex": 0,
+              "overloadIndex": 1,
               "parameters": [
                 {
                   "parameterName": "val",
@@ -1422,6 +1782,7 @@
             },
             {
               "kind": "Method",
+              "canonicalReference": "@x2node/db!StandardSQLDialect#stringLiteral:member(1)",
               "docComment": "/**\n * Returns passed in string in single quotes and escapes all single quotes inside the string with a double single quote.\n */\n",
               "excerptTokens": [
                 {
@@ -1463,7 +1824,7 @@
                 "endIndex": 7
               },
               "releaseTag": "Public",
-              "overloadIndex": 0,
+              "overloadIndex": 1,
               "parameters": [
                 {
                   "parameterName": "val",
@@ -1485,6 +1846,7 @@
         },
         {
           "kind": "Interface",
+          "canonicalReference": "@x2node/db!StatementResult:interface",
           "docComment": "/**\n * Result of a SQL statement execution.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
@@ -1505,6 +1867,7 @@
           "members": [
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@x2node/db!StatementResult#generatedId:member",
               "docComment": "/**\n * When inserting into a table with an auto-generated id column, this is the inserted id value.\n */\n",
               "excerptTokens": [
                 {
@@ -1537,6 +1900,7 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@x2node/db!StatementResult#numAffectedRows:member",
               "docComment": "/**\n * Number of table rows affected by the statement (e.g. inserted, updated or deleted).\n */\n",
               "excerptTokens": [
                 {
@@ -1571,7 +1935,245 @@
           "extendsTokenRanges": []
         },
         {
+          "kind": "Interface",
+          "canonicalReference": "@x2node/db!TransactionMonitor:interface",
+          "docComment": "/**\n * Monitor instance allocated to a specific transaction.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface "
+            },
+            {
+              "kind": "Reference",
+              "text": "TransactionMonitor"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "TransactionMonitor",
+          "members": [
+            {
+              "kind": "MethodSignature",
+              "canonicalReference": "@x2node/db!TransactionMonitor#addSegmentUpdate:member(1)",
+              "docComment": "/**\n * Register change being made to database records by the transaction.\n *\n * @param segment - Updated record collection segment. Must be exclusively locked.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "addSegmentUpdate"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "R"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">("
+                },
+                {
+                  "kind": "Reference",
+                  "text": "segment"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Segment"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "R"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "returnTypeTokenRange": {
+                "startIndex": 11,
+                "endIndex": 12
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "segment",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 10
+                  }
+                }
+              ],
+              "typeParameters": [
+                {
+                  "typeParameterName": "R",
+                  "constraintTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  }
+                }
+              ],
+              "name": "addSegmentUpdate"
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@x2node/db!TransactionMonitor#currentLastModified:member",
+              "docComment": "/**\n * Most recent among the last modification timestamps of segments passed to {@link DatabaseMonitor.monitorTransaction} before the transaction.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "currentLastModified"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Date"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "currentLastModified",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@x2node/db!TransactionMonitor#currentVersion:member",
+              "docComment": "/**\n * Computed aggregated version of the combination of segments passed to {@link DatabaseMonitor.monitorTransaction} before the transaction.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "readonly "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "currentVersion"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "currentVersion",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              }
+            },
+            {
+              "kind": "MethodSignature",
+              "canonicalReference": "@x2node/db!TransactionMonitor#saveSegmentUpdates:member(1)",
+              "docComment": "/**\n * Save changes made to the database records by the transaction.\n *\n * @remarks\n *\n * This method is called before the database transaction is committed. The transaction can still be rolled back after this method call (if the transaction commit fails).\n *\n * @returns Promise of the new version information. If the promise rejects, the transaction is rolled back.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Reference",
+                  "text": "saveSegmentUpdates"
+                },
+                {
+                  "kind": "Content",
+                  "text": "(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<{\n        readonly "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "newVersion"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": number;\n        readonly "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "newLastModified"
+                },
+                {
+                  "kind": "Content",
+                  "text": ": "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Date"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n    }>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "returnTypeTokenRange": {
+                "startIndex": 2,
+                "endIndex": 10
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "saveSegmentUpdates"
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
           "kind": "Enum",
+          "canonicalReference": "@x2node/db!TxMode:enum",
           "docComment": "/**\n * Transaction mode.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
@@ -1592,6 +2194,7 @@
           "members": [
             {
               "kind": "EnumMember",
+              "canonicalReference": "@x2node/db!TxMode.ReadOnly:member",
               "docComment": "/**\n * Read-only transaction.\n */\n",
               "excerptTokens": [
                 {
@@ -1616,6 +2219,7 @@
             },
             {
               "kind": "EnumMember",
+              "canonicalReference": "@x2node/db!TxMode.ReadWrite:member",
               "docComment": "/**\n * Read/write transaction.\n */\n",
               "excerptTokens": [
                 {
@@ -1642,6 +2246,7 @@
         },
         {
           "kind": "Enum",
+          "canonicalReference": "@x2node/db!TxResolve:enum",
           "docComment": "/**\n * Transaction resolution.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
@@ -1662,6 +2267,7 @@
           "members": [
             {
               "kind": "EnumMember",
+              "canonicalReference": "@x2node/db!TxResolve.Commit:member",
               "docComment": "/**\n * Commit transaction.\n */\n",
               "excerptTokens": [
                 {
@@ -1686,6 +2292,7 @@
             },
             {
               "kind": "EnumMember",
+              "canonicalReference": "@x2node/db!TxResolve.Rollback:member",
               "docComment": "/**\n * Rollback transaction.\n */\n",
               "excerptTokens": [
                 {

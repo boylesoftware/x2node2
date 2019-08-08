@@ -10,7 +10,7 @@ export default class DatabaseShape implements IDatabaseShape {
   /**
    * Top-level record types.
    */
-  private readonly _recordTypes: RecordType[];
+  private readonly _recordTypes: RecordType<unknown>[];
 
   /**
    * Create new database shape descriptor.
@@ -18,12 +18,11 @@ export default class DatabaseShape implements IDatabaseShape {
    * @param recordTypes - All top-level record types, collections of which are
    * stored in the database.
    */
-  public constructor(recordTypes: RecordType[]) {
+  public constructor(recordTypes: RecordType<unknown>[]) {
 
     this._recordTypes = recordTypes;
   }
 
   /** {@inheritDoc IDatabaseShape.recordTypes} */
-  // eslint-disable-next-line @typescript-eslint/array-type
-  public get recordTypes(): ReadonlyArray<RecordType> { return this._recordTypes; }
+  public get recordTypes(): readonly RecordType<unknown>[] { return this._recordTypes; }
 }

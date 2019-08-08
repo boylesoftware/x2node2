@@ -3,55 +3,91 @@
 import { Service } from "@x2node/common";
 
 import { DatabaseConnection } from "./connection";
+import { Segment } from "./segment";
 
 /**
- * Standard service key for the database monitor provider.
+ * Standard service key for the database monitor service.
  *
  * @public
  */
-export const DB_MONITOR_PROVIDER_SERVICE = "databaseMonitorProvider";
+export const DB_MONITOR_SERVICE = "databaseMonitor";
 
 /**
- * Provider of database monitor instances.
+ * Database monitor service.
  *
  * @public
  */
-export interface DatabaseMonitorProvider extends Service {
+export interface DatabaseMonitor extends Service {
+
+  // TODO: single record "segments"
 
   /**
-   * Allocate monitor instance and associate it with the provided database
-   * connection.
+   * Allocate monitor for the transaction currently active on the provided
+   * database connection.
    *
    * @remarks
-   * After the monitor instance no longer needed, it must be release using its
-   * {@link DatabaseMonitor.release} method.
+   * Before the returned promise resolves, the monitor locks specified record
+   * collection segments. All locks are released upon completion of the
+   * transaction.
+   *
+   * The database connection passed to this method must be in active transaction
+   * (its {@link DatabaseConnection.inTransaction} flag must be `true`).
    *
    * @param con - Database connection.
-   * @returns Promise of the monitor. The promise is rejected if the monitor
-   * cannot be allocated.
+   * @param readSegments - Record collection segments that the transaction
+   * <em>may</em> read. These segments are locked with a shared lock.
+   * @param writeSegments - Record collection segments that the transaction
+   * <em>may</em> change. These segments are locked with an exclusive lock.
+   * @returns Promise of the transaction monitor. The promise is rejected if the
+   * monitor cannot be allocated.
    */
-  getMonitor(con: DatabaseConnection): Promise<DatabaseMonitor>;
+  monitorTransaction(
+    con: DatabaseConnection,
+    readSegments: readonly Segment<unknown>[] | null | undefined,
+    writeSegments: readonly Segment<unknown>[] | null | undefined
+  ): Promise<TransactionMonitor>;
 }
 
 /**
- * Database monitor instance associated with a specific database connection and
- * therefore a specific database transaction.
+ * Monitor instance allocated to a specific transaction.
  *
  * @public
  */
-export interface DatabaseMonitor {
+export interface TransactionMonitor {
 
   /**
-   * Release the instance back to the provider after it is no longer needed.
+   * Computed aggregated version of the combination of segments passed to
+   * {@link DatabaseMonitor.monitorTransaction} before the transaction.
+   */
+  readonly currentVersion: number;
+
+  /**
+   * Most recent among the last modification timestamps of segments passed to
+   * {@link DatabaseMonitor.monitorTransaction} before the transaction.
+   */
+  readonly currentLastModified: Date;
+
+  /**
+   * Register change being made to database records by the transaction.
+   *
+   * @param segment - Updated record collection segment. Must be exclusively
+   * locked.
+   */
+  addSegmentUpdate<R>(segment: Segment<R>): void;
+
+  /**
+   * Save changes made to the database records by the transaction.
    *
    * @remarks
-   * The monitor instance becomes unusable after this method call.
+   * This method is called before the database transaction is committed. The
+   * transaction can still be rolled back after this method call (if the
+   * transaction commit fails).
    *
-   * Note, that throwing error from this method normally leads to the
-   * application crash.
+   * @returns Promise of the new version information. If the promise rejects,
+   * the transaction is rolled back.
    */
-  release(): void;
-
-  // transaction lifecycle methods
-  // interface for transaction steps
+  saveSegmentUpdates(): Promise<{
+    readonly newVersion: number;
+    readonly newLastModified: Date;
+  }>;
 }

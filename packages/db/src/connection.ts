@@ -160,6 +160,16 @@ export interface DatabaseConnection {
   release(): void;
 
   /**
+   * Tells if the connection is in active transaction.
+   *
+   * @remarks
+   * This flag is `true` after the promise returned by
+   * {@link DatabaseConnection.beginTransaction} resolves and until
+   * {@link DatabaseConnection.endTransaction} is called.
+   */
+  readonly inTransaction: boolean;
+
+  /**
    * Begin database transaction.
    *
    * @remarks

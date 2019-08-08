@@ -3,11 +3,32 @@
 /**
  * Class that represents a record type.
  *
+ * @typeParam R - Record type.
+ *
  * @public
  */
-export interface RecordType {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  new (...args: any): any;
+export interface RecordType<R> {
+  new (): R;
+}
+
+/**
+ * Descriptor of record type.
+ *
+ * @typeParam R - Record type.
+ *
+ * @public
+ */
+export interface RecordShape<R> {
+
+  /**
+   * Record constructor.
+   */
+  readonly type: RecordType<R>;
+
+  /**
+   * Names of segment key fields.
+   */
+  readonly segmentKeys: readonly (keyof R)[];
 }
 
 /**
@@ -15,12 +36,12 @@ export interface RecordType {
  *
  * @public
  */
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface DatabaseShape {
 
   /**
    * All top-level record types, collections of which are stored in the
    * database.
    */
-  // eslint-disable-next-line @typescript-eslint/array-type
-  readonly recordTypes: ReadonlyArray<RecordType>;
+  //readonly recordTypes: readonly RecordShape<unknown>[];
 }
